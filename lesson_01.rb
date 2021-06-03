@@ -7,17 +7,15 @@ _current_year = (Date.today).year
 _current_month = (Date.today).month
 _current_day = (Date.today).day
 _currnet_date = Date.today
-#Переменные для проверки на валидность по календарю
+#Переменные для проверки на валидность по календарю ()
 _year_birthday = ''
-_month_birthday = ''
-_day_birthday = ''
 _birthday_date = ''
     
 #Массив для перевода названия месяца
 RU_MONTHS = {'Jan' => 'Января', 'Feb' => 'Февраля', 
-  'Mar' => 'Марта', 'Apr'=> 'Апреля', 'May'=>'Мая' , 'Jun'=>'Июня',
-  'Jul'=>'Июля', 'Aug'=>'Августа', 'Sep'=>'Сентября', 'Nov'=>'Ноября', 
-  'Oct'=>'Октября', 'nov'=>'Ноября', 'Dec'=>'Декабря'}
+  'Mar' => 'Марта', 'Apr' => 'Апреля', 'May' =>' Мая' , 'Jun' => 'Июня',
+  'Jul' => 'Июля', 'Aug' => 'Августа', 'Sep' =>' Сентября', 'Nov' => 'Ноября', 
+  'Oct' => 'Октября', 'nov' => 'Ноября', 'Dec' => 'Декабря'}
 RU_MONTHS.freeze
 #Функция замещения названия месяца "локализация"...   
 def eng_to_russian_date(date_string)
@@ -34,6 +32,7 @@ loop do
     if _birthday_date.to_s == "q" #Если введено 'q' выход из программы
       abort "Пока, пока!"
     end
+  #Получаем из введеной даты год, месяц, день
   _year_birthday, _month_birthday, _day_birthday = _birthday_date.split('-')
   #Пока дата невалидна продолжаем ввод
   break if Date.valid_date?(_year_birthday.to_i,_month_birthday.to_i,_day_birthday.to_i)
