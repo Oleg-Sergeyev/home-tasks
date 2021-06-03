@@ -34,15 +34,13 @@ loop do
     if _birthday_date.to_s == "q" #Если введено 'q' выход из программы
       abort "Пока, пока!"
     end
-  _year_birthday = (_birthday_date[0,4]).to_i
-  _month_birthday = (_birthday_date[5,7]).to_i
-  _day_birthday = (_birthday_date[8,9]).to_i
+  _year_birthday, _month_birthday, _day_birthday = _birthday_date.split('-')
   #Пока дата невалидна продолжаем ввод
-  break if Date.valid_date?(_year_birthday,_month_birthday,_day_birthday)
+  break if Date.valid_date?(_year_birthday.to_i,_month_birthday.to_i,_day_birthday.to_i)
   puts 'Дата некорректна!' 
 end 
 #Вычисление возраста
-_total_old =  _current_year -_year_birthday
+_total_old =  _current_year -_year_birthday.to_i
         
 #Формирование строки для вывода дня рождения в формате "хх ххххххх хххх"
 _str_birthday = eng_to_russian_date(Date.parse(_birthday_date).strftime('%d %b %Y'))
