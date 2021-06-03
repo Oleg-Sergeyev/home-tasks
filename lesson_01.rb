@@ -8,10 +8,10 @@ _current_month = (Date.today).month
 _current_day = (Date.today).day
 _currnet_date = Date.today
 #Переменные для проверки на валидность по календарю
-_year_birthday = ""
-_month_birthday = ""
-_day_birthday = ""
-_birthday_date = ""
+_year_birthday = ''
+_month_birthday = ''
+_day_birthday = ''
+_birthday_date = ''
     
 #Массив для перевода названия месяца
 RU_MONTHS = {'Jan' => 'Января', 'Feb' => 'Февраля', 
