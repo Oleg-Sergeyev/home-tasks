@@ -2,7 +2,7 @@ require 'date'
 #Первое задание
 puts 'RUBY VERSION is ' + RUBY_VERSION
  
- #Второе и третье задание
+#Второе и третье задание
 _current_year = (Date.today).year
 _current_month = (Date.today).month
 _current_day = (Date.today).day
