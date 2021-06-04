@@ -1,10 +1,13 @@
 class LocalUser
   require 'digest'
   require 'io/console'
+  require 'csv'
 
   @user_name = ''
   @psw_hash = ''
   @psw1 = ''
+  @local_path = Dir.pwd
+  @file_name = "users.csv"
   
   def create_user 
     loop do
@@ -40,5 +43,19 @@ class LocalUser
       else _str = 'Password hash: ' + @psw_hash
     end
       puts 'User name: ' + @user_name + "\n" + _str
+  end
+  def write_file
+    @local_path = Dir.pwd
+    @file_name = 'users.csv'
+    puts @local_path
+    puts @file_name
+    if !File.exists?(@local_path + @file_name)
+      abort "File not exist!"
+    end
+    CSV.open(@local_path, "a") do |csv|
+      csv << ["1", "user", "pass", "ok"]
+    #else puts 'File not exist'
+    end
+    #File.open('users.csv', "w+")
   end
 end

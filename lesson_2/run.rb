@@ -1,5 +1,6 @@
 require_relative 'ClassLocalUser.rb'
 
-user1 = LocalUser.new
-user1.create_user
-user1.show_user
+user = LocalUser.new
+#user.create_user
+#user.show_user
+user.write_file
