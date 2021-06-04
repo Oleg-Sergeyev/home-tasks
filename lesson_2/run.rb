@@ -8,5 +8,3 @@ if user.create_user == true
     abort "Bye, bye!"
   end
 end
-#user.show_user
-#user.write_file

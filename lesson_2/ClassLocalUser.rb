@@ -38,6 +38,7 @@ class LocalUser
     end
     return true
   end
+  private
   def show_user
     if @psw_hash == '' 
       _str = 'User password is not set'
@@ -45,6 +46,7 @@ class LocalUser
     end
       puts 'User name: ' + @user_name + "\n" + _str
   end
+  private
   def write_file
     @local_path = File.expand_path(File.dirname(__FILE__))
     @file_name = 'users.csv'
@@ -58,6 +60,7 @@ class LocalUser
       csv << [@user_name, @psw_hash, Date.today]
     end
   end
+  private
   def chk_manage_symbols(str1, str2)
     if str1 == "write_file" && str2 == "n" || str1 == "input_data" && str2 == "q"
       abort 'Bye, bye!'
