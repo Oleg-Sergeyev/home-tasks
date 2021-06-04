@@ -8,7 +8,7 @@ class LocalUsersDb
     @local_path = local_path
     @file_name = file_name
   end
-  
+
   @user_name = ''
   @psw_hash = ''
   @psw1 = ''
@@ -48,7 +48,7 @@ class LocalUsersDb
     return true
   end
   private
-  def show_user
+  def show_current_user
     if @psw_hash == '' 
       _str = 'User password is not set'
       else _str = 'Password hash: ' + @psw_hash
