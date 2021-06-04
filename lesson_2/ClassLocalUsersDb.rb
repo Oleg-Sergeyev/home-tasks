@@ -1,32 +1,41 @@
-class LocalUser
+class LocalUsersDb
   require 'digest'
   require 'date'
   require 'io/console'
   require 'csv'
 
+  def initialize(local_path, file_name)
+    @local_path = local_path
+    @file_name = file_name
+  end
+  
   @user_name = ''
   @psw_hash = ''
   @psw1 = ''
-  @local_path = ''
-  @file_name = ''
-  
+    
   def create_user 
     loop do
       print "Create new user, please set user name or 'q' for exit: "
       @user_name = gets.strip
-      chk_manage_symbols('input_data', @user_name)
+      if chk_manage_symbols('input_data', @user_name) == false
+        return false
+      end  
       break if !(@user_name.length<3 && @user_name.length<10)
       puts 'Name must have minimum 3 and maximum 10 symbols'
     end
     loop do
       @psw1 = IO::console.getpass "Create new password: "
-      chk_manage_symbols('input_data', @psw1)
+      if chk_manage_symbols('input_data', @psw1) == false
+        return false
+      end
       break if (@psw1.length <= 10 && @psw1.length >= 6)
       puts 'Name must have minimum 6 and maximum 10 symbols'
     end
     loop do
       psw2 = IO::console.getpass "Repeat password or 'q' for exit: "
-      chk_manage_symbols('input_data', psw2)
+      if chk_manage_symbols('input_data', psw2) == false
+        return false
+      end
       break if @psw1 == psw2
       puts 'Password mismatch!'
     end
@@ -48,8 +57,6 @@ class LocalUser
   end
   private
   def write_file
-    @local_path = File.expand_path(File.dirname(__FILE__))
-    @file_name = 'users.csv'
     _file = @local_path + '/' + @file_name
     if !File.exists?(_file)
       _type_open = "w"
@@ -63,7 +70,7 @@ class LocalUser
   private
   def chk_manage_symbols(str1, str2)
     if str1 == "write_file" && str2 == "n" || str1 == "input_data" && str2 == "q"
-      abort 'Bye, bye!'
+      #abort 'Bye, bye!'
       return false
     end
     if str1 == "write_file" && str2 == "y"
