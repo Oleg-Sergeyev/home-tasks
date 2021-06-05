@@ -1,12 +1,18 @@
 require_relative 'ClassLocalUsersDb.rb'
+require_relative 'ClassLocalHosts.rb'
 
 local_path = File.expand_path(File.dirname(__FILE__))
 file_name = ""
 puts `clear`
-puts "Welcome to 'USERS MANAGER' \nYou can create new csv-files, new users, save it and remove it.\n\n"
+puts "Welcome to 'USERS MANAGER' \nYou can create new users database, create new users, save it and remove it."
+puts "Also you can upload users db to computers."
 loop do
-  puts "Input 'N' to create new csv-file\nInput 'D' to work default csv-file\nInput 'E' to work with created csv-file\nInput 'q' for exit" 
-  print "Your choice: "
+  puts "\nInput 'L' to load computers from file" 
+  puts "Input 'N' to create new users db"
+  puts "Input 'D' to work with default users db"
+  puts "Input 'E' to work with created users db"
+  puts "Input 'q' for exit"
+  print "\nYour choice: "
   loop do
     manage_symbol = gets.strip
     if manage_symbol == 'D'
