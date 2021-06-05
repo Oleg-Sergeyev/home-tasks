@@ -1,6 +1,8 @@
 require_relative 'ClassLocalUsersDb.rb'
 require_relative 'ClassLocalHosts.rb'
 
+#LocalHosts.load_file()
+
 local_path = File.expand_path(File.dirname(__FILE__))
 file_name = ""
 puts `clear`

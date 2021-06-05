@@ -1,9 +1,10 @@
-class LocalUsersDb
-  require 'digest'
-  require 'date'
-  require 'io/console'
-  require 'csv'
+require 'digest'
+require 'date'
+require 'io/console'
+require 'csv'
 
+class LocalUsersDb
+  
   def initialize(local_path, file_name)
     @local_path = local_path
     @file_name = file_name

@@ -1,3 +1,5 @@
+require 'csv'
+
 class LocalHosts
   def initialize(name, mac_address, users_db, local_network)
   @name = name
@@ -10,5 +12,11 @@ class LocalHosts
   end
   private
   def change_name
+  end
+  public
+  def load_file()
+    CSV.open(File.expand_path(File.dirname(__FILE__)) + '/pc_list.csv', 'r') do |row|
+    puts row
+    end
   end
 end
