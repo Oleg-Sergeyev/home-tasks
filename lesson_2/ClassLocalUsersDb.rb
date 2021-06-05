@@ -15,7 +15,8 @@ class LocalUsersDb
     
   def create_user 
     loop do
-      print "Create new user, please set user name or 'q' for exit: "
+      puts `clear`
+      print "Input new user name or 'q' for exit: "
       @user_name = gets.strip
       if chk_manage_symbols('input_data', @user_name) == false
         return false
@@ -24,7 +25,8 @@ class LocalUsersDb
       puts 'Name must have minimum 3 and maximum 10 symbols'
     end
     loop do
-      @psw1 = IO::console.getpass "Create new password: "
+      puts `clear`
+      @psw1 = IO::console.getpass "Create new password or 'q' for exit:  "
       if chk_manage_symbols('input_data', @psw1) == false
         return false
       end
@@ -32,6 +34,7 @@ class LocalUsersDb
       puts 'Name must have minimum 6 and maximum 10 symbols'
     end
     loop do
+      puts `clear`
       psw2 = IO::console.getpass "Repeat password or 'q' for exit: "
       if chk_manage_symbols('input_data', psw2) == false
         return false
@@ -40,9 +43,10 @@ class LocalUsersDb
       puts 'Password mismatch!'
     end
     @psw_hash = Digest::MD5.hexdigest @psw1
+    puts `clear`
     print "Write new user 'y' - yes, 'n' - no ?"
     if chk_manage_symbols('write_file', gets.strip) == true
-    puts 'user ' + @user_name + ' saved'
+    puts show_current_user() + ' saved'
     #abort 'Bye, bye!'
     end
     return true
@@ -50,10 +54,10 @@ class LocalUsersDb
   private
   def show_current_user
     if @psw_hash == '' 
-      _str = 'User password is not set'
-      else _str = 'Password hash: ' + @psw_hash
+      _str = ' password is not set'
+      else _str = ' password hash: [' + @psw_hash + "]"
     end
-      puts 'User name: ' + @user_name + "\n" + _str
+      return 'User name: ' + "'" + @user_name + "'" + _str
   end
   private
   def write_file
@@ -70,12 +74,12 @@ class LocalUsersDb
   private
   def chk_manage_symbols(str1, str2)
     if str1 == "write_file" && str2 == "n" || str1 == "input_data" && str2 == "q"
-      #abort 'Bye, bye!'
-      return false
+    #abort 'Bye, bye!'
+    return false
     end
     if str1 == "write_file" && str2 == "y"
-      write_file()
-      return true
+    write_file()
+    return true
     end
   end
 end
