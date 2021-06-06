@@ -24,8 +24,8 @@ end
 local_path = File.expand_path(File.dirname(__FILE__))
 file_name = ""
 #puts `clear`
-puts "Welcome to 'USERS MANAGER' \nYou can create new users database, create new users, save it and remove it."
-puts "Also you can upload users db to computers."
+puts "Welcome to 'USERS MANAGER' \nYou can create new users database, create new users, save it."
+#puts "Also you can upload users db to computers."
 puts "\nComputers list"
 # Вывод компьютеров
 @array_pc.each do |element|
