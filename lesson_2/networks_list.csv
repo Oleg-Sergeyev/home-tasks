@@ -1,0 +1,6 @@
+name,network
+programmers,192.168.10.1-254
+managers,192.168.11.1-254
+lawyers,192.168.12.1-254
+accounting,192.168.13.1-254
+designers,192.168.14.1-254

@@ -1,6 +1,6 @@
-name,mac
-petrov_aa,1C-95-08-RC-49-45
-sidorov_bb,AD-70-19-D2-49-46
-zaitsev_nn,7C-75-08-D5-49-47
-ivanova_aa,RV-CX-H9-12-49-H1
-srv-01,67-BN-55-V3-78-49
+name,mac,brand
+petrov_aa,1C-95-08-RC-49-45,hp
+sidorov_bb,AD-70-19-D2-49-46,hp
+zaitsev_nn,7C-75-08-D5-49-47,dell
+ivanova_aa,RV-CX-H9-12-49-H1,lenovo
+srv-01,67-BN-55-V3-78-49,dell
