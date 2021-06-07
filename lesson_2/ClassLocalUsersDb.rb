@@ -7,12 +7,10 @@ class LocalUsersDb
   def initialize(local_path, file_name)
     @local_path = local_path
     @file_name = file_name
+    @user_name = ''
+    @psw_hash = ''
+    @psw1 = ''
   end
-
-  @user_name = ''
-  @psw_hash = ''
-  @psw1 = ''
-
   def create_user
     loop do
       puts `clear`

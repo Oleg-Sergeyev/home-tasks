@@ -1,9 +1,9 @@
-require_relative 'ClassLocalUsersDb.rb'
-require_relative 'ClassLocalHosts.rb'
-require_relative 'ClassLocalNetworks.rb'
+require_relative 'ClassLocalUsersDb'
+require_relative 'ClassLocalHosts'
+require_relative 'ClassLocalNetworks'
 
 # 'Загрузка' компьютеров в массив
-hosts = CSV.read(__dir__ + '/pc_list.csv')
+hosts = CSV.read(__dir__ + '/db/pc_list.csv')
 hosts.shift
 @array_pc = []
 hosts.each do |element|
@@ -12,7 +12,7 @@ hosts.each do |element|
   @array_pc.push(_array)
 end
 # 'Загрузка' сетей в массив
-networks = CSV.read(__dir__ + '/networks_list.csv')
+networks = CSV.read(__dir__ + '/db/networks_list.csv')
 networks.shift
 @array_networks = []
 networks.each do |element|
@@ -21,7 +21,7 @@ networks.each do |element|
   @array_networks.push(_array)
 end
 
-local_path = __dir__
+local_path = __dir__ + '/db/'
 file_name = ''
 # puts `clear`
 puts "Welcome to 'USERS MANAGER' \nYou can create new users database, create new users, save it."
