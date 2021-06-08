@@ -1,6 +1,8 @@
 require_relative 'ClassLocalUsersDb'
 require_relative 'ClassLocalHosts'
 require_relative 'ClassLocalNetworks'
+require_relative 'ClassCliMenu'
+
 
 # 'Загрузка' компьютеров в массив
 hosts = CSV.read(__dir__ + '/db/pc_list.csv')
@@ -51,36 +53,30 @@ puts "\nPC's with networks"
        ' objects: ' + element[1].class.to_s + '/' + element[1].get_host[3].class.to_s
 end
 # Запуск меню управления вводом/сохранением файла и/или пользователей
+# Проба меню
 loop do
-  puts "\nInput 'N' to create new users db"
-  puts "Input 'D' to work with default users db"
-  puts "Input 'E' to work with created users db"
-  puts "Input 'q' for exit"
-  print "\nYour choice: "
-  loop do
-    manage_symbol = gets.strip
-    if manage_symbol == 'D'
-      puts "New user will be saved in 'users.csv'\n"
-      file_name = 'users.csv'
-      break
-    end
-    if manage_symbol == 'N' || manage_symbol == 'E'
-      print 'Input file name w/o extension: '
-      file_name = gets.strip + '.csv'
-      break
-    end
-    abort 'Bye, bye!' if manage_symbol == 'q'
-    break if manage_symbol == 'N' || manage_symbol == 'Y' || manage_symbol == 'q'
-  end
-  users_db = LocalUsersDb.new(local_path, file_name)
-  loop do
-    puts 'New user was not created' if users_db.create_user == false
-    # puts `clear`
-    print "Do you want create new users ? 'y/n': "
-    next unless gets.strip == 'n'
+MAIN_MENU = File.open(__dir__ + '/db/menu', 'r')
+main_menu = CliMenu.new(MAIN_MENU, 'Your choice: ' , ['D', 'E', 'N', 'Q'])
+#puts main_menu.show
+control = main_menu.choice
+#puts control
+if control == 'D'
+  file_name = 'users.csv'
+end
+if control == 'N' || control == 'E'
+  print 'Input file name w/o extension: '
+  file_name = gets.strip + '.csv'
+end
+abort 'Bye, bye!' if control == 'Q'
 
-    puts `clear`
-    # abort "Bye, bye!"
-    break
-  end
+users_db = LocalUsersDb.new(local_path, file_name)
+
+  puts 'New user was not created' if users_db.create_user == false
+  # puts `clear`
+  print "Do you want create new users ? 'y/n': "
+  next unless gets.strip == 'n'
+
+  puts `clear`
+  # abort "Bye, bye!"
+  break
 end

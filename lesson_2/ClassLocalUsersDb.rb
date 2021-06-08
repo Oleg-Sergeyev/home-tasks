@@ -16,7 +16,7 @@ class LocalUsersDb
       puts `clear`
       print "Input new user name or 'q' for exit: "
       @user_name = gets.strip
-      return unless !chk_manage_symbols('input_data', @user_name)
+      return false unless !chk_manage_symbols('input_data', @user_name)
       break unless @user_name.length < 3 && @user_name.length < 10
 
       puts 'Name must have minimum 3 and maximum 10 symbols'
