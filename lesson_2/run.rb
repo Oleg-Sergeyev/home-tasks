@@ -23,7 +23,7 @@ networks.each do |element|
   @array_networks.push(_array)
 end
 
-local_path = __dir__ + '/db/'
+local_path = __dir__ 
 file_name = ''
 # puts `clear`
 puts "Welcome to 'USERS MANAGER' \nYou can create new users database, create new users, save it."
@@ -59,9 +59,11 @@ MAIN_MENU = File.open(__dir__ + '/db/menu', 'r')
 main_menu = CliMenu.new(MAIN_MENU, 'Your choice: ' , ['D', 'E', 'N', 'Q'])
 #puts main_menu.show
 control = main_menu.choice
-#puts control
+puts control
 if control == 'D'
   file_name = 'users.csv'
+#else
+ # control = main_menu.choice
 end
 if control == 'N' || control == 'E'
   print 'Input file name w/o extension: '
@@ -70,13 +72,13 @@ end
 abort 'Bye, bye!' if control == 'Q'
 
 users_db = LocalUsersDb.new(local_path, file_name)
-
+  
   puts 'New user was not created' if users_db.create_user == false
   # puts `clear`
   print "Do you want create new users ? 'y/n': "
   next unless gets.strip == 'n'
 
-  puts `clear`
+ # puts `clear`
   # abort "Bye, bye!"
   break
 end

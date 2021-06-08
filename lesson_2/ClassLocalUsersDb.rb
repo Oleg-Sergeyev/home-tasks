@@ -58,7 +58,7 @@ class LocalUsersDb
   end
 
   def write_file
-    _file = @local_path + '/' + @file_name
+    _file = @local_path + '/db/' + @file_name
     _type_open = if !File.exist?(_file)
                    'w'
                  else
