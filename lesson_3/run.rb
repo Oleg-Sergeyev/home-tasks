@@ -2,7 +2,7 @@ require_relative 'class_exchange_rate'
 require 'date'
 require 'pry-byebug'
 
-binding.pry
+# binding.pry
 d = DateTime.now
 puts `clear`
 puts 'Ruble exchange rate table for today ' + d.strftime('%m/%d/%Y at %H:%M').to_s
