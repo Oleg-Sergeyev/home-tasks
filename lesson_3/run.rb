@@ -12,5 +12,5 @@ table.show.each do |element|
   i += 1
 end
 
-print "\nEnter your email address to send it: "
+print "\nEnter email addresses separated by a space: "
 input = gets.chomp
