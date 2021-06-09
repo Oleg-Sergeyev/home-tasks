@@ -9,7 +9,7 @@ class ExchangeRate
     @data = connect
   end
 
-  def show
+  def show # Метод возвращает массив заданных курсов
     data_parsed = JSON.parse(@data.body)
     array = []
     @country_valute.each do |country_valute|
@@ -20,7 +20,7 @@ class ExchangeRate
 
   private
 
-  def connect
+  def connect # Метод создает объект Faraday и возвращает данные полученные от ресурса
     Faraday.get('https://www.cbr-xml-daily.ru/daily_json.js')
   end
 end

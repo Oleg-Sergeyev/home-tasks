@@ -1,0 +1,30 @@
+require 'date'
+
+desc 'Информация о курсе рубля'
+task default: 'exchange_rate:view'
+
+namespace :exchange_rate do
+  desc 'Информация о курсе рубля вывод на экран'
+  task :view do
+    ruby 'run.rb'
+    puts "\nТекущее время из Rakfile: " + DateTime.now.strftime('%m/%d/%Y at %H:%M').to_s
+  end
+end
+
+namespace :exchange_rate do
+  desc 'Отправка по адресу **** mail.ru'
+  task :send_mail_ru do
+    p 'Отправка на ***mail.ru'
+    sleep 2
+    ruby 'sender_to_mail_ru.rb'
+  end
+end
+
+namespace :exchange_rate do
+  desc 'Отправка по адресу **** yandex.ru'
+  task :send_yandex_ru do
+    p 'Отправка на ***yandex.ru'
+    sleep 2
+    ruby 'sender_to_yandex_ru.rb'
+  end
+end
