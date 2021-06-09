@@ -1,20 +1,16 @@
-require 'faraday'
-require 'faraday_middleware'
-require 'json'
+require_relative 'class_exchange_rate'
+require 'date'
 
-# Debug: 
-# require "pry"
+puts `clear`
+puts 'Table for RUB exchange rate, today ' + Date.today.to_s
+valutes = %w[USD EUR CNY GBP CHF JPY]
+table = ExchangeRate.new(valutes)
+i = 0
+puts "\n"
+table.show.each do |element|
+  puts valutes[i] + ' -> ' + element.to_s
+  i += 1
+end
 
-
-country_code_src = "USD"
-country_code_dst = "RUS"
-connection = Faraday.get("http://www.google.com/ig/calculator?hl=en&q=1#{country_code_src}=?#{country_code_dst}")
-
-currency_comparison_hash = eval connection.body #Google's output is not JSON, it's a hash
-
-dst_currency_value, *dst_currency_text = *currency_comparison_hash[:rhs].split(' ')
-dst_currency_value = dst_currency_value.to_f
-dst_currency_text = dst_currency_text.join(' ')
-
-puts "#{country_code_dst} -> #{dst_currency_value} (#{dst_currency_text} to 1 #{country_code_src})"
-#puts country_code_dst#->dst_currency_value #{dst_currency_text} to 1 {country_code_src}
+print "\nEnter your email address to send it: "
+input = gets.chomp
