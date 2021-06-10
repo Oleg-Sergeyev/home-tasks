@@ -20,8 +20,9 @@ class LocalEmail
     @message << "Subject: #{@theme}\n"
     @message << text
   end
+
   def send
-    #puts @message
+    # puts @message
     Net::SMTP.start(ENV['SMTP'], 587, ENV['DOMAIN'], ENV['EMAIL'], ENV['PASSPORT'], :plain) do |smtp|
       smtp.send_message @message, from, to
     end

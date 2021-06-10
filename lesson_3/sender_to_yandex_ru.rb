@@ -1,7 +1,7 @@
 require_relative 'lib/local_email'
 require_relative 'lib/exchange_rate'
 
-#EMAILS = File.open(__dir__ + '/db/emails.db', 'r')
+# EMAILS = File.open(__dir__ + '/db/emails.db', 'r')
 email = LocalEmail.new('smtp@dvpweb.ru', 'mr.stown@yandex.ru', 'exchange rate')
 valutes = %w[USD EUR CNY GBP CHF JPY]
 table = ExchangeRate.new(valutes)

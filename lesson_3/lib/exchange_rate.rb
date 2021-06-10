@@ -4,7 +4,7 @@ require 'json'
 
 # class ExchangeRate
 class ExchangeRate
-  CENTER_BANK_URL = 'https://www.cbr-xml-daily.ru/daily_json.js'
+  CENTER_BANK_URL = 'https://www.cbr-xml-daily.ru/daily_json.js'.freeze
   def initialize(valute)
     @country_valute = valute
     @data = connect
