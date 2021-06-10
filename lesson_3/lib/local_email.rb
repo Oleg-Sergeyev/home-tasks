@@ -22,7 +22,7 @@ class LocalEmail
   end
   def send
     #puts @message
-    Net::SMTP.start('mail.dvpweb.ru', 587, 'dvpweb.ru', ENV['EMAIL'], ENV['PASSPORT'], :plain) do |smtp|
+    Net::SMTP.start(ENV['SMTP'], 587, ENV['DOMAIN'], ENV['EMAIL'], ENV['PASSPORT'], :plain) do |smtp|
       smtp.send_message @message, from, to
     end
   end
