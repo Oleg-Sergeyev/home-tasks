@@ -4,6 +4,7 @@ require 'json'
 
 # class ExchangeRate
 class ExchangeRate
+  CENTER_BANK_URL = 'https://www.cbr-xml-daily.ru/daily_json.js'
   def initialize(valute)
     @country_valute = valute
     @data = connect
@@ -11,16 +12,14 @@ class ExchangeRate
 
   def show # Метод возвращает массив заданных курсов
     data_parsed = JSON.parse(@data.body)
-    array = []
-    @country_valute.each do |country_valute|
-      array.push(((data_parsed ['Valute'])[country_valute])['Value'])
+    @country_valute.map do |country_valute|
+      data_parsed.dig('Valute', country_valute, 'Value')
     end
-    array
   end
 
   private
 
   def connect # Метод создает объект Faraday и возвращает данные полученные от ресурса
-    Faraday.get('https://www.cbr-xml-daily.ru/daily_json.js')
+    Faraday.get(CENTER_BANK_URL)
   end
 end

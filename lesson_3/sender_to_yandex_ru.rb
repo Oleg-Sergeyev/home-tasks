@@ -1,5 +1,5 @@
-require_relative 'class_local_email'
-require_relative 'class_exchange_rate'
+require_relative 'lib/local_email'
+require_relative 'lib/exchange_rate'
 
 #EMAILS = File.open(__dir__ + '/db/emails.db', 'r')
 email = LocalEmail.new('ruby_code@mail.com', '******@yandex.ru', 'exchange rate')

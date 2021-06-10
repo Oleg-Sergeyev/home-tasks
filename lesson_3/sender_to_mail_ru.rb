@@ -1,7 +1,7 @@
-require_relative 'class_local_email'
-require_relative 'class_exchange_rate'
+require_relative 'lib/local_email'
+require_relative 'lib/exchange_rate'
 
-email = LocalEmail.new('ruby_code@mail.com', '******@mail.ru', 'exchange rate')
+email = LocalEmail.new('smtp@dvpweb.ru', 'sergeyev_ov@mail.ru', 'exchange rate')
 valutes = %w[USD EUR CNY GBP CHF JPY]
 table = ExchangeRate.new(valutes)
 i = 0

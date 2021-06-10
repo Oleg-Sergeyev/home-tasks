@@ -1,4 +1,4 @@
-require_relative 'class_exchange_rate'
+require_relative 'lib/exchange_rate'
 require 'date'
 require 'pry-byebug'
 
