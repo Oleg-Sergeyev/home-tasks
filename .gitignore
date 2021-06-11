@@ -1,0 +1,6 @@
+/usr/
+/usr/**
+/doc/**
+/doc/*.doc
+.env
+.env.template
