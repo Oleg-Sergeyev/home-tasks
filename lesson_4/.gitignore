@@ -9,4 +9,5 @@
 *.log
 *.json
 *.tmp
+tmp.rb
 .gitignore

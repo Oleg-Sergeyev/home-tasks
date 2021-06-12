@@ -6,12 +6,12 @@ FILE_JSON = PATH + '/export.json'.freeze
 if Dir.exist?(PATH) == false
   Dir.mkdir(PATH)
 else
-   if File.exist?(FILE_LOG)
-     File.delete(FILE_LOG)
-   end
-   if File.exist?(FILE_JSON)
+  if File.exist?(FILE_LOG)
+    File.delete(FILE_LOG)
+  end
+  if File.exist?(FILE_JSON)
     File.delete(FILE_JSON)
-   end
+  end
 end
 
 file_log = File.new(FILE_LOG, 'w')
