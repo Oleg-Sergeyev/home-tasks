@@ -1,11 +1,17 @@
 require 'json'
-
+# Class Telemetry
 class Telemetry
   PATH = __dir__.to_s + '/tmp'.to_s
   FILE_LOG = PATH + '/hardware.log'.freeze
   FILE_JSON = PATH + '/export.json'.freeze
   def initialize
     @main_arr = []
+  end
+
+  def export
+    chkfiles
+    File.open(FILE_JSON, 'wb') { |json_file| json_file.puts JSON.pretty_generate(getjson) }
+    File.delete(FILE_LOG)
   end
 
   private
@@ -45,12 +51,8 @@ class Telemetry
       end
     end
     end
+    @main_arr
   end
-def export
-  chkfiles
-  File.open(FILE_JSON, 'wb') { |json_file| json_file.puts JSON.pretty_generate(getjson) }
-  File.delete(FILE_LOG)
-end
 def chkfiles
   if Dir.exist?(PATH) == false
     Dir.mkdir(PATH)
