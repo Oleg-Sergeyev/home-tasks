@@ -1,38 +1,42 @@
 require 'json'
 # Class Telemetry
 class Telemetry
-  PATH = __dir__.to_s + '/tmp'.to_s
-  FILE_LOG = PATH + '/hardware.log'.freeze
-  FILE_JSON = PATH + '/export.json'.freeze
+  PATH = Dir.pwd.to_s + '/tmp'.to_s
+  FILE_LOG = PATH + '/info.log'.freeze
+  HARDWARE_JSON = PATH + '/hardware.json'.freeze
+  ETHERNET_JSON = PATH + '/ethernet.json'.freeze
+
   def initialize
-    @main_arr = []
+    @hardware_arr = []
+    @ethernet_arr = []
   end
 
   def export
     chkfiles
-    File.open(FILE_JSON, 'wb') { |json_file| json_file.puts JSON.pretty_generate(getjson) }
+    File.open(HARDWARE_JSON, 'wb') { |json_hwfile| json_hwfile.puts JSON.pretty_generate(hwjson) }
+    File.open(ETHERNET_JSON, 'wb') { |json_ethfile| json_ethfile.puts JSON.pretty_generate(ethjson) }
     File.delete(FILE_LOG)
   end
 
   private
 
-  def getinfo
+  def getinfo(operation)
     file_log = File.new(FILE_LOG, 'w')
-    file_log.write(`lspci -v`)
+    file_log.write(operation)
     file_log.close
     file_log = File.new(FILE_LOG, 'r:UTF-8')
     file_log.readlines
   end
 
-  def getjson
+  def hwjson
     param_arr = []
     dev = ''
-    getinfo.each do |string|
+    getinfo(`lspci -v`).each do |string|
       string = string.gsub(/^$\n/, '')
       string.each_line do |str|
         if !str.start_with?("\t") || !str.start_with?('')
           if param_arr.empty? != true
-            @main_arr.push(dev => param_arr)
+            @hardware_arr.push(dev => param_arr)
             param_arr = []
           end
           dev = str[0..7].rstrip!
@@ -50,15 +54,42 @@ class Telemetry
         end
       end
     end
-    @main_arr
+    @hardware_arr
+  end
+
+  def ethjson
+    param_arr = []
+    device = ''
+    getinfo(`ifconfig`).each do |string|
+      string = string.gsub(/^$\n/, '')
+      string.each_line do |str|
+        if !str.start_with?(' ')
+          if param_arr.empty? != true
+            @ethernet_arr.push(device => param_arr)
+            param_arr = []
+          end
+          device = str.lines(':')[0].chop
+          param_arr.push(str.lines(':')[1].chop.lstrip!.downcase)
+        else
+          param_arr.push(str.gsub(str[0..7], '').chop)
+        end
+      end
+    end
+    @ethernet_arr.push(device => param_arr)
   end
 
   def chkfiles
     if Dir.exist?(PATH) == false
       Dir.mkdir(PATH)
     else
-      File.delete(FILE_LOG) if File.exist?(FILE_LOG)
-      File.delete(FILE_JSON) if File.exist?(FILE_JSON)
+      dir = Dir.new(PATH)
+      Dir.foreach(dir) do |f|
+        #p File.directory?(f), f #file_type
+        #if !File.directory?(f) 
+          fn = File.join(dir, f)
+          File.delete(fn) if f != '.' && f != '..'
+        #end
+      end
     end
   end
 end
