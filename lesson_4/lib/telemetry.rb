@@ -1,7 +1,7 @@
 require 'json'
 # Class Telemetry
 class Telemetry
-  PATH = Dir.pwd.to_s + '/tmp'.to_s
+  PATH = Dir.pwd.to_s + '/.report'.to_s
   FILE_LOG = PATH + '/info.log'.freeze
   HARDWARE_JSON = PATH + '/hardware.json'.freeze
   ETHERNET_JSON = PATH + '/ethernet.json'.freeze
@@ -82,14 +82,15 @@ class Telemetry
     if Dir.exist?(PATH) == false
       Dir.mkdir(PATH)
     else
-      dir = Dir.new(PATH)
-      Dir.foreach(dir) do |f|
+      Dir.delete(PATH)
+      #dir = Dir.new(PATH)
+      #Dir.foreach(dir) do |f|
         #p File.directory?(f), f #file_type
         #if !File.directory?(f) 
-          fn = File.join(dir, f)
-          File.delete(fn) if f != '.' && f != '..'
+         # fn = File.join(dir, f)
+         # File.delete(fn) if f != '.' && f != '..'
         #end
-      end
+      #end
     end
   end
 end

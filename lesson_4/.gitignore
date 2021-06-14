@@ -4,6 +4,8 @@
 /usr/**
 /doc/**
 /doc/*.doc
+/.report/
+/.report/**
 .env
 .env.template
 *.log

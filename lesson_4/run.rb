@@ -5,7 +5,7 @@ require 'zip'
 hardware = Telemetry.new
 hardware.export
 
-folder = Dir.pwd.to_s + '/tmp/'.to_s
+folder = Dir.pwd.to_s + '/.report/'.to_s
 input_filenames = ['hardware.json', 'ethernet.json']
 filename = "#{:report}.zip"
 zipfile = folder.to_s + filename.to_s
