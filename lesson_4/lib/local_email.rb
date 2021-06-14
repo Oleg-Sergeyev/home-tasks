@@ -20,6 +20,7 @@ class LocalEmail
     @message << "Subject: #{@theme}\n"
     @message << text
   end
+
   def send_mail(text, attachment = false, filename = false)
     Pony.mail({
       :from => from,

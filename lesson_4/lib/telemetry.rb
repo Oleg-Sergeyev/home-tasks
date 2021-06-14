@@ -1,4 +1,6 @@
 require 'json'
+require 'fileutils'
+
 # Class Telemetry
 class Telemetry
   PATH = Dir.pwd.to_s + '/.report'.to_s
@@ -15,7 +17,6 @@ class Telemetry
     chkfiles
     File.open(HARDWARE_JSON, 'wb') { |json_hwfile| json_hwfile.puts JSON.pretty_generate(hwjson) }
     File.open(ETHERNET_JSON, 'wb') { |json_ethfile| json_ethfile.puts JSON.pretty_generate(ethjson) }
-    File.delete(FILE_LOG)
   end
 
   private
@@ -82,15 +83,7 @@ class Telemetry
     if Dir.exist?(PATH) == false
       Dir.mkdir(PATH)
     else
-      Dir.delete(PATH)
-      #dir = Dir.new(PATH)
-      #Dir.foreach(dir) do |f|
-        #p File.directory?(f), f #file_type
-        #if !File.directory?(f) 
-         # fn = File.join(dir, f)
-         # File.delete(fn) if f != '.' && f != '..'
-        #end
-      #end
+      FileUtils.rm_r PATH, force: true
     end
   end
 end
