@@ -29,13 +29,13 @@ presskey
 
 puts "\nЗадание 3"
 colors = {
-  :red => 'красный',
-  :orange => 'оранжевый',
-  :yellow  => 'желтый',
-  :green  => 'зеленый',
-  :blue  => 'голубой',
-  :indigo  => 'индиго',
-  :violet  => 'фиолетовый'
+  red: 'красный',
+  orange: 'оранжевый',
+  yellow: 'желтый',
+  green: 'зеленый',
+  blue: 'голубой',
+  indigo: 'индиго',
+  violet: 'фиолетовый'
 }
 colors.each do |key, value|
   puts ":#{key} => #{value}"
@@ -54,19 +54,19 @@ puts "' Hello world ' allstrip -> #{' Hello world '.strip}"
 presskey
 
 puts "\nЗадание 6"
-puts "#{:hellow} #{:world!}"
+puts 'hellow world!'
 
 presskey
 
 puts "\nЗадание 7"
 colors = {
-  :red => 1,
-  :orange => 2,
-  :yellow  => 3,
-  :green  => 4,
-  :blue  => 5,
-  :indigo  => 6,
-  :violet  => 7
+  red: 1,
+  orange: 2,
+  yellow: 3,
+  green: 4,
+  blue: 5,
+  indigo: 6,
+  violet: 7
 }
 k = rand(1..7)
 colors.each do |key, value|
@@ -98,7 +98,7 @@ hardware.export
 STR = 'Generated report on the composition of the computer and settings of network interfaces'.freeze
 FOLDER = Dir.pwd.to_s + '/.report/'.to_s
 INPUT_FILENAMES = ['hardware.json', 'ethernet.json'].freeze
-ZIPFILENAME = "#{:report}.zip".freeze
+ZIPFILENAME = 'report.zip'.freeze
 ZIPFILE = FOLDER.to_s + ZIPFILENAME.to_s
 
 Zip::File.open(ZIPFILE, Zip::File::CREATE) do |zip_file|
