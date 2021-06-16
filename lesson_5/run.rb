@@ -32,9 +32,9 @@ car.arr.each { |element| print "#{element} " }
 presskey
 
 puts 'Задание 3'
-pointers = Point.new(%w[-5 100 654 5])
+pointers = Point.new(%w[-5 err 654 5])
 puts "\nКоординаты: #{pointers.arr}"
-res = pointers.decide
+res = pointers.decide.round(2)
 if res != false
   puts "\nРезультат вычисления: #{res} ед."
 else
