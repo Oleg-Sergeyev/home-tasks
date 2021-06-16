@@ -9,11 +9,11 @@ puts `clear`
 puts 'Задание 1, 5'
 student = User.new('Олег', 'Сергеев', 'Владимирович')
 student2 = User.new('Новенький', 'Новенький', 'Новенький')
-teacher = User.new('Игорь', 'Симдянов', 'Владимирович')
+teacher = User.new('Игорь', 'Симдянов', 'Вячеславович')
 student2.name = 'Василий'
-puts "\nОбъект №#{student.count} #{student.name} #{student.surname} #{student.patronimyc}"
-puts "Объект №#{student2.count} #{student2.name} #{student2.surname} #{student2.patronimyc}"
-puts "Объект №#{teacher.count} #{teacher.name} #{teacher.surname} #{teacher.patronimyc}"
+puts "\nОбъект №#{student.count} #{student.name} #{student.patronimyc} #{student.surname}"
+puts "Объект №#{student2.count} #{student2.name} #{student2.patronimyc} #{student2.surname}"
+puts "Объект №#{teacher.count} #{teacher.name} #{teacher.patronimyc} #{teacher.surname}"
 
 presskey
 
@@ -24,9 +24,10 @@ car = Auto.new([:car, :toyota, 2021])
 
 car.arr[1] = :wolkswagen
 
-puts "\nBus #{bus.arr}"
-puts "Bus #{truck.arr}"
-puts "Bus #{car.arr}"
+puts "\nAuto #{bus.arr}"
+puts "Auto #{truck.arr}"
+print 'Auto '
+car.arr.each { |element| print "#{element} " }
 
 presskey
 
