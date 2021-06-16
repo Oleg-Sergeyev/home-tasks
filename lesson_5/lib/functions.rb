@@ -2,9 +2,12 @@
 
 require 'io/console'
 
+MESSAGE_PRESS_ANY_KEY = "\nPress any key or 'q' for exit: "
+MESSAGE_ABORT = 'Bye, bye!'
+
 def presskey
-  print "\nPress any key or 'q' for exit: "
+  print MESSAGE_PRESS_ANY_KEY
   input = $stdin.getch
-  abort 'Bye, bye!' if input == 'q'
+  abort MESSAGE_ABORT if input == 'q'
   puts `clear`
 end
