@@ -31,7 +31,7 @@ puts "Bus #{car.arr}"
 presskey
 
 puts 'Задание 3'
-pointers = Point.new(%w[-5 100 lklk 5])
+pointers = Point.new(%w[-5 100 654 5])
 puts "\nКоординаты: #{pointers.arr}"
 res = pointers.decide
 if res != false

@@ -9,8 +9,10 @@ class Point
   end
 
   def decide
+    return false if arr.size != 4
+
     arr.each do |element|
-      return false if element.number? == false || arr.size != 4
+      return false if element.number? == false # || arr.size != 4
     end
     arr_float = arr.collect(&:to_f)
     Math.sqrt((arr_float[2] - arr_float[0])**2 +
