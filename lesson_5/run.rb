@@ -11,7 +11,7 @@ student = User.new('Олег', 'Сергеев', 'Владимирович')
 student2 = User.new('Новенький', 'Новенький', 'Новенький')
 teacher = User.new('Игорь', 'Симдянов', 'Владимирович')
 student2.name = 'Василий'
-puts "Объект №#{student.count} #{student.name} #{student.surname} #{student.patronimyc}"
+puts "\nОбъект №#{student.count} #{student.name} #{student.surname} #{student.patronimyc}"
 puts "Объект №#{student2.count} #{student2.name} #{student2.surname} #{student2.patronimyc}"
 puts "Объект №#{teacher.count} #{teacher.name} #{teacher.surname} #{teacher.patronimyc}"
 
