@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'lib/user'
 require_relative 'lib/point'
 require_relative 'lib/auto'
@@ -29,7 +31,9 @@ puts "Bus #{car.arr}"
 presskey
 
 puts 'Задание 3'
-res = Point.new(%w[-5 5 5 5]).decide
+pointers = Point.new(%w[-5 100 lklk 5])
+puts "\nКоординаты: #{pointers.arr}"
+res = pointers.decide
 if res != false
   puts "\nРезультат вычисления: #{res} ед."
 else
@@ -39,3 +43,5 @@ end
 presskey
 
 puts 'Задание 4'
+puts $LOAD_PATH
+puts "\nВсего элементов(путей): #{$LOAD_PATH.size}"

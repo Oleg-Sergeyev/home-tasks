@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Class User
 class User
   @@objcouner = 0
@@ -11,6 +13,6 @@ class User
   end
 
   def count
-    @@objcouner = @@objcouner + 1
+    @@objcouner += 1
   end
 end
