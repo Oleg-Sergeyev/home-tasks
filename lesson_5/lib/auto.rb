@@ -2,12 +2,13 @@
 
 # Class Auto
 class Auto
+  PARAM = 3
   def initialize(arr)
     @arr = arr
   end
   attr_accessor :arr
 
   def list
-    return false if arr.size != 3
+    return true if arr.size != PARAM
   end
 end

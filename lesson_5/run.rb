@@ -18,24 +18,29 @@ puts "Объект №#{teacher.count} #{teacher.name} #{teacher.patronimyc} #{t
 presskey
 
 puts 'Задание 2'
-bus = Auto.new(%w[автобус лиаз 1988])
+bus = Auto.new(%w[автобус лиаз])
 truck = Auto.new(['грузовик', 'камаз', 2021])
 car = Auto.new([:car, :toyota, 2021])
 
 car.arr[1] = :wolkswagen
 
-puts "\nAuto #{bus.arr}"
-puts "Auto #{truck.arr}"
-print 'Auto '
-car.arr.each { |element| print "#{element} " }
+autos = [bus, truck, car]
+
+autos.each do |auto|
+  if !auto.list.nil?
+    puts "Auto: #{auto.arr} has error in parametres!"
+  else
+    puts "Auto: #{auto.arr}"
+  end
+end
 
 presskey
 
 puts 'Задание 3'
-pointers = Point.new(%w[-5 err 654 5])
+pointers = Point.new(%w[-5 8 ewr 5])
 puts "\nКоординаты: #{pointers.arr}"
-res = pointers.decide.round(2)
-if res != false
+res = pointers.calculate
+if res != true
   puts "\nРезультат вычисления: #{res} ед."
 else
   puts "\nОшибка в переданном массиве"

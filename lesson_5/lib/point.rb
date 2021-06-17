@@ -2,21 +2,24 @@
 
 # Class Point
 class Point
+  PARAM = 4
   attr_accessor :arr
 
   def initialize(arr)
     @arr = arr
   end
 
-  def decide
-    return false if arr.size != 4
+  def calc(array)
+    Math.sqrt((array[2] - array[0])**2 +
+    (array[3] - array[1])**2).round(3)
+  end
 
-    arr.each do |element|
-      return false if element.number? == false
-    end
+  def calculate
+    return true if arr.size != PARAM
+    return true unless arr.all?(&:number?)
+
     arr_float = arr.collect(&:to_f)
-    Math.sqrt((arr_float[2] - arr_float[0])**2 +
-      (arr_float[3] - arr_float[1])**2)
+    calc(arr_float)
   end
 end
 
