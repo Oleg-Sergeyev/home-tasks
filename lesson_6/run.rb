@@ -5,8 +5,8 @@ require_relative 'lib/functions'
 require 'date'
 require 'io/console'
 
-#p auth
 player = Player.new(auth)
+#p auth
 puts 'едем дальше'
 
 
