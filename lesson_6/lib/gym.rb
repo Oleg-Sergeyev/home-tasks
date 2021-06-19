@@ -1,22 +1,22 @@
+# frozen_string_literal: true
 
 # Class Gym
 class Gym
-
-  def initialize(arr_date, arr_time, maxgamers, mingamers)
+  def initialize(arr_date, arr_time, maxplayers, minplayers)
     @arr_date = arr_date
     @arr_time = arr_time
-    @maxgamers = maxgamers
-    @mingamers = mingamers
+    @maxplayers = maxplayers
+    @minplayers = minplayers
   end
 
-  attr_accessor :arr_date, :arr_time, :maxgamers, :mingamers
+  attr_accessor :arr_date, :arr_time, :maxplayers, :minplayers
 
-  def load(arr_gamers)
-    return unless !@arr_date.include?(arr_gamers[0]) && @arr_time.include?(arr_gamers[1])
+  def load(arr_players)
+    return unless !@arr_date.include?(arr_players[0]) && @arr_time.include?(arr_players[1])
 
-    return unless @maxgamers <= arr_gamers[2] && @mingamers >= arr_gamers[2]
+    return unless @maxplayers <= arr_players[2] && @minplayers >= arr_players[2]
 
-    save(arr_gamers)
+    save(arr_players)
   end
 
   def save(array)
