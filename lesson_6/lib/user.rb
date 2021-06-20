@@ -56,6 +56,7 @@ class User
         show_back
       end
       signup if key == 2.to_s
+      abort BYE if key == ''
     end
    end
 
@@ -72,11 +73,7 @@ class User
     if time == ''
       savesignup(DEFUALT_TIME) #'save signup'
     else
-      if chk_time(time)
-        p 'correct' #savesignup(time)
-      else
-        p 'not correct' #signup
-      end
+      savesignup(time) if chk_time(time)
     end
   end
 
@@ -87,8 +84,29 @@ class User
       clear
       print "#{DATE_IS_NOT_CORRECT}. #{PRESS_ANY_KEY}"
       key = $stdin.getch
-      show_back if key == 'b'
+      show_menu if key == 'b'
       signup
     end
+  end
+
+  def savesignup(time)
+    type_open = if !File.exist?(UNFVPLAYERS_FULLPATH)
+                  'w'
+                else
+                  'a'
+                end
+    CSV.open(UNFVPLAYERS_FULLPATH, type_open) do |csv|
+      csv << [DateTime.parse(time), @id, Date.today.strftime('%FT%T%:z')]
+    end
+    clear
+    puts "#{YOU_APPLIED} at this time: #{time}"
+    pressanykey
+  end
+
+  def pressanykey
+    print PRESS_ANY_KEY_TO_EXIT
+    key = $stdin.getch
+    show_menu if key == 'b'
+    abort BYE
   end
 end

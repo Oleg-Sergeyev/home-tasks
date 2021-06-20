@@ -21,18 +21,18 @@ def auth
 end
 
 # Menu level 1
-def setmenu_lv1(role)
-  puts 'Select one of the menu items'
-  if role == 'trainer'
-    MENU_TRAINER.each do |key, value|
-      puts key
-    end
-  else
-    MENU_PLAYER.each do |key, value|
-      puts key
-    end
-  end
-end
+#def setmenu_lv1(role)
+#  puts 'Select one of the menu items'
+#  if role == 'trainer'
+#    MENU_TRAINER.each do |key, value|
+#      puts key
+#    end
+#  else
+#    MENU_PLAYER.each do |key, value|
+#      puts key
+#    end
+#  end
+#end
 
 def clear
   puts `clear`
