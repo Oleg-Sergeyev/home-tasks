@@ -34,8 +34,8 @@ def setmenu_lv1(role)
   end
 end
 
-def viewmenu()
-
+def clear
+  puts `clear`
 end
 
 def veiwgym(gym)

@@ -7,7 +7,11 @@ require 'date'
 require 'io/console'
 
 user = User.new(auth)
+#p user.role
 user.show_menu
+
+#key = $stdin.getch
+#user.input_key(key)
 #p user.role
 #puts 'едем дальше'
 
