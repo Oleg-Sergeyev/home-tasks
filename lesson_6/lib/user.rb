@@ -37,7 +37,7 @@ class User
 
   def show_menu
     clear
-    puts SELECT_MENU
+    puts "Hello, #{@name} #{@surname}! \n#{SELECT_MENU}#{@role}."
     @menu_items_arr.each do |element|
       element.each do |key, value|
         puts value.key

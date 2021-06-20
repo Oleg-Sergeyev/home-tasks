@@ -9,7 +9,7 @@ MENU1_TRAINER = {
   ' View change players list (press 2)' => 2,
   ' View verified players list (press 3)' => 3
 }.freeze
-SELECT_MENU = 'Select one of the menu items'.freeze
+SELECT_MENU = "\nSelect one of the menu items. This is menu for ".freeze
 YOUR_CHOICE = "\nYour choice: ".freeze
 BACK_KEY = "\nPress 'b' to back: ".freeze
 SIGNUP_TIME = "\nInput date and time '22/06/2021 21:00'" + 
