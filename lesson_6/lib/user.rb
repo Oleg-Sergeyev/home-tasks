@@ -47,7 +47,7 @@ class User
   def input_key
     print YOUR_CHOICE
     key = $stdin.getch
-    if @role == 'trainer'
+    if @role == 'trainer' # Trainer
       if key == 1.to_s
         viewunverifiedplayers
         pressanykey

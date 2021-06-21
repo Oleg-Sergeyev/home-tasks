@@ -17,10 +17,10 @@ def userid(id)
 end
 
 def auth
+  description
   user = []
   loop do
-    puts `clear`
-    print 'Input your login: '
+    print INPUT_LOGIN
     login = gets.strip
     pass = IO.console.getpass 'Input your password: '
     user = chk(Array[login, pass])
@@ -110,4 +110,22 @@ def write_verifiedplayers(arr)
       csv << [row[0], row[1]]
     end
   end
+end
+
+def presskey
+  print MESSAGE_PRESS_ANY_KEY
+  input = $stdin.getch
+  abort BYE if input == 'q'
+  clear
+end
+
+def description
+  puts DESCRIPTION
+end
+
+def last
+  clear
+  puts "Задание 'от себя' (Запись на тренировку)"
+  user = User.new(auth)
+  user.show_menu
 end
