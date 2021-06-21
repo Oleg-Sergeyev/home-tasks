@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'date'
 
 class Hello
-
   MORNING = (DateTime.parse('06:00')..DateTime.parse('12:00')).freeze
   DAY = (DateTime.parse('12:00')..DateTime.parse('18:00')).freeze
   EVENING = (DateTime.parse('18:00')..DateTime.parse('23:59')).freeze
