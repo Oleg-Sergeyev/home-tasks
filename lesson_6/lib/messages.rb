@@ -6,8 +6,11 @@ MENU1_PLAYER = {
 }.freeze
 MENU1_TRAINER = {
   "\n View unverified players list (press 1)" => 1,
-  ' View change players list (press 2)' => 2,
-  ' View verified players list (press 3)' => 3
+  ' Autocheck players list (press 2)' => 2,
+  ' Manual edit players list (press 3)' => 3,
+  ' View verified players list (press 4)' => 4,
+  ' Send to GYM verified players list (press 5)' => 5,
+  ' Press any other key to exit' => ''
 }.freeze
 SELECT_MENU = "\nSelect one of the menu items. This is menu for ".freeze
 YOUR_CHOICE = "\nYour choice: ".freeze
@@ -19,3 +22,4 @@ PRESS_ANY_KEY = "Press any key to enter date or 'b' to back".freeze
 PRESS_ANY_KEY_TO_EXIT = "Press any key to exit or 'b' to back main menu".freeze
 YOU_APPLIED = 'You applied'.freeze
 BYE = "\nBye, bye!".freeze
+HEADER_TABLE = '| № |    Start date    |  Surname  |    Name    |  Application date'.freeze

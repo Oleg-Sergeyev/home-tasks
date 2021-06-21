@@ -2,9 +2,14 @@ require_relative 'settings'
 require 'digest'
 require 'io/console'
 require 'io/wait'
+require 'date'
 
 def chk(user)
   PLAYERS_DB.find { |row| row[1] == user[0] && row[2] == Digest::MD5.hexdigest(user[1]).upcase }
+end
+
+def userid(id)
+  (PLAYERS_DB.find { |row| row[0] == id.to_s })[3..4].join('     ')
 end
 
 def auth
@@ -45,5 +50,17 @@ def veiwgym(gym)
     gym.arr_time.each do |time|
       puts time
     end
+  end
+end
+
+def viewunverifiedplayers
+  clear
+  unvfplayers = CSV.read(UNFVPLAYERS_FULLPATH)
+  puts HEADER_TABLE
+  i = 1
+  unvfplayers.each do |element|
+    print "\n  #{i}   #{DateTime.parse(element[0]).strftime('%m-%d-%Y %H:%M')}     "\
+    "#{userid(element[1])}   #{DateTime.parse(element[2]).strftime('%m-%d-%Y %H:%M')}"
+    i += 1
   end
 end

@@ -50,6 +50,10 @@ class User
     print YOUR_CHOICE
     key = $stdin.getch
     if @role == 'trainer'
+      if key == 1.to_s
+        viewunverifiedplayers
+        show_back
+      end
     else
       if key == 1.to_s
         veiwgym(GYM_1)
@@ -58,7 +62,7 @@ class User
       signup if key == 2.to_s
       abort BYE if key == ''
     end
-   end
+  end
 
   def show_back
     print BACK_KEY
@@ -71,7 +75,7 @@ class User
     print SIGNUP_TIME
     time = gets.strip
     if time == ''
-      savesignup(DEFUALT_TIME) #'save signup'
+      savesignup(DEFUALT_TIME)
     else
       savesignup(time) if chk_time(time)
     end
@@ -107,6 +111,7 @@ class User
     print PRESS_ANY_KEY_TO_EXIT
     key = $stdin.getch
     show_menu if key == 'b'
+    clear
     abort BYE
   end
 end
