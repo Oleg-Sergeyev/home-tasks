@@ -18,9 +18,10 @@ BACK_KEY = "\nPress 'b' to back: ".freeze
 SIGNUP_TIME = "\nInput date and time '22/06/2021 21:00'"+
               'or press Enter for default this time: '.freeze
 DATE_IS_NOT_CORRECT = 'The entered date is not correct'.freeze
-PRESS_ANY_KEY = "Press any key to enter date or 'b' to back".freeze
-PRESS_ANY_KEY_TO_EXIT = "Press any key to exit or 'b' to back main menu".freeze
+PRESS_ANY_KEY = "Press any key to enter date or 'b' to back ".freeze
+PRESS_ANY_KEY_TO_EXIT = "Press any key to exit or 'b' to back main menu ".freeze
 YOU_APPLIED = 'You applied'.freeze
 BYE = "\nBye, bye!".freeze
 HEADER_TABLE = '| № |    Start date    |  Surname  |    Name    |  Application date'.freeze
 HEADER_TABLE_VFPLAYERS = '| № |    Start date    |  Surname  |    Name    |'.freeze
+VFPLAYERS_CREATED = 'Verified players list was created'.freeze

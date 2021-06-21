@@ -27,19 +27,16 @@ def auth
   Array[user[0], user[1], user[3], user[4], user[5]]
 end
 
-# Menu level 1
-#def setmenu_lv1(role)
-#  puts 'Select one of the menu items'
-#  if role == 'trainer'
-#    MENU_TRAINER.each do |key, value|
-#      puts key
-#    end
-#  else
-#    MENU_PLAYER.each do |key, value|
-#      puts key
-#    end
-#  end
-#end
+def savesignup(time)
+  type_open = if !File.exist?(UNFVPLAYERS_FULLPATH)
+                'w'
+              else
+                'a'
+              end
+  CSV.open(UNFVPLAYERS_FULLPATH, type_open) do |csv|
+    csv << [DateTime.parse(time), @id, DateTime.now]#Date.today.strftime('%FT%T%:z')]
+  end
+end
 
 def clear
   puts `clear`
@@ -99,7 +96,7 @@ def checkunverifiedplayers
       arr2.push(element) if DateTime.parse(element[0]).strftime('%H:%M') == DateTime.parse(time).strftime('%H:%M')
     end
   end
-  return arr2
+  return arr2 if arr2.size <= GYM_1.maxplayers
 end
 
 # For trainer function

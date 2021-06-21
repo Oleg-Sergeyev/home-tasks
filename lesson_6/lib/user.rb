@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 require 'date'
-require 'csv'
 require_relative 'settings'
 require_relative 'gym'
 require_relative 'menuitem'
@@ -17,10 +16,6 @@ class User
     create_menu1_items
   end
   attr_reader :role, :menu_items_arr
-
-  #def viewgyms
-  #  Array[GYM_1, GYM_2, GYM_3]
-  #end
 
   def create_menu1_items # Function to create main menu for trainer or player
     if @role == 'trainer'
@@ -51,7 +46,7 @@ class User
     if @role == 'trainer'
       if key == 1.to_s
         viewunverifiedplayers
-        show_back
+        pressanykey
       end
       if key == 2.to_s
         autocheck
@@ -59,7 +54,7 @@ class User
       if key == 4.to_s
         viewvfplayers
       end
-    else
+    else # Player
       if key == 1.to_s
         veiwgym(GYM_1)
         show_back
@@ -75,18 +70,18 @@ class User
     show_menu if key == 'b'
   end
 
-  def signup # For player function, input or set default datetime
+  def signup # Function for player, input or set default datetime
     clear
     print SIGNUP_TIME
     time = gets.strip
     if time == ''
-      savesignup(DEFUALT_TIME)
+      savesignupusers(DEFUALT_TIME)
     else
-      savesignup(time) if chk_time(time)
+      savesignupusers(time) if chk_time(time)
     end
   end
 
-  def chk_time(time) # For player function, chek input datetime
+  def chk_time(time) # Function for player, chek input datetime
     begin
     DateTime.parse(time) # '%m/%d/%Y %H:%M')
     rescue
@@ -98,15 +93,8 @@ class User
     end
   end
 
-  def savesignup(time) # For player function to save datetime in file
-    type_open = if !File.exist?(UNFVPLAYERS_FULLPATH)
-                  'w'
-                else
-                  'a'
-                end
-    CSV.open(UNFVPLAYERS_FULLPATH, type_open) do |csv|
-      csv << [DateTime.parse(time), @id, Date.today.strftime('%FT%T%:z')]
-    end
+  def savesignupusers(time) # Function for player to save datetime in file
+    savesignup(time)
     clear
     puts "#{YOU_APPLIED} at this time: #{time}"
     pressanykey
@@ -120,14 +108,14 @@ class User
     abort BYE
   end
 
-  def autocheck
+  def autocheck # Function for trainer
     write_verifiedplayers(checkunverifiedplayers)
     clear
-    puts 'Verified players list was created'
+    puts VFPLAYERS_CREATED
     pressanykey
   end
 
-  def viewvfplayers
+  def viewvfplayers # Function for trainer
     viewverifiedplayers
     pressanykey
   end
