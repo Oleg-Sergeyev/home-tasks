@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'settings'
 require 'digest'
 require 'io/console'
@@ -34,7 +36,7 @@ def savesignup(time)
                 'a'
               end
   CSV.open(UNFVPLAYERS_FULLPATH, type_open) do |csv|
-    csv << [DateTime.parse(time), @id, DateTime.now]#Date.today.strftime('%FT%T%:z')]
+    csv << [DateTime.parse(time), @id, DateTime.now] # Date.today.strftime('%FT%T%:z')]
   end
 end
 

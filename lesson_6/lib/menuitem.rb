@@ -2,7 +2,6 @@
 
 # Class Menu
 class MenuItem
-
   def initialize(key, value)
     @key = key
     @value = value
@@ -10,7 +9,7 @@ class MenuItem
 
   attr_reader :key, :value
 
-  #def action
+  # def action
   #
-  #end
+  # end
 end

@@ -12,15 +12,15 @@ class Gym
 
   attr_accessor :name, :arr_date, :arr_time, :maxplayers, :minplayers
 
-  #def load(arr_players)
+  # def load(arr_players)
   #  return unless !@arr_date.include?(arr_players[0]) && @arr_time.include?(arr_players[1])
   #
   #  return unless @maxplayers <= arr_players[2] && @minplayers >= arr_players[2]
   #
   #  save(arr_players)
-  #end
+  # end
 
-  #def save(array)
+  # def save(array)
   #
   # end
 end

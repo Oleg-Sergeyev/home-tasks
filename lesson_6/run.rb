@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'lib/gym'
 require_relative 'lib/user'
 require_relative 'lib/settings'
