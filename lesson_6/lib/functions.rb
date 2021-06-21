@@ -3,6 +3,8 @@ require 'digest'
 require 'io/console'
 require 'io/wait'
 require 'date'
+require 'csv'
+require 'fileutils'
 
 def chk(user)
   PLAYERS_DB.find { |row| row[1] == user[0] && row[2] == Digest::MD5.hexdigest(user[1]).upcase }
@@ -53,6 +55,8 @@ def veiwgym(gym)
   end
 end
 
+# For trainer function
+
 def viewunverifiedplayers
   clear
   unvfplayers = CSV.read(UNFVPLAYERS_FULLPATH)
@@ -62,5 +66,49 @@ def viewunverifiedplayers
     print "\n  #{i}   #{DateTime.parse(element[0]).strftime('%m-%d-%Y %H:%M')}     "\
     "#{userid(element[1])}   #{DateTime.parse(element[2]).strftime('%m-%d-%Y %H:%M')}"
     i += 1
+  end
+end
+
+# For trainer function
+
+def viewverifiedplayers
+  clear
+  vfplayers = CSV.read(VFPLAYERS_FULLPATH)
+  puts HEADER_TABLE_VFPLAYERS
+  i = 1
+  vfplayers.each do |element|
+    print "\n  #{i}   #{DateTime.parse(element[0]).strftime('%m-%d-%Y %H:%M')}     "\
+    "#{userid(element[1])}"
+    i += 1
+  end
+end
+
+# For trainer function
+
+def checkunverifiedplayers
+  arr1 = []
+  arr2 = []
+  unvfplayers = CSV.read(UNFVPLAYERS_FULLPATH)
+  GYM_1.arr_date.each do |date|
+    unvfplayers.each do |element|
+      arr1.push(element) if DateTime.parse(element[0]).strftime('%Y-%m-%d') == (date).strftime('%Y-%m-%d')
+    end
+  end
+  GYM_1.arr_time.each do |time|
+    arr1.each do |element|
+      arr2.push(element) if DateTime.parse(element[0]).strftime('%H:%M') == DateTime.parse(time).strftime('%H:%M')
+    end
+  end
+  return arr2
+end
+
+# For trainer function
+
+def write_verifiedplayers(arr)
+  FileUtils.remove_file VFPLAYERS_FULLPATH, force: true if File.exist?(VFPLAYERS_FULLPATH)
+  CSV.open(VFPLAYERS_FULLPATH, 'w') do |csv|
+    arr.each do |row|
+      csv << [row[0], row[1]]
+    end
   end
 end

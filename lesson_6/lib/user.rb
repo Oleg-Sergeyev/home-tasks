@@ -15,15 +15,14 @@ class User
     @role = arr[4]
     @menu_items_arr = []
     create_menu1_items
-    #p "#{@id} #{@login} #{@name} #{@surname} #{@role}"
   end
   attr_reader :role, :menu_items_arr
 
-  def viewgyms
-    Array[GYM_1, GYM_2, GYM_3]
-  end
+  #def viewgyms
+  #  Array[GYM_1, GYM_2, GYM_3]
+  #end
 
-  def create_menu1_items
+  def create_menu1_items # Function to create main menu for trainer or player
     if @role == 'trainer'
       MENU1_TRAINER.each do |key, value|
         @menu_items_arr.push({ @role => MenuItem.new(key, value) })
@@ -35,7 +34,7 @@ class User
     end
   end
 
-  def show_menu
+  def show_menu # Function show main menu
     clear
     puts "Hello, #{@name} #{@surname}! \n#{SELECT_MENU}#{@role}."
     @menu_items_arr.each do |element|
@@ -46,13 +45,19 @@ class User
     input_key
   end
 
-  def input_key
+  def input_key # Function main menu, check input key
     print YOUR_CHOICE
     key = $stdin.getch
     if @role == 'trainer'
       if key == 1.to_s
         viewunverifiedplayers
         show_back
+      end
+      if key == 2.to_s
+        autocheck
+      end
+      if key == 4.to_s
+        viewvfplayers
       end
     else
       if key == 1.to_s
@@ -70,7 +75,7 @@ class User
     show_menu if key == 'b'
   end
 
-  def signup
+  def signup # For player function, input or set default datetime
     clear
     print SIGNUP_TIME
     time = gets.strip
@@ -81,7 +86,7 @@ class User
     end
   end
 
-  def chk_time(time)
+  def chk_time(time) # For player function, chek input datetime
     begin
     DateTime.parse(time) # '%m/%d/%Y %H:%M')
     rescue
@@ -93,7 +98,7 @@ class User
     end
   end
 
-  def savesignup(time)
+  def savesignup(time) # For player function to save datetime in file
     type_open = if !File.exist?(UNFVPLAYERS_FULLPATH)
                   'w'
                 else
@@ -108,10 +113,22 @@ class User
   end
 
   def pressanykey
-    print PRESS_ANY_KEY_TO_EXIT
+    print "\n#{PRESS_ANY_KEY_TO_EXIT}"
     key = $stdin.getch
     show_menu if key == 'b'
     clear
     abort BYE
+  end
+
+  def autocheck
+    write_verifiedplayers(checkunverifiedplayers)
+    clear
+    puts 'Verified players list was created'
+    pressanykey
+  end
+
+  def viewvfplayers
+    viewverifiedplayers
+    pressanykey
   end
 end
