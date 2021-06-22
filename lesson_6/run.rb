@@ -54,10 +54,11 @@ clear
 puts 'Задание 4 (Сумма чисел)'
 print 'Input nubers: '
 arr = gets.chomp
-summ = 0
-arr.split(' ').each do |element|
-  summ += element.to_f
-end
+#summ = 0
+summ = arr.split(' ').map(&:to_f).sum
+#arr.split(' ').each do |element|
+#  summ += element.to_f
+#end
 puts "Сумма: #{summ}"
 presskey
 
