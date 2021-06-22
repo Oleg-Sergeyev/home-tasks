@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'lib/local_email'
 require_relative 'lib/telemetry'
 require 'fileutils'
@@ -7,7 +9,7 @@ require 'io/wait'
 
 def presskey
   print "Press any key or 'q' for exit: "
-  input = STDIN.getch
+  input = $stdin.getch
   abort 'Bye, bye!' if input == 'q'
   puts `clear`
 end
@@ -95,10 +97,10 @@ puts 'Please waite'
 hardware = Telemetry.new
 hardware.export
 
-STR = 'Generated report on the composition of the computer and settings of network interfaces'.freeze
+STR = 'Generated report on the composition of the computer and settings of network interfaces'
 FOLDER = Dir.pwd.to_s + '/.report/'.to_s
 INPUT_FILENAMES = ['hardware.json', 'ethernet.json'].freeze
-ZIPFILENAME = 'report.zip'.freeze
+ZIPFILENAME = 'report.zip'
 ZIPFILE = FOLDER.to_s + ZIPFILENAME.to_s
 
 Zip::File.open(ZIPFILE, Zip::File::CREATE) do |zip_file|

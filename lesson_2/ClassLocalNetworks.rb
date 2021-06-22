@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LocalNetworks
   def initialize(name, address)
     @name = name

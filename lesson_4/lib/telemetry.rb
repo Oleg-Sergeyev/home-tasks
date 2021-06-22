@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 require 'json'
 require 'fileutils'
 
 # Class Telemetry
 class Telemetry
   PATH = Dir.pwd.to_s + '/.report'.to_s
-  FILE_LOG = PATH + '/info.log'.freeze
-  HARDWARE_JSON = PATH + '/hardware.json'.freeze
-  ETHERNET_JSON = PATH + '/ethernet.json'.freeze
+  FILE_LOG = "#{PATH}/info.log"
+  HARDWARE_JSON = "#{PATH}/hardware.json"
+  ETHERNET_JSON = "#{PATH}/ethernet.json"
 
   def initialize
     @hardware_arr = []

@@ -5,9 +5,9 @@ source 'https://rubygems.org'
 git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 
 # gem "rails"
+gem 'dotenv'
 gem 'faraday'
 gem 'faraday_middleware'
-gem 'dotenv'
 
 group :development do
   gem 'pry-byebug'

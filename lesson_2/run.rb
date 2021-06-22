@@ -1,11 +1,12 @@
+# frozen_string_literal: true
+
 require_relative 'ClassLocalUsersDb'
 require_relative 'ClassLocalHosts'
 require_relative 'ClassLocalNetworks'
 require_relative 'ClassCliMenu'
 
-
 # 'Загрузка' компьютеров в массив
-hosts = CSV.read(__dir__ + '/db/pc_list.csv')
+hosts = CSV.read("#{__dir__}/db/pc_list.csv")
 hosts.shift
 @array_pc = []
 hosts.each do |element|
@@ -14,7 +15,7 @@ hosts.each do |element|
   @array_pc.push(_array)
 end
 # 'Загрузка' сетей в массив
-networks = CSV.read(__dir__ + '/db/networks_list.csv')
+networks = CSV.read("#{__dir__}/db/networks_list.csv")
 networks.shift
 @array_networks = []
 networks.each do |element|
@@ -23,7 +24,7 @@ networks.each do |element|
   @array_networks.push(_array)
 end
 
-local_path = __dir__ 
+local_path = __dir__
 file_name = ''
 # puts `clear`
 puts "Welcome to 'USERS MANAGER' \nYou can create new users database, create new users, save it."
@@ -31,12 +32,12 @@ puts "Welcome to 'USERS MANAGER' \nYou can create new users database, create new
 puts "\nComputers list"
 # Вывод компьютеров
 @array_pc.each do |element|
-  puts 'PC: ' + element[1].get_host[0] + ' mac: ' + element[1].get_host[1] + ' brand: ' + element[1].get_host[2]
+  puts "PC: #{element[1].get_host[0]} mac: #{element[1].get_host[1]} brand: #{element[1].get_host[2]}"
 end
 # Вывод сетей
 puts "\nNetworks list"
 @array_networks.each do |element|
-  puts 'Name: ' + element[1].get_network[0] + ' ipv4: ' + element[1].get_network[1]
+  puts "Name: #{element[1].get_network[0]} ipv4: #{element[1].get_network[1]}"
 end
 # Добавление объектов, сетей в компьютеры
 i = 0
@@ -48,37 +49,35 @@ end
 # Вывод компьютеров с добавленным объектом есть
 puts "\nPC's with networks"
 @array_pc.each do |element|
-  puts 'PC: ' + element[1].get_host[0] + ' mac: ' + element[1].get_host[1] +
-       ' brand: ' + element[1].get_host[2] +  ' network: ' + element[1].get_host[3].get_network[1] +
-       ' objects: ' + element[1].class.to_s + '/' + element[1].get_host[3].class.to_s
+  puts "PC: #{element[1].get_host[0]} mac: #{element[1].get_host[1]} brand: #{element[1].get_host[2]} network: #{element[1].get_host[3].get_network[1]} objects: #{element[1].class}/#{element[1].get_host[3].class}"
 end
 # Запуск меню управления вводом/сохранением файла и/или пользователей
 # Проба меню
 loop do
-MAIN_MENU = File.open(__dir__ + '/db/menu', 'r')
-main_menu = CliMenu.new(MAIN_MENU, 'Your choice: ' , ['D', 'E', 'N', 'Q'])
-#puts main_menu.show
-control = main_menu.choice
-puts control
-if control == 'D'
-  file_name = 'users.csv'
-#else
- # control = main_menu.choice
-end
-if control == 'N' || control == 'E'
-  print 'Input file name w/o extension: '
-  file_name = gets.strip + '.csv'
-end
-abort 'Bye, bye!' if control == 'Q'
+  MAIN_MENU = File.open("#{__dir__}/db/menu", 'r')
+  main_menu = CliMenu.new(MAIN_MENU, 'Your choice: ', %w[D E N Q])
+  # puts main_menu.show
+  control = main_menu.choice
+  puts control
+  if control == 'D'
+    file_name = 'users.csv'
+    # else
+    # control = main_menu.choice
+  end
+  if %w[N E].include?(control)
+    print 'Input file name w/o extension: '
+    file_name = "#{gets.strip}.csv"
+  end
+  abort 'Bye, bye!' if control == 'Q'
 
-users_db = LocalUsersDb.new(local_path, file_name)
-  
+  users_db = LocalUsersDb.new(local_path, file_name)
+
   puts 'New user was not created' if users_db.create_user == false
   # puts `clear`
   print "Do you want create new users ? 'y/n': "
   next unless gets.strip == 'n'
 
- # puts `clear`
+  # puts `clear`
   # abort "Bye, bye!"
   break
 end

@@ -129,3 +129,31 @@ def last
   user = User.new(auth)
   user.show_menu
 end
+
+def chk_years(number)
+  if (11..19).include?(number.modulo(100))
+    'лет'
+  else
+    return 'год' if number.to_s[-1].to_i == 1
+    return 'года' if (2..4).include?(number.to_s[-1].to_i)
+    return 'лет' if (5..9).include?(number.to_s[-1].to_i)
+    return 'лет' if number.to_s[-1].to_i.zero?
+  end
+end
+
+def chk_months(number)
+  return 'месяц' if number == 1
+  return 'месяца' if (2..4).include?(number)
+  return 'месяцев' if (5..12).include?(number)
+end
+
+def chk_days(number)
+  if (11..19).include?(number)
+    'дней'
+  else
+    return 'дней' if number.to_s[-1].to_i.zero?
+    return 'день' if number.to_s[-1].to_i == 1
+    return 'дня' if (2..4).include?(number.to_s[-1].to_i)
+    return 'дней' if (5..9).include?(number.to_s[-1].to_i)
+  end
+end

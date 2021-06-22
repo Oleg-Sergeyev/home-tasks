@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'digest'
 require 'date'
 require 'io/console'
@@ -11,12 +13,13 @@ class LocalUsersDb
     @psw_hash = ''
     @psw1 = ''
   end
+
   def create_user
     loop do
       puts `clear`
       print "Input new user name or 'q' for exit: "
       @user_name = gets.strip
-      return false unless !chk_manage_symbols('input_data', @user_name)
+      return false if chk_manage_symbols('input_data', @user_name)
       break unless @user_name.length < 3 && @user_name.length < 10
 
       puts 'Name must have minimum 3 and maximum 10 symbols'
@@ -24,7 +27,7 @@ class LocalUsersDb
     loop do
       puts `clear`
       @psw1 = IO.console.getpass "Create new password or 'q' for exit:  "
-      return unless !chk_manage_symbols('input_data', @psw1)
+      return if chk_manage_symbols('input_data', @psw1)
       break if @psw1.length <= 10 && @psw1.length >= 6
 
       puts 'Name must have minimum 6 and maximum 10 symbols'
@@ -32,7 +35,7 @@ class LocalUsersDb
     loop do
       puts `clear`
       psw2 = IO.console.getpass "Repeat password or 'q' for exit: "
-      return unless !chk_manage_symbols('input_data', @psw2)
+      return if chk_manage_symbols('input_data', @psw2)
       break if @psw1 == psw2
 
       puts 'Password mismatch!'
@@ -41,7 +44,7 @@ class LocalUsersDb
     puts `clear`
     print "Write new user 'y' - yes, 'n' - no ?"
     if chk_manage_symbols('write_file', gets.strip) == true
-      puts show_current_user + ' saved'
+      puts "#{show_current_user} saved"
       # abort 'Bye, bye!'
     end
     true
@@ -52,13 +55,13 @@ class LocalUsersDb
   def show_current_user
     _str = if @psw_hash == ''
              ' password is not set'
-           else ' password hash: [' + @psw_hash + ']'
+           else " password hash: [#{@psw_hash}]"
            end
-    'User name: ' + "'" + @user_name + "'" + _str
+    "User name: '#{@user_name}'#{_str}"
   end
 
   def write_file
-    _file = @local_path + '/db/' + @file_name
+    _file = "#{@local_path}/db/#{@file_name}"
     _type_open = if !File.exist?(_file)
                    'w'
                  else

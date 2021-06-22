@@ -25,7 +25,7 @@ BYE = "\nBye, bye!"
 HEADER_TABLE = '| № |    Start date    |  Surname  |    Name    |  Application date'
 HEADER_TABLE_VFPLAYERS = '| № |    Start date    |  Surname  |    Name    |'
 VFPLAYERS_CREATED = 'Verified players list was created'
-MESSAGE_PRESS_ANY_KEY = "Press any key to continue, or 'q' to exit"
+MESSAGE_PRESS_ANY_KEY = "\nPress any key to continue, or 'q' to exit"
 INPUT_LOGIN = "\nInput login: "
 DESCRIPTION = "\nНеобходимо авторизоваться либо тренером, либо игроком."\
      "\nВ файле player.csv список всех игроков и одного тренера."\

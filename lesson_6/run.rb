@@ -72,13 +72,44 @@ while i <= number.to_i
   i += 1
 end
 puts "f(#{number}) = #{f}"
+
 presskey
 
 clear
 puts 'Задание 6 (Возраст)'
-print "\nInput birthday like '03/02/1977': "
+puts "\nСегодня: #{DateTime.now.strftime('%d-%m-%Y')}"
+print "\nInput birthday like 'dd/mm/yyyy': "
 birthday = gets.chomp
-puts "Полных лет: #{((DateTime.now - DateTime.parse(birthday)).to_i / 360) - 1}"
+
+year_born = DateTime.parse(birthday).year
+month_born = DateTime.parse(birthday).month
+day_born = DateTime.parse(birthday).day
+
+curr_year = DateTime.now.year
+curr_month = DateTime.now.month
+curr_day = DateTime.now.day
+
+years = (curr_year - year_born)
+months = (curr_month - month_born)
+days = (curr_day - day_born)
+
+if days.negative?
+  months -= 1
+  days += 30
+end
+if months.negative?
+  years -= 1
+  months += 12
+end
+
+puts 'Вы еще не рождены ' if years.negative?
+puts 'Позравляем с Днем Рождения!!!' if years.zero? && months.zero? && days.zero?
+puts 'Позравляем с Днем Рождения!!!' if !years.zero? && months.zero? && days.zero?
+print "\nВам" if years.positive? || months.positive? || days.positive?
+print " #{years} #{chk_years(years)}" if years.positive?
+print " #{months} #{chk_months(months)}" if months.positive?
+print " #{days} #{chk_days(days)}" if days.positive?
+
 presskey
 
 clear

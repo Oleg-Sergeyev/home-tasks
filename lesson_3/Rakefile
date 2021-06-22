@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'date'
 
 desc 'Информация о курсе рубля'
@@ -7,7 +9,7 @@ namespace :exchange_rate do
   desc 'Информация о курсе рубля вывод на экран'
   task :view do
     ruby 'run.rb'
-    puts "\nТекущее время из Rakfile: " + DateTime.now.strftime('%m/%d/%Y at %H:%M').to_s
+    puts "\nТекущее время из Rakfile: #{DateTime.now.strftime('%m/%d/%Y at %H:%M')}"
   end
 end
 

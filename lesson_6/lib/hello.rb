@@ -3,10 +3,10 @@
 require 'date'
 
 class Hello
-  MORNING = (DateTime.parse('06:00')..DateTime.parse('12:00')).freeze
-  DAY = (DateTime.parse('12:00')..DateTime.parse('18:00')).freeze
+  MORNING = (DateTime.parse('06:00')..DateTime.parse('11:59')).freeze
+  DAY = (DateTime.parse('12:00')..DateTime.parse('17:59')).freeze
   EVENING = (DateTime.parse('18:00')..DateTime.parse('23:59')).freeze
-  NIGHT = (DateTime.parse('23:59')..DateTime.parse('06:00')).freeze
+  NIGHT = (DateTime.parse('00:01')..DateTime.parse('05:59')).freeze
 
   def greeting
     return 'Доброе утро' if MORNING.cover?(DateTime.now)
