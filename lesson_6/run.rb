@@ -81,7 +81,9 @@ puts 'Задание 6 (Возраст)'
 puts "\nСегодня: #{DateTime.now.strftime('%d-%m-%Y')}"
 print "\nInput birthday like 'dd/mm/yyyy': "
 birthday = gets.chomp
-
+rescue
+  if DateTime.parse(birthday)
+end
 year_born = DateTime.parse(birthday).year
 month_born = DateTime.parse(birthday).month
 day_born = DateTime.parse(birthday).day
