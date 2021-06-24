@@ -40,4 +40,28 @@ else
   print "Число нечетное = '"
 end
 print "#{format('%b', number)}'"
-abort BYE
+presskey
+
+puts 'Вычисление адреса сети и битности маски'
+# print 'Input ip address (4x) xxx.xxx.xxx.xxx: '
+ip = '192.168.10.25' # gets.chomp
+ip_mask = '255.255.255.0'
+ip_net_arr = []
+ip_arr = ip.split('.')
+ip_mask_arr = ip_mask.split('.')
+puts "\nIP #{ip_arr}"
+ip_arr.each do |oktet|
+  print format('%08b ', oktet).to_s
+end
+puts "\nMask #{ip_mask_arr}"
+ip_mask_arr.each do |oktet|
+  print format('%08b ', oktet).to_s
+end
+(0..3).each do |element|
+  ip_net_arr.push("#{ip_mask_arr[element].to_i & ip_arr[element].to_i} ")
+end
+print "\nNet #{ip_net_arr}"
+puts "\n"
+(0..3).each do |element|
+  print "#{format('%08b', ip_mask_arr[element].to_i & ip_arr[element].to_i)} "
+end
