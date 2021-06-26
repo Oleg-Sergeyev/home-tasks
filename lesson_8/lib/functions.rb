@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'io/console'
+
 ARR_COLORS = {
   1 => 'красный',
   2 => 'оранжевый',
@@ -21,3 +23,18 @@ ARR_DAYS = {
 }.freeze
 
 INPUT_ERROR = 'Input error!'
+NEGATIVE = 'NEGATIVE'
+POSITIVE = 'POSITIVE'
+ODD = 'ODD'
+EVEN = 'EVEN'
+MESSAGE_PRESS_KEY = "\nPress 'q' to exit, 'n' to next, 's' to start over"
+OPERATING_SYMBOLS = { 'n' => :next, 's' => :start_over, 'q' => :quit }.freeze
+def clear
+  puts `clear`
+end
+
+def presskey
+  print MESSAGE_PRESS_KEY
+  input = $stdin.getch
+  OPERATING_SYMBOLS.select { |key| key == input }.values[0]
+end
