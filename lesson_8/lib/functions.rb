@@ -28,6 +28,7 @@ NEGATIVE = 'NEGATIVE'
 POSITIVE = 'POSITIVE'
 ODD = 'ODD'
 EVEN = 'EVEN'
+THIS_STRING = "\nThis is a string"
 MESSAGE_PRESS_KEY = "\nPress 'q' to exit, 'n' to next, 's' to start over"
 OPERATING_SYMBOLS = { 'n' => :next, 's' => :start_over, 'q' => :quit }.freeze
 def clear

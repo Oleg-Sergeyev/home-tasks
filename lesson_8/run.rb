@@ -84,13 +84,13 @@ loop do
   print "\nEnter something: "
   str = gets.chomp
   if first_space?(str)
-    puts "\nThis is a string"
+    puts THIS_STRING
   else
     res = check.input(str)
     if res
       puts res
     else
-      puts "\nThis is a string"
+      puts THIS_STRING
     end
   end
   case presskey
