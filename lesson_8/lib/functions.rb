@@ -43,3 +43,7 @@ end
 def empty_string?(str)
   return true if str.count(' ') == str.length
 end
+
+def first_space?(str)
+  return true if str[0] == ' '
+end

@@ -83,11 +83,15 @@ loop do
   puts "\nЗадания №4,5,6. Что введнено? Если число то тип, положительное/отрицательное?"
   print "\nEnter something: "
   str = gets.chomp
-  res = check.input(str)
-  if res
-    puts res
+  if first_space?(str)
+    puts "\nThis is a string"
   else
-    puts 'This is a string'
+    res = check.input(str)
+    if res
+      puts res
+    else
+      puts "\nThis is a string"
+    end
   end
   case presskey
   when :start_over
