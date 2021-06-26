@@ -6,8 +6,8 @@ class Qualifier
 
   def input(str)
     Float(str)
-  rescue StandardError => e  #puts "Rescued: #{e.inspect}"
-    #'This is a string'
+  rescue StandardError
+    # 'This is a string'
   else
     if float?(str)
       "It's #{str.to_f.class}, #{negative_sign(str)} and #{odd_number(str)}"
@@ -18,10 +18,10 @@ class Qualifier
 
   def number(str)
     Float(str)
-  rescue StandardError => e  #puts "Rescued: #{e.inspect}"
-    #'This is a string'
+  rescue StandardError # StandardError => e # puts "Rescued: #{e.inspect}"
+    # 'This is a string'
   else
-    true #str.to_f
+    true # str.to_f
   end
 
   def float?(str)

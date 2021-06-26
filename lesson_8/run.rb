@@ -23,7 +23,7 @@ loop do
   when :next
     break
   when :quit
-    abort
+    abort THANKS
   end
 end
 
@@ -45,24 +45,28 @@ loop do
   when :next
     break
   when :quit
-    abort
+    abort THANKS
   end
 end
 
 clear
 loop do
   puts "\nЗадания №3. Проверка на целостность чисел и максимум из них"
-  print "\nInput some numbers like (1 59 77 10 3): "
+  print "\nEnter different numbers like '1 59 77 10 3' and you can even check strings: "
   input = gets.chomp
-  error = false
-  input.split(' ').each { |element|
-    if !check.number(element) || check.float?(element)
+  if empty_string?(input)
+    puts "\nAll spaces entered"
+  else
+    error = false
+    input.split(' ').each do |element|
+      next unless !check.number(element) || check.float?(element)
+
       error = true
       puts 'Error in input'
       break
     end
-  }
-  puts "Max of numbers is: #{input.split(' ').map(&:to_i).max}" if error == false
+    puts "Max of numbers is: #{input.split(' ').map(&:to_i).max}" if error == false
+  end
   case presskey
   when :start_over
     clear
@@ -70,7 +74,7 @@ loop do
   when :next
     break
   when :quit
-    abort
+    abort THANKS
   end
 end
 
@@ -92,7 +96,6 @@ loop do
   when :next
     break
   when :quit
-    abort
+    abort THANKS
   end
 end
-

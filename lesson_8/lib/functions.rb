@@ -22,6 +22,7 @@ ARR_DAYS = {
   7 => 'Воскресенье'
 }.freeze
 
+THANKS = "\n\nThanks! Bye!"
 INPUT_ERROR = 'Input error!'
 NEGATIVE = 'NEGATIVE'
 POSITIVE = 'POSITIVE'
@@ -37,4 +38,8 @@ def presskey
   print MESSAGE_PRESS_KEY
   input = $stdin.getch
   OPERATING_SYMBOLS.select { |key| key == input }.values[0]
+end
+
+def empty_string?(str)
+  return true if str.count(' ') == str.length
 end
