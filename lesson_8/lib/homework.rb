@@ -5,6 +5,7 @@ class HomeWork
   attr_accessor :description, :input, :task
 
   def initialize(description, input, task)
+    @tasks_arr = { 1 => method(:task1), 2 => method(:task2), 3 => method(:task3), 4 => method(:task4) }.freeze
     @description = description
     @input = input
     @check = Qualifier.new
@@ -14,10 +15,7 @@ class HomeWork
   end
 
   def check_task(task)
-    task1 if task == 1
-    task2 if task == 2
-    task3 if task == 3
-    task4 if task == 4
+    @tasks_arr[task].call
   end
 
   def show_description

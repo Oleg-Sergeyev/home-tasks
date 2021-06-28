@@ -31,7 +31,7 @@ EVEN = 'EVEN'
 THIS_STRING = "\nThis is a string"
 MESSAGE_PRESS_KEY = "\nPress 'q' to exit, 'n' to next, 's' to start over"
 OPERATING_SYMBOLS = { 'n' => :next, 's' => :start_over, 'q' => :quit }.freeze
-TASKS = { 1 => :task1, 2 => :task1, 3 => :task3, 4 => :task4 }.freeze
+
 def clear
   puts `clear`
 end
