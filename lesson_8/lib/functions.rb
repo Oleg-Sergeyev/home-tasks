@@ -38,7 +38,7 @@ end
 def presskey
   print MESSAGE_PRESS_KEY
   input = $stdin.getch
-  OPERATING_SYMBOLS.select { |key| key == input }.values[0]
+  OPERATING_SYMBOLS.select { |key| key == input }.values.last
 end
 
 def empty_string?(str)
