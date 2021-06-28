@@ -30,8 +30,9 @@ class HomeWork
   def task1
     colors = MyObject.new(ARR_COLORS)
     str = input_str
-    if @check.input(str)
-      puts "This color is: #{colors.input_number(str)}"
+    res = colors.input_number(str)
+    if res
+      puts "This color is: #{res}"
     else
       puts INPUT_ERROR
     end
@@ -40,8 +41,9 @@ class HomeWork
   def task2
     week = MyObject.new(ARR_DAYS)
     str = input_str
-    if @check.input(str)
-      puts "The day is: #{week.input_number(str)}"
+    res = week.input_number(str)
+    if res
+      puts "The day is: #{res}"
     else
       puts INPUT_ERROR
     end

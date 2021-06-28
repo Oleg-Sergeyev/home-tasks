@@ -9,7 +9,7 @@ class MyObject
   end
 
   def input_number(number)
-    return unless arr_objects.key?(number.to_i)
+    return nil unless arr_objects.key?(number.to_i)
 
     arr_objects[number.to_i]
   end
