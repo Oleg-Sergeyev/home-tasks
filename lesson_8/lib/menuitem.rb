@@ -15,12 +15,14 @@ class MenuItem
 
   def presskey
     input = $stdin.getch
-    symbol = @operating_symbols.select { |key| key == input }.values.first
-      if symbol
-        menu(symbol)
-      else
-        presskey
-      end
+    return unless @operating_symbols.key?(input)
+
+    symbol = @operating_symbols[input]
+    if symbol
+      menu(symbol)
+    else
+      presskey
+    end
   end
 
   def menu(symbol)

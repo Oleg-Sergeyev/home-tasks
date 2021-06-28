@@ -9,6 +9,8 @@ class MyObject
   end
 
   def input_number(number)
-    arr_objects.select { |key| key == number.to_i }.values[0] if number.to_i <= 7 && number.to_i >= 1
+    return unless arr_objects.key?(number.to_i)
+
+    arr_objects[number.to_i]
   end
 end

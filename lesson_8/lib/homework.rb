@@ -54,15 +54,7 @@ class HomeWork
     if empty_string?(input)
       puts "\nAll spaces entered"
     else
-      error = false
-      input.split(' ').each do |element|
-        next unless !@check.number(element) || @check.float?(element)
-
-        error = true
-        puts 'Error in input'
-        break
-      end
-      puts "Max of numbers is: #{input.split(' ').map(&:to_i).max}" if error == false
+      check_task3(input)
     end
   end
 
@@ -81,5 +73,17 @@ class HomeWork
         puts THIS_STRING
       end
     end
+  end
+
+  def check_task3(input)
+    error = false
+    input.split(' ').each do |element|
+      next unless !@check.number(element) || @check.float?(element)
+
+      error = true
+      puts 'Error in input'
+      break
+    end
+    puts "Max of numbers is: #{input.split(' ').map(&:to_i).max}" if error == false
   end
 end
