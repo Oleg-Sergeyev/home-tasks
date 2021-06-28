@@ -4,51 +4,7 @@ require_relative 'lib/myobject'
 require_relative 'lib/qualifier'
 require_relative 'lib/functions'
 require_relative 'lib/homework'
-
-#check = Qualifier.new
-#clear
-# loop do
-#   puts "\nЗадания №1. Цвет по номеру"
-#   colors = MyObject.new(ARR_COLORS)
-#   print "\nInput color number (1-7): "
-#   str = gets.chomp
-#   if check.input(str)
-#     puts "This color is: #{colors.input_number(str)}"
-#   else
-#     puts INPUT_ERROR
-#   end
-#   case presskey
-#   when :start_over
-#     clear
-#     redo
-#   when :next
-#     break
-#   when :quit
-#     abort THANKS
-#   end
-# end
-
-# clear
-# loop do
-#   puts "\nЗадания №2. День недели по номеру"
-#   week = MyObject.new(ARR_DAYS)
-#   print "\nInput day number (1-7): "
-#   str = gets.chomp
-#   if check.input(str)
-#     puts "The day is: #{week.input_number(str)}"
-#   else
-#     puts INPUT_ERROR
-#   end
-#   case presskey
-#   when :start_over
-#     clear
-#     redo
-#   when :next
-#     break
-#   when :quit
-#     abort THANKS
-#   end
-# end
+require_relative 'lib/menuitem'
 
 # clear
 # loop do
@@ -78,7 +34,22 @@ require_relative 'lib/homework'
 #     abort THANKS
 #   end
 # end
+clear
+descr = "\nЗадания №1. Цвет по номеру"
+input = "\nInput color number (1-7): "
+MenuItem.new(MESSAGE_PRESS_KEY, OPERATING_SYMBOLS, descr, input, 1)
 
-DESCR = "\nЗадания №4,5,6. Что введнено? Если число то тип, положительное/отрицательное?"
-INPUT = "\nEnter something: "
-HomeWork.new(DESCR, INPUT)
+clear
+descr = "\nЗадания №2. День недели по номеру"
+input = "\nInput day number (1-7): "
+MenuItem.new(MESSAGE_PRESS_KEY, OPERATING_SYMBOLS, descr, input, 2)
+
+clear
+descr = "\nЗадания №3. Проверка на целостность чисел и максимум из них"
+input = "\nEnter different numbers like '1 59 77 10 3' and you can even check strings: "
+MenuItem.new(MESSAGE_PRESS_KEY, OPERATING_SYMBOLS, descr, input, 3)
+
+clear
+descr = "\nЗадания №4,5,6. Что введнено? Если число то тип, положительное/отрицательное?"
+input = "\nEnter something: "
+MenuItem.new(MESSAGE_PRESS_KEY, OPERATING_SYMBOLS, descr, input, 4)

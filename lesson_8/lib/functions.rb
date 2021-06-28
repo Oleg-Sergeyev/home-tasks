@@ -31,15 +31,16 @@ EVEN = 'EVEN'
 THIS_STRING = "\nThis is a string"
 MESSAGE_PRESS_KEY = "\nPress 'q' to exit, 'n' to next, 's' to start over"
 OPERATING_SYMBOLS = { 'n' => :next, 's' => :start_over, 'q' => :quit }.freeze
+TASKS = { 1 => :task1, 2 => :task1, 3 => :task3, 4 => :task4 }.freeze
 def clear
   puts `clear`
 end
 
-def presskey
-  print MESSAGE_PRESS_KEY
-  input = $stdin.getch
-  OPERATING_SYMBOLS.select { |key| key == input }.values.last
-end
+# def presskey
+#   print MESSAGE_PRESS_KEY
+#   input = $stdin.getch
+#   OPERATING_SYMBOLS.select { |key| key == input }.values.last
+# end
 
 def empty_string?(str)
   return true if str.count(' ') == str.length

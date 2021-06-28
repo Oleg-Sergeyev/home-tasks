@@ -2,15 +2,22 @@
 
 # Class HomeWork
 class HomeWork
-  attr_accessor :description, :input
+  attr_accessor :description, :input, :task
 
-  def initialize(description, input)
+  def initialize(description, input, task)
     @description = description
     @input = input
     @check = Qualifier.new
     show_description
-    check_str(input_str)
-    presskey
+    @task = task
+    check_task(task)
+  end
+
+  def check_task(task)
+    task1 if task == 1
+    task2 if task == 2
+    task3 if task == 3
+    task4 if task == 4
   end
 
   def show_description
@@ -18,8 +25,49 @@ class HomeWork
   end
 
   def input_str
-    print input
+    print @input
     gets.chomp
+  end
+
+  def task1
+    colors = MyObject.new(ARR_COLORS)
+    str = input_str
+    if @check.input(str)
+      puts "This color is: #{colors.input_number(str)}"
+    else
+      puts INPUT_ERROR
+    end
+  end
+
+  def task2
+    week = MyObject.new(ARR_DAYS)
+    str = input_str
+    if @check.input(str)
+      puts "The day is: #{week.input_number(str)}"
+    else
+      puts INPUT_ERROR
+    end
+  end
+
+  def task3
+    input = input_str
+    if empty_string?(input)
+      puts "\nAll spaces entered"
+    else
+      error = false
+      input.split(' ').each do |element|
+        next unless !@check.number(element) || @check.float?(element)
+
+        error = true
+        puts 'Error in input'
+        break
+      end
+      puts "Max of numbers is: #{input.split(' ').map(&:to_i).max}" if error == false
+    end
+  end
+
+  def task4
+    check_str(input_str)
   end
 
   def check_str(str)
@@ -32,26 +80,6 @@ class HomeWork
       else
         puts THIS_STRING
       end
-    end
-  end
-
-  def presskey
-    print MESSAGE_PRESS_KEY
-    loop do
-      input = $stdin.getch
-      symbol = OPERATING_SYMBOLS.select { |key| key == input }.values.first
-      menu(symbol) if symbol
-    end
-  end
-
-  def menu(symbol)
-    case symbol
-    when :start_over
-      clear
-      initialize(description, input)
-    when :next
-    when :quit
-      abort THANKS
     end
   end
 end
