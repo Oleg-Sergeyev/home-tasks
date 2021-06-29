@@ -61,6 +61,6 @@ class HomeWork
     print " #{@y}"
     return @y if @num == (@str.to_i)
 
-    recursion_task7(@num)
+    recursion_task8(@num)
   end
 end
