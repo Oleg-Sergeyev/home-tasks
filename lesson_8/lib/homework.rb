@@ -5,8 +5,8 @@ class HomeWork
   attr_accessor :description, :input, :task
 
   def initialize(description, input, task)
-    tasks_arr = { task1: method(:task1), task2: method(:task2),
-                  task3: method(:task3), task4: method(:task4) }.freeze
+    tasks_arr = { 1 => method(:task1), 2 => method(:task2),
+                  3 => method(:task3), 4 => method(:task4) }.freeze
     @check = Qualifier.new
     puts description
     print input

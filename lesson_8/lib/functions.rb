@@ -28,7 +28,21 @@ ODD = 'ODD'
 EVEN = 'EVEN'
 THIS_STRING = "\nThis is a string"
 MESSAGE_PRESS_KEY = "\nPress 'q' to exit, 'n' to next, 's' to start over"
-OPERATING_SYMBOLS = { 'n' => :next, 's' => :start_over, 'q' => :quit }.freeze
+OPERATING_SYMBOLS = { 'n' => :next, 's' => :start_over, 'b' => :back, 'q' => :quit }.freeze
+
+descr = "\nЗадания №1. Цвет по номеру"
+input = "\nInput color number (1-7): "
+TASK1 = [descr, input, 1].freeze
+descr = "\nЗадания №2. День недели по номеру"
+input = "\nInput day number (1-7): "
+TASK2 = [descr, input, 2].freeze
+descr = "\nЗадания №3. Проверка на целостность чисел и максимум из них"
+input = "\nEnter different numbers like '1 59 77 10 3' and you can even check strings: "
+TASK3 = [descr, input, 3].freeze
+descr = "\nЗадания №4,5,6. Что введнено? Если число то тип, положительное/отрицательное?"
+input = "\nEnter something: "
+TASK4 = [descr, input, 4].freeze
+TASKS = [TASK1, TASK2, TASK3, TASK4].freeze
 
 def clear
   puts `clear`

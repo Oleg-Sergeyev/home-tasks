@@ -9,19 +9,16 @@ require_relative 'lib/menuitem'
 clear
 descr = "\nЗадания №1. Цвет по номеру"
 input = "\nInput color number (1-7): "
-MenuItem.new(descr, input, :task1)
-
-clear
-descr = "\nЗадания №2. День недели по номеру"
-input = "\nInput day number (1-7): "
-MenuItem.new(descr, input, :task2)
-
-clear
-descr = "\nЗадания №3. Проверка на целостность чисел и максимум из них"
-input = "\nEnter different numbers like '1 59 77 10 3' and you can even check strings: "
-MenuItem.new(descr, input, :task3)
-
-clear
-descr = "\nЗадания №4,5,6. Что введнено? Если число то тип, положительное/отрицательное?"
-input = "\nEnter something: "
-MenuItem.new(descr, input, :task4)
+task = 1
+while task != -1
+  clear
+  task = MenuItem.new(descr, input, task).next_task
+  TASKS.each do |array|
+    if array.include?(task)
+      descr = array[0]
+      input = array[1]
+    elsif task.zero?
+      task = 1
+    end
+  end
+end

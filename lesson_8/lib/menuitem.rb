@@ -4,12 +4,15 @@ require 'io/console'
 
 # Class MenuItem
 class MenuItem
+  attr_accessor :next_task
+
   def initialize(description, input, task)
     @description = description
     @input = input
     @task = task
     HomeWork.new(description, input, task)
     print MESSAGE_PRESS_KEY
+    @next_task = next_task
     presskey
   end
 
@@ -24,8 +27,11 @@ class MenuItem
   def menu(symbol)
     case symbol
     when :start_over
-      clear
-      initialize(@description, @input, @task)
+      @next_task = @task
+    when :next
+      @next_task = @task + 1
+    when :back
+      @next_task = @task - 1
     when :quit
       abort THANKS
     end
