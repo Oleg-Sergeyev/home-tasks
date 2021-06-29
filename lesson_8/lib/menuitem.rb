@@ -6,11 +6,9 @@ require 'io/console'
 class MenuItem
   attr_accessor :next_task
 
-  def initialize(description, input, task)
-    @description = description
-    @input = input
-    @task = task
-    HomeWork.new(description, input, task)
+  def initialize(array)
+    @description, @input, @task = *array
+    HomeWork.new(@description, @input, @task)
     print MESSAGE_PRESS_KEY
     @next_task = next_task
     presskey

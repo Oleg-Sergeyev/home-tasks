@@ -7,20 +7,15 @@ require_relative 'lib/homework'
 require_relative 'lib/menuitem'
 
 clear
-descr = TASK1[0] # Initial data, all arrays and constants are declared in functions.rb
-input = TASK1[1] #
-task = TASK1[2]  #
-until task.nil?
+task_arr = TASK1 # Initial data, all arrays and constants are declared in functions.rb
+until task_arr.last.nil?
   clear
-  task = MenuItem.new(descr, input, task).next_task
+  task = MenuItem.new(task_arr).next_task
   TASKS.each do |array|
     if array.include?(task)
-      descr = array[0]
-      input = array[1]
+      task_arr = array
     elsif task.zero? || task > TASK4[2]
-      descr = TASK1[0] # Array TASK1, start over
-      input = TASK1[1] #
-      task = TASK1[2]  #
+      task_arr = TASK1 # Array TASK1, start over
     end
   end
 end
