@@ -15,14 +15,10 @@ class MenuItem
 
   def presskey
     input = $stdin.getch
-    return unless OPERATING_SYMBOLS.key?(input)
+    presskey unless OPERATING_SYMBOLS.key?(input)
 
     symbol = OPERATING_SYMBOLS[input]
-    if symbol
-      menu(symbol)
-    else
-      presskey
-    end
+    menu(symbol) if symbol
   end
 
   def menu(symbol)
