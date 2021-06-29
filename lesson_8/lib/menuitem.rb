@@ -4,22 +4,20 @@ require 'io/console'
 
 # Class MenuItem
 class MenuItem
-  def initialize(message_press_key, operating_symbols, description, input, task)
-    @message_press_key = message_press_key
-    @operating_symbols = operating_symbols
+  def initialize(description, input, task)
     @description = description
     @input = input
     @task = task
-    HomeWork.new(@description, @input, @task)
-    print @message_press_key
+    HomeWork.new(description, input, task)
+    print MESSAGE_PRESS_KEY
     presskey
   end
 
   def presskey
     input = $stdin.getch
-    return unless @operating_symbols.key?(input)
+    return unless OPERATING_SYMBOLS.key?(input)
 
-    symbol = @operating_symbols[input]
+    symbol = OPERATING_SYMBOLS[input]
     if symbol
       menu(symbol)
     else
@@ -31,7 +29,7 @@ class MenuItem
     case symbol
     when :start_over
       clear
-      initialize(@message_press_key, @operating_symbols, @description, @input, @task)
+      initialize(@description, @input, @task)
     when :quit
       abort THANKS
     end
