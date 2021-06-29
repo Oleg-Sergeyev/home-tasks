@@ -26,6 +26,8 @@ class HomeWork
     return true if str[0] == ' '
   end
 
+  # Home tasks methods 1,2,3,4
+
   def task1
     colors = MyObject.new(ARR_COLORS)
     res = colors.input_number(@str)
@@ -66,6 +68,8 @@ class HomeWork
       end
     end
   end
+
+  # task3 breakdown
 
   def check_task3(input)
     error = false
