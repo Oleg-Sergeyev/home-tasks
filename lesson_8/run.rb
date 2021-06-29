@@ -10,7 +10,7 @@ clear
 descr = TASK1[0]
 input = TASK1[1]
 task = TASK1[2]
-while task != -1
+until task.nil?
   clear
   task = MenuItem.new(descr, input, task).next_task
   TASKS.each do |array|
