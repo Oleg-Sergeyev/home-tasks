@@ -21,7 +21,7 @@ class Qualifier
   rescue StandardError # StandardError => e # puts "Rescued: #{e.inspect}"
     # 'This is a string'
   else
-    true # str.to_f
+    true
   end
 
   def float?(str)
@@ -35,6 +35,8 @@ class Qualifier
   def even_number(str)
     str.to_i.even? ? EVEN : ODD
   end
+
+  # Additional check after '&&...' eg for '6.0' is EVEN
 
   def odd_number(str)
     str.split('.')[1].length == 1 && str.split('.')[1] == '0' ? EVEN : ODD
