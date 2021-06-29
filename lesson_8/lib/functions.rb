@@ -27,7 +27,7 @@ POSITIVE = 'POSITIVE'
 ODD = 'ODD'
 EVEN = 'EVEN'
 THIS_STRING = "\nThis is a string"
-MESSAGE_PRESS_KEY = "\nPress 'q' to exit, 'n' to next, 's' to start over"
+MESSAGE_PRESS_KEY = "\nPress 'q'- exit, 'n' - next, 'b' - back, 's' to start over"
 OPERATING_SYMBOLS = { 'n' => :next, 's' => :start_over, 'b' => :back, 'q' => :quit }.freeze
 
 descr = "\nЗадания №1. Цвет по номеру"
