@@ -34,12 +34,12 @@ class HomeWork
     @y = 1
     @num = 1
     print "\nFibonacci row: #{@x} #{@y}"
-    recursion_task8(@num)
+    puts "\n\nFibonacci number: #{recursion_task8(@num)}"
   end
 
   def task9
     phi = (1 + Math.sqrt(5)) / 2
-    puts "\n\nFibonacci number: #{(((phi**@str.to_i) - (- phi)**-@str.to_i) / Math.sqrt(5)).round(0)}"
+    puts "\n\nFibonacci number: #{(((phi**@str.to_i) - (- phi)**-@str.to_i) / Math.sqrt(5)).round(1)}"
   end
 
   def loop_task7
@@ -56,11 +56,11 @@ class HomeWork
   end
 
   def recursion_task8(_num_)
-    @x, @y = @y, (@x + @y)
-    @num += 1
-    print " #{@y}"
     return @y if @num == (@str.to_i)
 
+    @x, @y = @y, (@x + @y)
+    print " #{@y}"
+    @num += 1
     recursion_task8(@num)
   end
 end
