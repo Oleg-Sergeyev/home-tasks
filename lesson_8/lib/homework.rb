@@ -5,32 +5,30 @@ class HomeWork
   attr_accessor :description, :input, :task
 
   def initialize(description, input, task)
-    @tasks_arr = { 1 => method(:task1), 2 => method(:task2), 3 => method(:task3), 4 => method(:task4) }.freeze
-    @description = description
-    @input = input
+    tasks_arr = { task1: method(:task1), task2: method(:task2),
+                  task3: method(:task3), task4: method(:task4) }.freeze
     @check = Qualifier.new
-    show_description
-    @task = task
-    check_task(task)
+    puts description
+    print input
+    @str = gets.chomp
+    tasks_arr[task].call
   end
 
-  def check_task(task)
-    @tasks_arr[task].call
+  # Service function
+
+  def empty_string?(str)
+    return true if str.count(' ') == str.length
   end
 
-  def show_description
-    puts @description
-  end
+  # Service function
 
-  def input_str
-    print @input
-    gets.chomp
+  def first_space?(str)
+    return true if str[0] == ' '
   end
 
   def task1
     colors = MyObject.new(ARR_COLORS)
-    str = input_str
-    res = colors.input_number(str)
+    res = colors.input_number(@str)
     if res
       puts "This color is: #{res}"
     else
@@ -40,8 +38,7 @@ class HomeWork
 
   def task2
     week = MyObject.new(ARR_DAYS)
-    str = input_str
-    res = week.input_number(str)
+    res = week.input_number(@str)
     if res
       puts "The day is: #{res}"
     else
@@ -50,16 +47,15 @@ class HomeWork
   end
 
   def task3
-    input = input_str
-    if empty_string?(input)
+    if empty_string?(@str)
       puts "\nAll spaces entered"
     else
-      check_task3(input)
+      check_task3(@str)
     end
   end
 
   def task4
-    check_str(input_str)
+    check_str(@str)
   end
 
   def check_str(str)

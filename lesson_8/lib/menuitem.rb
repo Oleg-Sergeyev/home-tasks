@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'io/console'
+
 # Class MenuItem
 class MenuItem
   def initialize(message_press_key, operating_symbols, description, input, task)

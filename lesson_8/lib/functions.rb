@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'io/console'
-
 ARR_COLORS = {
   1 => 'красный',
   2 => 'оранжевый',
@@ -34,12 +32,4 @@ OPERATING_SYMBOLS = { 'n' => :next, 's' => :start_over, 'q' => :quit }.freeze
 
 def clear
   puts `clear`
-end
-
-def empty_string?(str)
-  return true if str.count(' ') == str.length
-end
-
-def first_space?(str)
-  return true if str[0] == ' '
 end
