@@ -7,7 +7,7 @@ class MenuItem
   attr_accessor :next_task
 
   def initialize(array)
-    @description, @input, @task = *array
+    _, _, @task = *array
     HomeWork.new(*array)
     print MESSAGE_PRESS_KEY
     @next_task = next_task
