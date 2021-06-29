@@ -55,14 +55,10 @@ class HomeWork
   end
 
   def task4
-    check_str(@str)
-  end
-
-  def check_str(str)
-    if first_space?(str)
+    if first_space?(@str)
       puts THIS_STRING
     else
-      res = @check.input(str)
+      res = @check.input(@str)
       if res
         puts res
       else
