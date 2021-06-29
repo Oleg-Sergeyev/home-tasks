@@ -7,9 +7,9 @@ require_relative 'lib/homework'
 require_relative 'lib/menuitem'
 
 clear
-descr = "\nЗадания №1. Цвет по номеру"
-input = "\nInput color number (1-7): "
-task = 1
+descr = TASK1[0]
+input = TASK1[1]
+task = TASK1[2]
 while task != -1
   clear
   task = MenuItem.new(descr, input, task).next_task
@@ -17,8 +17,10 @@ while task != -1
     if array.include?(task)
       descr = array[0]
       input = array[1]
-    elsif task.zero?
-      task = 1
+    elsif task.zero? || task > TASK4[2]
+      descr = TASK1[0]
+      input = TASK1[1]
+      task = TASK1[2]
     end
   end
 end
