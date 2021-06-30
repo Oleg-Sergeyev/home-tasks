@@ -42,7 +42,13 @@ class HomeWork
   end
 
   def task4
-    
+    arr = @str.split(' ').each_slice(3).to_a
+    n = 0
+    while n < arr.length
+      user = User.new(*arr[n])
+      puts "\nClass '#{user.class}' -> #{user.name} #{user.surname} #{user.patronymic}"
+      n += 1
+    end
   end
 
   def method_task2(year, curr_year = 2021)
