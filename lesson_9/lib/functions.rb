@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require_relative 'qualifier'
+
+@check = Qualifier.new
 INPUT_ERROR = 'Input error!'
 THANKS = "\n\nThanks! Bye!"
 MESSAGE_PRESS_KEY = "\n\nPress 'q'- exit, 'n' - next, 'b' - back, 's' to start over"
@@ -57,4 +60,68 @@ end
 
 def first_space?(str)
   return true if str[0] == ' '
+end
+
+def empty?(str)
+  return true if str == ''
+end
+
+def not_empty?(str)
+  return true if str != ''
+end
+
+def method_task1(*array)
+  error = false
+  array.each do |element|
+    next if @check.number?(element)
+
+    error = true
+    puts 'Error in input'
+    break
+  end
+  puts "Sum of numbers is: #{array.map(&:to_f).sum.round(2)}" if error == false
+end
+
+def method_task2(year, curr_year = 2021)
+  if year.zero? && Date.new(curr_year, 12, 31).yday == LEAP_YEAR_DAYS
+    puts "\n#{curr_year} - #{LEAP_YEAR}"
+  elsif !year.zero? && Date.new(year, 12, 31).yday == LEAP_YEAR_DAYS
+    puts "\n#{year} - #{LEAP_YEAR}"
+  else
+    puts "\n#{year.zero? ? curr_year : year} #{COMMON_YAER}"
+  end
+end
+
+def method_task4(str)
+  arr = str.split(' ').each_slice(3).to_a
+  n = 0
+  while n < arr.length
+    user = User.new(*arr[n])
+    puts "\nClass '#{user.class}' -> #{user.name} #{user.surname} #{user.patronymic}"
+    n += 1
+  end
+end
+
+def method_task5(*arr)
+  cel, far = *arr
+  cel2far = cel * 1.8 + 32
+  far2cel = (far - 32) / 1.8
+  puts "\n(#{cel})cel.->(#{cel2far.round(0)})far.  (#{far})far.->(#{far2cel.round(0)}).cel"
+end
+
+def method_task6(*arr, convert: 1000)
+  print "\n#{arr.map { |element| (element / convert).round(2) }} kg."
+end
+
+def loop_task7(str)
+  x = 0
+  y = 1
+  n = 1
+  print "\nFibonacci row: #{x} #{y}"
+  while n <= (str.to_i - 1)
+    x, y = y, (x + y)
+    print " #{y}"
+    n += 1
+  end
+  puts "\n\nFibonacci number: #{y}"
 end
