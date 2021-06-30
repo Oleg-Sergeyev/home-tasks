@@ -5,7 +5,8 @@ class HomeWork
   attr_accessor :description, :input, :task
 
   def initialize(description, input, task)
-    tasks_arr = { 7 => method(:task7), 8 => method(:task8), 9 => method(:task9) }.freeze
+    tasks_arr = { 1 => method(:task1), 2 => method(:task2), 7 => method(:task7), 8 => method(:task8), 9 => method(:task9) }.freeze
+    @check = Qualifier.new
     puts description
     print input
     @str = gets.chomp
@@ -25,6 +26,37 @@ class HomeWork
   end
 
   # Home tasks methods 1,2,3,4
+
+  def task1
+    method_task1(*@str.split(' '))
+  end
+
+  def task2
+    method_task2(@str.to_i)
+  end
+
+  def method_task2(year, curr_year = 2021)
+    if year.zero? && Date.new(curr_year, 12, 31).yday == 366
+      puts "\n#{curr_year} - #{LEAP_YEAR}"
+    elsif !year.zero? && Date.new(year, 12, 31).yday == 366
+      puts "\n#{year} - #{LEAP_YEAR}"
+    else
+      puts "\n#{year.zero? ? curr_year : year} #{COMMON_YAER}"
+    end
+  end
+
+  def method_task1(*array)
+    error = false
+    array.each do |element|
+      next if @check.number?(element)
+
+      error = true
+      puts 'Error in input'
+      break
+    end
+    puts "Sum of numbers is: #{array.map(&:to_f).sum.round(2)}" if error == false
+  end
+
   def task7
     loop_task7
   end
