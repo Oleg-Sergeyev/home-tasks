@@ -36,9 +36,9 @@ class HomeWork
   end
 
   def method_task2(year, curr_year = 2021)
-    if year.zero? && Date.new(curr_year, 12, 31).yday == 366
+    if year.zero? && Date.new(curr_year, 12, 31).yday == LEAP_YEAR_DAYS
       puts "\n#{curr_year} - #{LEAP_YEAR}"
-    elsif !year.zero? && Date.new(year, 12, 31).yday == 366
+    elsif !year.zero? && Date.new(year, 12, 31).yday == LEAP_YEAR_DAYS
       puts "\n#{year} - #{LEAP_YEAR}"
     else
       puts "\n#{year.zero? ? curr_year : year} #{COMMON_YAER}"
