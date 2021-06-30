@@ -19,15 +19,15 @@ class HomeWork
   end
 
   def task1
-    if not_empty?(@str)
-      method_task1(*@str.split(' '))
+    if not_empty?(@str) && !check_num_str(@str)
+      puts "Sum of numbers is: #{@str.split(' ').map(&:to_f).sum.round(2)}"
     else
       puts INPUT_ERROR
     end
   end
 
   def task2
-    if not_empty?(@str)
+    if Qualifier.number?(@str) && !Qualifier.float?(@str)
       method_task2(@str.to_i)
     else
       puts INPUT_ERROR
@@ -35,7 +35,7 @@ class HomeWork
   end
 
   def task3
-    if not_empty?(@str)
+    if not_empty?(@str) && !Qualifier.number?(@str)
       ARR_COLORS.each { |key, value| puts "Key color is '#{key}'" if value == @str }
     else
       puts INPUT_ERROR
@@ -51,7 +51,7 @@ class HomeWork
   end
 
   def task5
-    if not_empty?(@str)
+    if not_empty?(@str) && !check_num_str(@str)
       method_task5(*@str.split(' ').map(&:to_i))
     else
       puts INPUT_ERROR
@@ -59,7 +59,7 @@ class HomeWork
   end
 
   def task6
-    if not_empty?(@str)
+    if not_empty?(@str) && !check_num_str(@str)
       method_task6(*@str.split(' ').map(&:to_f))
     else
       puts INPUT_ERROR
@@ -67,7 +67,7 @@ class HomeWork
   end
 
   def task7
-    if not_empty?(@str)
+    if not_empty?(@str) && !check_num_str(@str)
       loop_task7(@str)
     else
       puts INPUT_ERROR
@@ -75,7 +75,7 @@ class HomeWork
   end
 
   def task8
-    if not_empty?(@str)
+    if not_empty?(@str) && !check_num_str(@str)
       @x = 0
       @y = 1
       @num = 1
@@ -87,8 +87,12 @@ class HomeWork
   end
 
   def task9
-    phi = (1 + Math.sqrt(5)) / 2
-    puts "\n\nFibonacci number: #{(((phi**@str.to_i) - (- phi)**-@str.to_i) / Math.sqrt(5)).round(1)}"
+    if not_empty?(@str) && !check_num_str(@str)
+      phi = (1 + Math.sqrt(5)) / 2
+      puts "\n\nFibonacci number: #{(((phi**@str.to_i) - (- phi)**-@str.to_i) / Math.sqrt(5)).round(1)}"
+    else
+      puts INPUT_ERROR
+    end
   end
 
   def recursion_task8(_num_)

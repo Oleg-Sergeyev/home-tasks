@@ -10,7 +10,7 @@ clear
 task_arr = TASK1 # Initial data, all arrays and constants are declared in functions.rb
 until task_arr.last.nil?
   clear
-  task = MenuItem.new(task_arr).next_task
+  task = MenuItem.new(task_arr).next_task # Return number completed task
   TASKS.each do |array|
     if array.include?(task)
       task_arr = array

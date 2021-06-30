@@ -2,7 +2,6 @@
 
 require_relative 'qualifier'
 
-@check = Qualifier.new
 INPUT_ERROR = 'Input error!'
 THANKS = "\n\nThanks! Bye!"
 MESSAGE_PRESS_KEY = "\n\nPress 'q'- exit, 'n' - next, 'b' - back, 's' to start over"
@@ -37,7 +36,7 @@ descr = "\nЗадание №5. Перевод градусов Цельсия �
 input = "\nEnter degrees Celsius and Fahrenheit like '50 100' : "
 TASK5 = [descr, input, 5].freeze
 descr = "\nЗадание №6. Конвертации килограмм в граммы"
-input = "\nEnter any numbers: "
+input = "\nEnter any numbers like '4550 5000 3000 30..': "
 TASK6 = [descr, input, 6].freeze
 descr = "\nЗадание №7. Числа Фибоначчи, цикл"
 input = "\nEnter munber of 'Fibonacci number': "
@@ -70,23 +69,22 @@ def not_empty?(str)
   return true if str != ''
 end
 
-def method_task1(*array)
+def check_num_str(str)
   error = false
-  array.each do |element|
-    next if @check.number?(element)
+  str.split(' ').each do |element|
+    next if Qualifier.number?(element)
 
     error = true
-    puts 'Error in input'
     break
   end
-  puts "Sum of numbers is: #{array.map(&:to_f).sum.round(2)}" if error == false
+  error
 end
 
 def method_task2(year, curr_year = 2021)
   if year.zero? && Date.new(curr_year, 12, 31).yday == LEAP_YEAR_DAYS
-    puts "\n#{curr_year} - #{LEAP_YEAR}"
+    puts "\n#{curr_year} - #{LEAP_YEAR} - #{LEAP_YEAR_DAYS} дней"
   elsif !year.zero? && Date.new(year, 12, 31).yday == LEAP_YEAR_DAYS
-    puts "\n#{year} - #{LEAP_YEAR}"
+    puts "\n#{year} - #{LEAP_YEAR} - #{LEAP_YEAR_DAYS} дней"
   else
     puts "\n#{year.zero? ? curr_year : year} #{COMMON_YAER}"
   end

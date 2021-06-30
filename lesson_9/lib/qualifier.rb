@@ -16,7 +16,7 @@ class Qualifier
     end
   end
 
-  def number?(str)
+  def self.number?(str)
     Float(str)
   rescue StandardError # StandardError => e # puts "Rescued: #{e.inspect}"
     # 'This is a string'
@@ -26,7 +26,7 @@ class Qualifier
 
   # Number checks
 
-  def float?(str)
+  def self.float?(str)
     str.include?('.')
   end
 
