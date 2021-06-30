@@ -5,29 +5,19 @@ class HomeWork
   attr_accessor :description, :input, :task
 
   def initialize(description, input, task)
-    tasks_arr = { 1 => method(:task1), 2 => method(:task2), 3 => method(:task3),
-                  4 => method(:task4), 5 => method(:task5), 6 => method(:task6),
-                  7 => method(:task7), 8 => method(:task8), 9 => method(:task9) }.freeze
+    set_tasks
     @check = Qualifier.new
     puts description
     print input
     @str = gets.chomp
-    tasks_arr[task].call
+    @tasks_arr[task].call
   end
 
-  # Service function
-
-  def empty_string?(str)
-    return true if str.count(' ') == str.length
+  def set_tasks
+    @tasks_arr = { 1 => method(:task1), 2 => method(:task2), 3 => method(:task3),
+                   4 => method(:task4), 5 => method(:task5), 6 => method(:task6),
+                   7 => method(:task7), 8 => method(:task8), 9 => method(:task9) }.freeze
   end
-
-  # Service function
-
-  def first_space?(str)
-    return true if str[0] == ' '
-  end
-
-  # Home tasks methods 1,2,3,4
 
   def task1
     method_task1(*@str.split(' '))
@@ -42,12 +32,16 @@ class HomeWork
   end
 
   def task4
-    arr = @str.split(' ').each_slice(3).to_a
-    n = 0
-    while n < arr.length
-      user = User.new(*arr[n])
-      puts "\nClass '#{user.class}' -> #{user.name} #{user.surname} #{user.patronymic}"
-      n += 1
+    if (@str.split(' ').length % 3).zero? && @str != ''
+      arr = @str.split(' ').each_slice(3).to_a
+      n = 0
+      while n < arr.length
+        user = User.new(*arr[n])
+        puts "\nClass '#{user.class}' -> #{user.name} #{user.surname} #{user.patronymic}"
+        n += 1
+      end
+    else
+      puts INPUT_ERROR
     end
   end
 

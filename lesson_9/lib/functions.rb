@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+INPUT_ERROR = 'Input error!'
 THANKS = "\n\nThanks! Bye!"
 MESSAGE_PRESS_KEY = "\n\nPress 'q'- exit, 'n' - next, 'b' - back, 's' to start over"
 OPERATING_SYMBOLS = { 'n' => :next, 's' => :start_over, 'b' => :back, 'q' => :quit }.freeze
@@ -48,4 +49,12 @@ TASKS = [TASK1, TASK2, TASK3, TASK4, TASK5, TASK6, TASK7, TASK8, TASK9].freeze
 
 def clear
   puts `clear`
+end
+
+def empty_string?(str)
+  return true if str.count(' ') == str.length
+end
+
+def first_space?(str)
+  return true if str[0] == ' '
 end
