@@ -5,7 +5,9 @@ class HomeWork
   attr_accessor :description, :input, :task
 
   def initialize(description, input, task)
-    tasks_arr = { 1 => method(:task1), 2 => method(:task2), 7 => method(:task7), 8 => method(:task8), 9 => method(:task9) }.freeze
+    tasks_arr = { 1 => method(:task1), 2 => method(:task2), 3 => method(:task3),
+                  4 => method(:task4), 7 => method(:task7), 8 => method(:task8),
+                  9 => method(:task9) }.freeze
     @check = Qualifier.new
     puts description
     print input
@@ -33,6 +35,14 @@ class HomeWork
 
   def task2
     method_task2(@str.to_i)
+  end
+
+  def task3
+    ARR_COLORS.each { |key, value| puts "Key color is '#{key}'" if value == @str }
+  end
+
+  def task4
+    
   end
 
   def method_task2(year, curr_year = 2021)
