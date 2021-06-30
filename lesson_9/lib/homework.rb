@@ -6,8 +6,8 @@ class HomeWork
 
   def initialize(description, input, task)
     tasks_arr = { 1 => method(:task1), 2 => method(:task2), 3 => method(:task3),
-                  4 => method(:task4), 7 => method(:task7), 8 => method(:task8),
-                  9 => method(:task9) }.freeze
+                  4 => method(:task4), 5 => method(:task5), 7 => method(:task7),
+                  8 => method(:task8), 9 => method(:task9) }.freeze
     @check = Qualifier.new
     puts description
     print input
@@ -49,6 +49,17 @@ class HomeWork
       puts "\nClass '#{user.class}' -> #{user.name} #{user.surname} #{user.patronymic}"
       n += 1
     end
+  end
+
+  def task5
+    method_task5(*@str.split(' ').map(&:to_i))
+  end
+
+  def method_task5(*arr)
+    cel, far = *arr
+    cel2far = cel * 1.8 + 32
+    far2cel = (far - 32) / 1.8
+    puts "\n(#{cel})cel.->(#{cel2far.round(0)})far.  (#{far})far.->(#{far2cel.round(0)}).cel"
   end
 
   def method_task2(year, curr_year = 2021)
