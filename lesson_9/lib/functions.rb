@@ -32,7 +32,9 @@ TASK4 = [descr, input, 4].freeze
 descr = "\nЗадание №5. Перевод градусов Цельсия в градусы по Фаренгейту и обратно"
 input = "\nEnter degrees Celsius and Fahrenheit like '50 100' : "
 TASK5 = [descr, input, 5].freeze
-
+descr = "\nЗадание №6. Конвертации килограмм в граммы"
+input = "\nEnter any numbers: "
+TASK6 = [descr, input, 6].freeze
 descr = "\nЗадание №7. Числа Фибоначчи, цикл"
 input = "\nEnter munber of 'Fibonacci number': "
 TASK7 = [descr, input, 7].freeze
@@ -42,7 +44,7 @@ TASK8 = [descr, input, 8].freeze
 descr = "\nЗадание №9. Числа Фибоначчи, по формуле Бине"
 input = "\nEnter munber of 'Fibonacci number': "
 TASK9 = [descr, input, 9].freeze
-TASKS = [TASK1, TASK2, TASK3, TASK4, TASK5, TASK7, TASK8, TASK9].freeze
+TASKS = [TASK1, TASK2, TASK3, TASK4, TASK5, TASK6, TASK7, TASK8, TASK9].freeze
 
 def clear
   puts `clear`

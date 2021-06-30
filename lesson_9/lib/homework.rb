@@ -6,8 +6,8 @@ class HomeWork
 
   def initialize(description, input, task)
     tasks_arr = { 1 => method(:task1), 2 => method(:task2), 3 => method(:task3),
-                  4 => method(:task4), 5 => method(:task5), 7 => method(:task7),
-                  8 => method(:task8), 9 => method(:task9) }.freeze
+                  4 => method(:task4), 5 => method(:task5), 6 => method(:task6),
+                  7 => method(:task7), 8 => method(:task8), 9 => method(:task9) }.freeze
     @check = Qualifier.new
     puts description
     print input
@@ -52,7 +52,15 @@ class HomeWork
   end
 
   def task5
-    method_task5(*@str.split(' ').map(&:to_i))
+    method_task5(*@str.split(' ').map(&:to_i)) if @str != ''
+  end
+
+  def task6
+    method_task6(*@str.split(' ').map(&:to_f))
+  end
+
+  def method_task6(*arr)
+    print "#{arr.map { |element| element / 1000 }} "
   end
 
   def method_task5(*arr)
@@ -93,7 +101,7 @@ class HomeWork
     @y = 1
     @num = 1
     print "\nFibonacci row: #{@x} #{@y}"
-    puts "\n\nFibonacci number: #{recursion_task8(@num)}"
+    puts "\n\nFibonacci number: #{recursion_task8(@num) if @str != ''}"
   end
 
   def task9
