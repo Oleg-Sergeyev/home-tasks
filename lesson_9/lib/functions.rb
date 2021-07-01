@@ -49,6 +49,17 @@ input = "\nEnter munber of 'Fibonacci number': "
 TASK9 = [descr, input, 9].freeze
 TASKS = [TASK1, TASK2, TASK3, TASK4, TASK5, TASK6, TASK7, TASK8, TASK9].freeze
 
+def getlessons
+  arr = []
+  i = 1
+  9.times do
+    str = "lesson_#{i}"
+    arr.push(str)
+    i += 1
+  end
+  arr
+end
+
 def clear
   puts `clear`
 end
