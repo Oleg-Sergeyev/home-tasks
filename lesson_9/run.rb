@@ -8,5 +8,5 @@ require_relative 'lib/user'
 require 'date'
 
 clear
-lesson = getlessons[8]
+lesson = getlessons[getlessons.length - 1]
 MenuManage.new(lesson) # Start new tasks
