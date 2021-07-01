@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Class MenuManage
-class MenuManage
+class TaskManager
   attr_accessor :number
 
   def initialize(name)

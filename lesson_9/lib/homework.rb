@@ -22,6 +22,8 @@ class HomeWork
   def task2
     if Qualifier.number?(@str) && !Qualifier.float?(@str)
       method_task2(@str.to_i)
+    elsif empty?(@str)
+      method_task2(@str.to_i)
     else
       puts INPUT_ERROR
     end
