@@ -103,8 +103,12 @@ end
 def method_task5(*arr)
   cel, far = *arr
   cel2far = cel * 1.8 + 32
-  far2cel = (far - 32) / 1.8
-  puts "\n(#{cel})cel.->(#{cel2far.round(0)})far.  (#{far})far.->(#{far2cel.round(0)}).cel"
+  if far
+    far2cel = (far - 32) / 1.8
+    puts "\n(#{cel})cel.->(#{cel2far.round(0)})far.  (#{far})far.->(#{far2cel.round(0)}).cel"
+  else
+    puts "\n(#{cel})cel.->(#{cel2far.round(0)})far."
+  end
 end
 
 def method_task6(*arr, convert: 1000)
