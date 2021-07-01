@@ -17,15 +17,15 @@ class TaskManager
     until task_arr.last.nil?
       clear
       puts "Homework from [ #{@name} ]"
-      task = MenuItem.new(task_arr).next_task # Return number completed task
-      task_arr = change_tasks(TASKS, task)
+      num_task = MenuItem.new(task_arr).next_task # Return number completed task
+      task_arr = change_tasks(TASKS, num_task)
     end
   end
 
-  def change_tasks(full_array, task)
+  def change_tasks(full_array, num_task)
     full_array.each do |array|
-      return array if array.include?(task)
-      return full_array.first if task.zero? || task > full_array.last.last  # Array TASK1, start over
+      return array if array.include?(num_task)
+      return full_array.first if num_task.zero? || num_task > full_array.last.last  # Array TASK1, start over
     end
   end
 end

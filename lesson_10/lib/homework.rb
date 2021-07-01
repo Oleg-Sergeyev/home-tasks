@@ -7,7 +7,14 @@ class HomeWork
   def initialize(description, input, task)
     puts description
     print input
-    @str = gets.chomp
     method("task#{task}").call
+  end
+
+  def input_str
+    gets.chomp
+  end
+
+  def task1
+    puts 'task1'
   end
 end
