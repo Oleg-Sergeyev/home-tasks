@@ -5,17 +5,10 @@ class HomeWork
   attr_accessor :description, :input, :task
 
   def initialize(description, input, task)
-    set_tasks
     puts description
     print input
     @str = gets.chomp
-    @tasks_arr[task].call
-  end
-
-  def set_tasks
-    @tasks_arr = { 1 => method(:task1), 2 => method(:task2), 3 => method(:task3),
-                   4 => method(:task4), 5 => method(:task5), 6 => method(:task6),
-                   7 => method(:task7), 8 => method(:task8), 9 => method(:task9) }.freeze
+    method("task#{task}").call
   end
 
   def task1
