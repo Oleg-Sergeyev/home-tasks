@@ -24,7 +24,7 @@ class MenuItem
 
   def menu(symbol)
     case symbol
-    when :start_over
+    when :input_again
       @next_task = @task
     when :next
       @next_task = @task + 1

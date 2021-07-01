@@ -4,8 +4,8 @@ require_relative 'qualifier'
 
 INPUT_ERROR = 'Input error!'
 THANKS = "\n\nThanks! Bye!"
-MESSAGE_PRESS_KEY = "\n\nPress 'q'- exit, 'n' - next, 'b' - back, 's' to start over"
-OPERATING_SYMBOLS = { 'n' => :next, 's' => :start_over, 'b' => :back, 'q' => :quit }.freeze
+MESSAGE_PRESS_KEY = "\n\nPress 'q'- exit, 'n' - next, 'b' - back, 'i' input again"
+OPERATING_SYMBOLS = { 'n' => :next, 'i' => :input_again, 'b' => :back, 'q' => :quit }.freeze
 LEAP_YEAR = 'високосный год'
 COMMON_YAER = 'невисокосный год'
 LEAP_YEAR_DAYS = 366
