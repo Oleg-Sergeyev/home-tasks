@@ -7,8 +7,8 @@ class MultiInput
   def initialize(str_res, description, input_str)
     clear
     puts description
-    print "\nTotal entered: #{str_res}"
-    @getstr = input_str(input_str) if input_str != ''
+    print "#{INTERED_DATA} #{str_res}"
+    @getstr = input_str(input_str) if not_empty?(input_str)
   end
 
   def input_str(str)

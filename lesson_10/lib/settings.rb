@@ -1,12 +1,15 @@
 # frozen_string_literal: true
 
+# Messages
 INPUT_ERROR = 'Input error!'
 THANKS = "\n\nThanks! Bye!"
+INTERED_DATA = "\nYou entered this data:"
 MESSAGE_PRESS_KEY = "\n\nPress 'q'- exit, 'n' - next, 'b' - back, 'r' restart task"
 MESSAGE_PRESS_ACCEPT = "\n\nPress 'a' to accept or 'i' input again"
+# Arrays of control characters
 SYMBOLS_MENU2 = { 'n' => :next, 'b' => :back, 'q' => :quit, 'r' => :restart }.freeze
 SYMBOLS_MENU1 = { 'a' => :accept, 'i' => :input }.freeze
-
+# TASKS
 TASK1_DESCRIPTION = "\nЗадание №1. В этом задании нужно ввести три параметра"
 INPUTS1 = ["\nInput first param like '654': ", "\nInput second param: ", "\nInput third param: "].freeze
 TASK1 = [TASK1_DESCRIPTION, INPUTS1, 1].freeze

@@ -7,7 +7,7 @@ class HomeWork
   def initialize(input_result, description, task)
     clear
     puts description
-    puts "\nTotal entered: #{input_result}"
+    puts "#{INTERED_DATA} #{input_result}"
     method("task#{task}").call
   end
 
