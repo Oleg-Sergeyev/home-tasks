@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'io/console'
+require 'io/wait'
 
 # Class MenuItem
 class MenuItem
@@ -32,7 +33,8 @@ class MenuItem
   end
 
   def presskey2
-    input = $stdin.getch
+    clear_stdin
+    input = $stdin.getch.chomp
     presskey2 unless SYMBOLS_MENU2.key?(input)
 
     symbol = SYMBOLS_MENU2[input]
@@ -40,9 +42,12 @@ class MenuItem
   end
 
   def presskey1
-    input = $stdin.getch
-    presskey1 unless SYMBOLS_MENU1.key?(input)
-
+    input = ''
+    loop do
+      clear_stdin
+      input = $stdin.getch.chomp
+      break if SYMBOLS_MENU1.key?(input)
+    end
     symbol = SYMBOLS_MENU1[input]
     menu1(symbol) if symbol
   end
@@ -67,5 +72,9 @@ class MenuItem
     when :quit
       abort THANKS
     end
+  end
+
+  def clear_stdin
+    $stdin.getc while $stdin.ready?
   end
 end
