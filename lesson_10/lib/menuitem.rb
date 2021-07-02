@@ -10,10 +10,18 @@ class MenuItem
     @description, @arr, @task = *array
     @arr_results = []
     # HomeWork.new(@arr_results)
-    HomeWork.new(@arr_results, @description, @task) if create_miobject
-    print MESSAGE_PRESS_KEY
+    create_miobject
+    select_menu
     @next_task = next_task
-    presskey
+  end
+
+  def select_menu
+    print MESSAGE_PRESS_ACCEPT
+    return unless presskey1.to_i == @task
+
+    HomeWork.new(@arr_results, @description, @task)
+    print MESSAGE_PRESS_KEY
+    presskey2
   end
 
   def create_miobject
@@ -24,17 +32,34 @@ class MenuItem
     MultiInput.new(@arr_results, @description, '')
   end
 
-  def presskey
+  def presskey2
     input = $stdin.getch
-    presskey unless OPERATING_SYMBOLS.key?(input)
+    presskey unless SYMBOLS_MENU2.key?(input)
 
-    symbol = OPERATING_SYMBOLS[input]
-    menu(symbol) if symbol
+    symbol = SYMBOLS_MENU2[input]
+    menu2(symbol) if symbol
   end
 
-  def menu(symbol)
+  def presskey1
+    input = $stdin.getch
+    presskey unless SYMBOLS_MENU1.key?(input)
+
+    symbol = SYMBOLS_MENU1[input]
+    menu1(symbol) if symbol
+  end
+
+  def menu1(symbol)
     case symbol
-    when :input_again
+    when :accept
+      @task
+    when :input
+      initialize([@description, @arr, @task])
+    end
+  end
+
+  def menu2(symbol)
+    case symbol
+    when :restart
       @next_task = @task
     when :next
       @next_task = @task + 1
