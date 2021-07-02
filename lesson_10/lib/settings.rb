@@ -5,11 +5,11 @@ THANKS = "\n\nThanks! Bye!"
 MESSAGE_PRESS_KEY = "\n\nPress 'q'- exit, 'n' - next, 'b' - back, 'i' input again"
 OPERATING_SYMBOLS = { 'n' => :next, 'i' => :input_again, 'b' => :back, 'q' => :quit }.freeze
 
-TASK1_DESCRIPTION = "\nЗадание №1. Можно ввести три раза"
+TASK1_DESCRIPTION = "\nЗадание №1. В этом задании нужно ввести три параметра"
 INPUTS1 = ["\nInput first param like '654': ", "\nInput second param: ", "\nInput third param: "].freeze
 TASK1 = [TASK1_DESCRIPTION, INPUTS1, 1].freeze
 
-TASK2_DESCRIPTION = "\nЗадание №2. Только один ввод"
+TASK2_DESCRIPTION = "\nЗадание №2. В этом задании достаточно одного параметра"
 INPUTS2 = ["\nInput only one param: "].freeze
 TASK2 = [TASK2_DESCRIPTION, INPUTS2, 2].freeze
 
