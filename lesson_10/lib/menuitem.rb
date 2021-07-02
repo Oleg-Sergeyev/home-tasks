@@ -10,14 +10,13 @@ class MenuItem
     @description, @arr, @task = *array
     @arr_results = []
     # HomeWork.new(@arr_results)
-    create_miobject
-    select_menu
+    select_menu if create_miobject
     @next_task = next_task
   end
 
   def select_menu
     print MESSAGE_PRESS_ACCEPT
-    return unless presskey1.to_i == @task
+    return unless presskey1 == @task
 
     HomeWork.new(@arr_results, @description, @task)
     print MESSAGE_PRESS_KEY
@@ -34,7 +33,7 @@ class MenuItem
 
   def presskey2
     input = $stdin.getch
-    presskey unless SYMBOLS_MENU2.key?(input)
+    presskey2 unless SYMBOLS_MENU2.key?(input)
 
     symbol = SYMBOLS_MENU2[input]
     menu2(symbol) if symbol
@@ -42,7 +41,7 @@ class MenuItem
 
   def presskey1
     input = $stdin.getch
-    presskey unless SYMBOLS_MENU1.key?(input)
+    presskey1 unless SYMBOLS_MENU1.key?(input)
 
     symbol = SYMBOLS_MENU1[input]
     menu1(symbol) if symbol
@@ -51,7 +50,7 @@ class MenuItem
   def menu1(symbol)
     case symbol
     when :accept
-      @task
+      @next_task = @task
     when :input
       initialize([@description, @arr, @task])
     end
