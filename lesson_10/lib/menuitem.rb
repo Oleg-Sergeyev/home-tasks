@@ -7,11 +7,21 @@ class MenuItem
   attr_accessor :next_task
 
   def initialize(array)
-    _, _, @task = *array
-    HomeWork.new(*array)
+    @description, @arr, @task = *array
+    @arr_results = []
+    # HomeWork.new(@arr_results)
+    HomeWork.new(@arr_results, @description, @task) if create_miobject
     print MESSAGE_PRESS_KEY
     @next_task = next_task
     presskey
+  end
+
+  def create_miobject
+    @arr.each do |input_str|
+      str = MultiInput.new(@arr_results, @description, input_str).getstr
+      @arr_results.push(str) if str
+    end
+    MultiInput.new(@arr_results, @description, '')
   end
 
   def presskey
@@ -24,7 +34,7 @@ class MenuItem
 
   def menu(symbol)
     case symbol
-    when :start_over
+    when :input_again
       @next_task = @task
     when :next
       @next_task = @task + 1
