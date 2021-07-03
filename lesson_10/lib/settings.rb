@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
+require 'date'
+
 # Messages
 INPUT_ERROR = 'Input error!'
 THANKS = "\n\nThanks! Bye!"
 INTERED_DATA = "\nYou entered this data:"
-MESSAGE_PRESS_KEY = "\n\n\nPress 'q' exit, 'n' next, 'b' back, 'r' reload, '1..9' manual select task "
 MESSAGE_PRESS_ACCEPT = "\n\n\nPress 'a' to accept or 'i' input again"
 # Arrays of control characters
 SYMBOLS_MENU2 = { 'n' => :next, 'b' => :back, 'q' => :quit, 'r' => :restart }.freeze
@@ -21,9 +22,14 @@ TASK2 = [TASK2_DESCRIPTION, INPUTS2, 2].freeze
 TASK3_DESCRIPTION = 'Задание №3. Список пользователей в алфавитном порядке'
 INPUTS3 = ["\nInput some surnames like 'Казанцев Антропов...': "].freeze
 TASK3 = [TASK3_DESCRIPTION, INPUTS3, 3].freeze
-TASK3_DATA = 'Иванов,Петров,Сидоров,Алексеева,Казанцев,Антропов,Анисимова,Кузнецов,Соловьёв,Кошкина'
 
-TASKS = [TASK1, TASK2, TASK3].freeze
+TASK4_DESCRIPTION = 'Задание №4. Вывод интервала дней текущей недели:'
+INPUTS4 = ["\nInput any date like '28-08-2021' or press enter to '#{Date.today.strftime('%d-%m-%Y')}' : "].freeze
+TASK4 = [TASK4_DESCRIPTION, INPUTS4, 4].freeze
+
+TASKS = [TASK1, TASK2, TASK3, TASK4].freeze
 
 # Arrays of control characters
 NUMBERS_MENU2 = (1..TASKS.size).freeze
+# Messages
+MESSAGE_PRESS_KEY = "\n\nPress 'q' exit, 'n' next, 'b' back, 'r' reload, '1..#{TASKS.size}' manual select task "
