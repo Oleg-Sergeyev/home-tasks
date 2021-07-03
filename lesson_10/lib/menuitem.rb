@@ -46,7 +46,6 @@ class MenuItem
   def presskey1
     input = ''
     loop do
-      clear_stdin
       input = $stdin.getch.chomp
       break if SYMBOLS_MENU1.key?(input)
     end
@@ -67,16 +66,8 @@ class MenuItem
     case symbol
     when :restart
       @next_task = @num_task
-    when :next
-      @next_task = @num_task + 1
-    when :back
-      @next_task = @num_task - 1
     when :quit
-      abort THANKS
+      @next_task = 0
     end
-  end
-
-  def clear_stdin
-    $stdin.getc while $stdin.ready?
   end
 end

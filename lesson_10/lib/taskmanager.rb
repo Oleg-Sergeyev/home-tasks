@@ -2,21 +2,27 @@
 
 # Class MenuManage
 class TaskManager
-  attr_accessor :number
+  attr_accessor :number, :competed_task
 
-  def initialize(name)
-    @name = name
-    start(TASKS)
+  def initialize(num_task)
+    @num_task = num_task
+    @competed_task = false
+    start
   end
 
-  def start(full_array)
-    work_task(full_array.first)
+  def start
+    work_task(change_tasks(TASKS, @num_task))
   end
 
   def work_task(task_arr)
     until task_arr.last.nil?
       num_task = MenuItem.new(task_arr).next_task # Return number completed task
-      task_arr = change_tasks(TASKS, num_task)
+      if !num_task.zero?
+        task_arr = change_tasks(TASKS, num_task)
+      else
+        @competed_task = true
+        break
+      end
     end
   end
 
