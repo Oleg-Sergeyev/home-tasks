@@ -15,10 +15,7 @@ class TaskManager
 
   def work_task(task_arr)
     until task_arr.last.nil?
-      clear
-      puts "Homework from [ #{@name} ]"
       num_task = MenuItem.new(task_arr).next_task # Return number completed task
-      p num_task
       task_arr = change_tasks(TASKS, num_task)
     end
   end

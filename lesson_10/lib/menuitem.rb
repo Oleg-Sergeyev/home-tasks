@@ -33,12 +33,15 @@ class MenuItem
   end
 
   def presskey2
-    clear_stdin
     input = $stdin.getch.chomp
-    presskey2 unless SYMBOLS_MENU2.key?(input)
-
-    symbol = SYMBOLS_MENU2[input]
-    menu2(symbol) if symbol
+    if SYMBOLS_MENU2.key?(input)
+      symbol = SYMBOLS_MENU2[input]
+      menu2(symbol) if symbol
+    elsif NUMBERS_MENU2.include?(input.to_i)
+      @next_task = input.to_i
+    else
+      presskey2
+    end
   end
 
   def presskey1
