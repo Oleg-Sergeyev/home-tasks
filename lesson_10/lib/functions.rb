@@ -24,7 +24,6 @@ def date?(str)
   return unless str.split('-').size == 3
 
   day, month, year = *str.split('-')
-  puts year.to_i
   Date.valid_date?(year.to_i, month.to_i, day.to_i)
 end
 
