@@ -8,7 +8,7 @@ class MenuItem
   attr_accessor :next_task
 
   def initialize(array)
-    @description, @arr, @task = *array
+    @description, @arr, @num_task = *array
     @arr_results = []
     # HomeWork.new(@arr_results)
     select_menu if create_miobject
@@ -17,9 +17,9 @@ class MenuItem
 
   def select_menu
     print MESSAGE_PRESS_ACCEPT
-    return unless presskey1 == @task
+    return unless presskey1 == @num_task
 
-    HomeWork.new(@arr_results, @description, @task)
+    Task.new(@arr_results, @description, @num_task)
     print MESSAGE_PRESS_KEY
     presskey2
   end
@@ -58,20 +58,20 @@ class MenuItem
   def menu1(symbol)
     case symbol
     when :accept
-      @next_task = @task
+      @next_task = @num_task
     when :input
-      initialize([@description, @arr, @task])
+      initialize([@description, @arr, @num_task])
     end
   end
 
   def menu2(symbol)
     case symbol
     when :restart
-      @next_task = @task
+      @next_task = @num_task
     when :next
-      @next_task = @task + 1
+      @next_task = @num_task + 1
     when :back
-      @next_task = @task - 1
+      @next_task = @num_task - 1
     when :quit
       abort THANKS
     end
