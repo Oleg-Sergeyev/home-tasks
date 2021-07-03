@@ -10,7 +10,6 @@ class MenuItem
   def initialize(array)
     @description, @arr, @num_task = *array
     @arr_results = []
-    # HomeWork.new(@arr_results)
     select_menu if create_miobject
     @next_task = next_task
   end
