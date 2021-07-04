@@ -9,7 +9,7 @@ def empty_string?(str)
 end
 
 def first_space?(str)
-  return true if str[0] == ' '
+  return true if str.first == ' '
 end
 
 def empty?(str)

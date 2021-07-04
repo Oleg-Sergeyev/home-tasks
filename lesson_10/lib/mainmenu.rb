@@ -23,7 +23,7 @@ class MainMenu
     if input == 'q'
       abort THANKS
     elsif NUMBERS_MENU2.include?(input.to_i)
-      initialize(@name) if TaskManager.new(input.to_i).competed_task
+      print_menu if TaskManager.new(input.to_i).competed_task
     end
   end
 end

@@ -24,9 +24,8 @@ class Task
 
   def task2
     size = @input_result.first
-    arr = []
     if Qualifier.number?(size) && !Qualifier.float?(size)
-      size.to_i.times { arr.push(rand(0..99)) }
+      arr = (1..size.to_i).map { rand(0..99) }
       puts "\nMaximum: #{arr.max} Minimum: #{arr.min}"
       print "\nArray = #{arr}"
     else
