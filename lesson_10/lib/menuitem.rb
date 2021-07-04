@@ -10,8 +10,12 @@ class MenuItem
   def initialize(array)
     @description, @arr, @num_task = *array
     @arr_results = []
-    select_menu if create_miobject
+    start
     @next_task = next_task
+  end
+
+  def start
+    select_menu if create_miobject
   end
 
   def select_menu
@@ -58,7 +62,7 @@ class MenuItem
     when :accept
       @next_task = @num_task
     when :input
-      initialize([@description, @arr, @num_task])
+      start
     end
   end
 
