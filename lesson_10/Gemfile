@@ -3,9 +3,9 @@
 source 'https://rubygems.org'
 
 git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
-
+gem 'dotenv'
+gem 'mysql2', '~> 0.5.3'
 group :development do
   gem 'pry-byebug'
   gem 'rubocop'
-  gem 'solargraph'
 end
