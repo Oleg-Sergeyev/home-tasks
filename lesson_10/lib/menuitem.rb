@@ -29,8 +29,13 @@ class MenuItem
 
   def create_miobject
     @arr.each do |input_str|
-      str = MultiInput.new(@arr_results, @description, input_str).getstr
-      @arr_results.push(str) if str
+      if input_str.class != Array
+        str = MultiInput.new(@arr_results, @description, input_str).getstr
+        @arr_results.push(str) if str
+      else
+        @arr_results = []
+        @arr_results.push(input_str.first)
+      end
     end
     MultiInput.new(@arr_results, @description, '')
   end

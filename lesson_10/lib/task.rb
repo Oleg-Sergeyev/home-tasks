@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Class HomeWork
+# Class Task
 class Task
   # attr_accessor :description, :input_result, :task
 
