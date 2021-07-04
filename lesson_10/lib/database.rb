@@ -17,7 +17,7 @@ class DataBase
                                 port: 3306)
     @results = client.query('SELECT * FROM ruby_hometasks WHERE lesson_id = 10')
     @results.each do |row|
-      p row
+      puts row
     end
   end
 end
