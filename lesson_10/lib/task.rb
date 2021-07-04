@@ -2,8 +2,6 @@
 
 # Class Task
 class Task
-  # attr_accessor :description, :input_result, :task
-
   def initialize(input_result, description, num_task)
     clear
     @input_result = input_result
@@ -40,7 +38,7 @@ class Task
   def task4
     if empty?(@input_result.first)
       puts "\n"
-      puts week_days(Date.today)
+      puts week_days(Date.parse(@input_result.last))
     elsif date?(@input_result.first)
       puts "\n"
       puts week_days(Date.parse(@input_result.first))
