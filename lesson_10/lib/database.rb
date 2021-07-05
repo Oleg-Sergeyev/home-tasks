@@ -46,11 +46,7 @@ class DataBase
   end
 
   def inputs_str(str)
-    arr = []
-    JSON.parse(str).each do |_key, value|
-      arr.push(value)
-    end
-    arr
+    JSON.parse(str).values
   end
 
   def inputs_param(str2)
