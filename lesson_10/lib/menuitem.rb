@@ -33,7 +33,7 @@ class MenuItem
         str = MultiInput.new(@arr_results, @description, input_str).getstr
         @arr_results.push(str) if str != ''
       elsif @arr_results.empty?
-        @arr_results.push(input_str.last) #if @arr_results.empty?
+        @arr_results.push(input_str.last) # if @arr_results.empty?
       end
     end
     MultiInput.new(@arr_results, @description, '')
