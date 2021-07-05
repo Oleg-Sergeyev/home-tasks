@@ -67,6 +67,7 @@ class MenuItem
     when :accept
       @next_task = @num_task
     when :input
+      @arr_results = []
       start
     end
   end
@@ -75,6 +76,7 @@ class MenuItem
     case symbol
     when :restart
       @next_task = @num_task
+      @arr_results = []
     when :quit
       @next_task = 0
     end
