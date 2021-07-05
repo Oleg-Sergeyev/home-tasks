@@ -36,7 +36,7 @@ class Task
   end
 
   def task4
-    if PARAMAS.include?(@input_result.last)
+    if @input_result.first.empty?
       puts "\n"
       puts week_days(Date.today) #if PARAMAS.include?(@input_result.last)
     elsif date?(@input_result.first)

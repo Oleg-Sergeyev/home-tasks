@@ -33,25 +33,39 @@ class DataBase
 
   def create_constants
     @full_array.each do |data|
-      Kernel.const_set("TASK#{data[1]}", [Kernel.const_set("TASK#{data[1]}_SESCIPTION", data[3]),
+      Kernel.const_set("TASK#{data[1]}", [Kernel.const_set("TASK#{data[1]}_DESCRIPTION", data[3]),
                                           Kernel.const_set("INPUTS#{data[1]}", parse_str(data[4], data[5])),
                                           data[1]])
     end
   end
 
+  def check_params
+    Date.today.strftime('%d-%m-%Y')
+  end
+
   def parse_str(str, str2)
+    arr = inputs_str(str)
+    arr.push(inputs_param(str2)) if str2 != 'null'
+    arr
+  end
+
+  def inputs_str(str)
     arr = []
-    p str2
     JSON.parse(str).each do |_key, value|
       arr.push(value)
     end
-    if str2 != 'null'
-      arr2 = []
-      JSON.parse(str2).each do |_key, value|
+    arr
+  end
+
+  def inputs_param(str2)
+    arr2 = []
+    JSON.parse(str2).each do |_key, value|
+      if value == 'Date.today'
+        arr2.push(check_params)
+      else
         arr2.push(value)
       end
-      arr.push(arr2)
     end
-    arr
+    arr2
   end
 end

@@ -14,29 +14,8 @@ TODAY = Date.today.strftime('%d-%m-%Y')
 SYMBOLS_MENU2 = { 'q' => :quit, 'r' => :restart }.freeze
 SYMBOLS_MENU1 = { 'a' => :accept, 'i' => :input }.freeze
 
-# TASKS
-# TASK1_DESCRIPTION = 'Задание №1. Деление двух чисел'
-# INPUTS1 = ["\nInput dividend like '654': ", "\nInput divider '3': "].freeze
-# TASK1 = [TASK1_DESCRIPTION, INPUTS1, 1].freeze
-
-# TASK2_DESCRIPTION = 'Задание №2. Массив определенного размера состоящий из случайный числе от 0..99'
-# INPUTS2 = ["\nInput array size: "].freeze
-# TASK2 = [TASK2_DESCRIPTION, INPUTS2, 2].freeze
-
-# TASK3_DESCRIPTION = 'Задание №3. Список пользователей в алфавитном порядке'
-# INPUTS3 = ["\nInput some surnames like 'Казанцев Антропов...': "].freeze
-# TASK3 = [TASK3_DESCRIPTION, INPUTS3, 3].freeze
-
-# TASK4_DESCRIPTION = 'Задание №4. Вывод интервала дней текущей недели'
-# INPUTS4 = ["\nInput any date like '28-08-2021' or press enter to '#{TODAY}' : ", [TODAY]].freeze
-# TASK4 = [TASK4_DESCRIPTION, INPUTS4, 4].freeze
-
-# TASKS = [TASK1, TASK2, TASK3, TASK4].freeze
-
 # Arrays of control characters
 NUMBERS_MENU2 = (1..TASKS.size).freeze
 # Messages
 MESSAGE_PRESS_KEY = "\n\nPress 'q' exit to main menu, 'r' restart this task"
 MESSAGE_MAINMENU_PRESS_KEY = "\n\nPress 'q' exit or '1..#{TASKS.size}' select task "
-
-PARAMAS = ['Date.today'].freeze

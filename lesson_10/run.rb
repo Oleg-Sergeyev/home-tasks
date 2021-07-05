@@ -6,5 +6,5 @@ require 'dotenv'
 files = Dir.new("#{__dir__}/lib").children
 files.each { |file| require_relative("lib/#{file}") }
 clear
-# DataBase.new(10)
+
 MainMenu.new('LESSON 10')

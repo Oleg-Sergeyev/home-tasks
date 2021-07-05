@@ -5,7 +5,7 @@ class MultiInput
   attr_accessor :getstr
 
   def initialize(str_res, description, input_str)
-    #clear
+    clear
     puts description
     print "#{INTERED_DATA} #{str_res}"
     @getstr = input_str(input_str) if not_empty?(input_str)
