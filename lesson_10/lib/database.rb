@@ -39,10 +39,6 @@ class DataBase
     end
   end
 
-  def check_params
-    Date.today.strftime('%d-%m-%Y')
-  end
-
   def parse_str(str, str2)
     arr = inputs_str(str)
     arr.push(inputs_param(str2)) if str2 != 'null'
@@ -61,7 +57,7 @@ class DataBase
     arr2 = []
     JSON.parse(str2).each do |_key, value|
       if value == 'Date.today'
-        arr2.push(check_params)
+        arr2.push(Date.today.strftime('%d-%m-%Y'))
       else
         arr2.push(value)
       end
