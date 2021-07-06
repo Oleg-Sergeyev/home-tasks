@@ -8,7 +8,7 @@ THANKS = "\n\nThanks! Bye!"
 INTERED_DATA = "\nYou entered this data:"
 MESSAGE_PRESS_ACCEPT = "\n\n\nPress 'a' to accept or 'i' input again"
 TODAY = Date.today.strftime('%d-%m-%Y')
-DATE_ERROR = "\nSorry, it is impossible to get the days of the week for this date!"  
+DATE_ERROR = "\nSorry, it is impossible to get the days of the week for this date!"
 # Arrays of control characters
 SYMBOLS_MENU2 = { 'q' => :quit, 'r' => :restart }.freeze
 SYMBOLS_MENU1 = { 'a' => :accept, 'i' => :input }.freeze
