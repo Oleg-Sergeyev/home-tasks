@@ -31,6 +31,9 @@ def week_days(input_date)
   arr_days = []
   week_begin = Date.commercial(input_date.year, input_date.cweek, 1)
   week_end = Date.commercial(input_date.year, input_date.cweek, 7)
+rescue StandardError
+  DATE_ERROR
+else
   (week_begin..week_end).each do |day|
     arr_days.push(day.strftime('%d-%m-%Y %A'))
   end

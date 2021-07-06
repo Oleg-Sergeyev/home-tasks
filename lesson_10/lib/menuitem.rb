@@ -36,7 +36,7 @@ class MenuItem
         @arr_results.push(input_str.last) # if @arr_results.empty?
       end
     end
-    MultiInput.new(@arr_results, @description)
+    MultiInput.new(@arr_results, @description, '')
   end
 
   def presskey2
