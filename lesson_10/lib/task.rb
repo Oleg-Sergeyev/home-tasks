@@ -46,8 +46,4 @@ class Task
       puts INPUT_ERROR
     end
   end
-
-  def get_binding(str)
-    binding
-  end
 end
