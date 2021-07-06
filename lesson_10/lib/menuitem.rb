@@ -31,10 +31,9 @@ class MenuItem
     @arr.each do |input_str|
       if input_str.class != Array
         str = MultiInput.new(@arr_results, @description, input_str).getstr
-        @arr_results.push(str) if str
-      else
-        @arr_results = []
-        @arr_results.push(input_str.first)
+        @arr_results.push(str) if str != ''
+      elsif @arr_results.empty?
+        @arr_results.push(input_str.last) # if @arr_results.empty?
       end
     end
     MultiInput.new(@arr_results, @description, '')

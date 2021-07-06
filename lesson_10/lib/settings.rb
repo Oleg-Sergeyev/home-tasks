@@ -22,7 +22,8 @@ INPUTS2 = ["\nInput array size: "].freeze
 TASK2 = [TASK2_DESCRIPTION, INPUTS2, 2].freeze
 
 TASK3_DESCRIPTION = 'Задание №3. Список пользователей в алфавитном порядке'
-INPUTS3 = ["\nInput some surnames like 'Казанцев Антропов...': "].freeze
+SURNAMES = ['Иванов Петров Сидоров Алексеева Казанцев Антропов Анисимова Кузнецов Соловьёв Кошкина'].freeze
+INPUTS3 = ["\nInput some surnames like 'Казанцев Антропов...' or press enter to get it: ", SURNAMES].freeze
 TASK3 = [TASK3_DESCRIPTION, INPUTS3, 3].freeze
 
 TASK4_DESCRIPTION = 'Задание №4. Вывод интервала дней текущей недели'

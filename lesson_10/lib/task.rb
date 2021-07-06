@@ -32,7 +32,12 @@ class Task
   end
 
   def task3
-    print "\n#{@input_result.first.split(' ').sort}"
+    puts "\n"
+    if empty?(@input_result.first)
+      print "\n#{@input_result.sort}"
+    else
+      print "\n#{@input_result.first.split(' ').sort}"
+    end
   end
 
   def task4
