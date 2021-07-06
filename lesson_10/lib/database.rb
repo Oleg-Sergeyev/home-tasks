@@ -50,14 +50,12 @@ class DataBase
   end
 
   def inputs_param(str2)
-    arr2 = []
-    JSON.parse(str2).each do |_key, value|
-      if value == 'Date.today'
-        arr2.push(Date.today.strftime('%d-%m-%Y'))
+    JSON.parse(str2).values.map do |item|
+      if item == 'Date.today'
+        Date.today.strftime('%d-%m-%Y')
       else
-        arr2.push(value)
+        item
       end
     end
-    arr2
   end
 end
