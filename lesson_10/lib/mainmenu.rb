@@ -24,6 +24,8 @@ class MainMenu
       abort THANKS
     elsif NUMBERS_MENU2.include?(input.to_i)
       print_menu if TaskManager.new(input.to_i).competed_task
+    else
+      presskey
     end
   end
 end
