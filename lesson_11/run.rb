@@ -73,9 +73,7 @@ USERS = { 'Петров Петр Петрович' => 3,
           'Троянов Анатолий Генадьевич' => 3 }.freeze
 puts "\nUsers with ratings:"
 puts "\n"
-USERS.each do |arr|
-  p arr
-end
+USERS.each { |arr| p arr}
 users = USERS.each_with_object({}) do |(name, score), collection|
   user = User.new(name, score)
   collection[user] = user
