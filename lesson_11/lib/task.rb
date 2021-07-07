@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative 'user'
+
 # 1
 # def input_color(arr)
 #   puts `clear`
@@ -53,6 +55,31 @@
 # puts "\n"
 
 # 7
+# puts `clear`
+# print "\n#{'Hello world!'.chars}"
+# puts "\n\n"
+
+# 8
 puts `clear`
-print "\n#{'Hello world!'.chars}"
-puts "\n\n"
+USERS = { 'Петров Петр Петрович' => 3,
+          'Сидоров Сергей Александрович' => 4,
+          'Макарычев Дмитрий Сергеевич' => 4,
+          'Петрушин Михаил Анатольевич' => 2,
+          'Александрова Татьяна Сергеевна' => 5,
+          'Михалкова Екатерина Андреевна' => 3,
+          'Сухороков Андрей Викотрович' => 5,
+          'Стрельцова Ольга Петровна' => 1,
+          'Троянов Анатолий Генадьевич' => 3 }.freeze
+puts "\nUsers with ratings:"
+puts "\n"
+USERS.each do |arr|
+  p arr
+end
+users = USERS.each_with_object({}) do |(name, score), collection|
+  user = User.new(name, score)
+  collection[user] = user
+end
+average_rating = users.values.map(&:score).sum / USERS.size
+puts "\nAverage raiting = #{average_rating}\n\nUsers with more than '#{average_rating}' rating:"
+puts "\n"
+users.select { |user, _score| puts "#{user.name} #{user.score}" if user.score > average_rating }
