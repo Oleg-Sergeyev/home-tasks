@@ -17,6 +17,7 @@ class Calendar
     @sundays = []
     @weeks = []
     full_array
+    print_calendar
   end
 
   def dates_in_month(year, month)
@@ -47,8 +48,33 @@ class Calendar
   end
 
   def get_last_day(year, month)
-    [31,30,29,28].each do |day|
+    [31, 30, 29, 28].each do |day|
       return day if Date.valid_date?(year, month, day)
+    end
+  end
+
+  def chk(day, index)
+    if (1..7).include?(day.strftime('%d').to_i - index) && day.strftime('%d').to_i <= 7
+      2
+    else
+      0
+    end
+  end
+
+  def int(day, index)
+    if day.strftime('%d').to_i < 10 && (day.strftime('%d').to_i - index) <= 0
+      1
+    elsif day.strftime('%d').to_i < 10 && (day.strftime('%d').to_i - index) >= 0
+      2
+    else
+      0
+    end
+  end
+
+  def print_calendar
+    @weeks.each_with_index do |(name, dates), index|
+      print "\n#{name}: "
+      dates.each_with_index { |day, _ind| print format("%#{chk(day, index) + int(day, index)}d ", day.strftime('%d').to_i) }
     end
   end
 end
