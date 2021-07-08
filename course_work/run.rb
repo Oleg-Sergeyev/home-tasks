@@ -5,10 +5,6 @@ require 'date'
 
 month = Calendar.new(2021, 7).weeks
 
-def chk_dates(dates)
-  return 4 if dates.size == 4
-end
-
 def chk(day, index)
   return 4 if day.strftime('%d').to_i - index == 4 && day.strftime('%d').to_i <= 7
 end
