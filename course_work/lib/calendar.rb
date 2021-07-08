@@ -21,7 +21,7 @@ class Calendar
 
   def dates_in_month(year, month)
     first_day = Date.new(year, month, 1)
-    last_day = Date.new(year, month, 31)
+    last_day = Date.new(year, month, get_last_day(year, month))
     @arr_dates = (first_day..last_day).to_a
   end
 
@@ -44,5 +44,11 @@ class Calendar
     @fridays.push(date) if date.friday?
     @saturdays.push(date) if date.saturday?
     @sundays.push(date) if date.sunday?
+  end
+
+  def get_last_day(year, month)
+    [31,30,29,28].each do |day|
+      return day if Date.valid_date?(year, month, day)
+    end
   end
 end
