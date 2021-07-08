@@ -45,16 +45,19 @@ print(%w[Понедельник Вторник Среда Четверг Пят�
 puts "\n\nTask 6"
 months = %w[Январь Февраль Март Апрель Май Июнь Июль Сентябрь Октябрь Ноябрь Декабрь]
 
-def max_hash_key(hash)
-  hash.max_by { |_key, value| value }
-end
+# def max_hash_key(hash)
+#   hash.max_by { |_key, value| value }
+# end
 
-def min_hash_key(hash)
-  hash.min_by { |_key, value| value }
-end
+# def min_hash_key(hash)
+#   hash.min_by { |_key, value| value }
+# end
 
-print "\nMax month = #{max_hash_key(Hash[months.map { |month| [month, month.size] }])}"
-print "\nMin month = #{min_hash_key(Hash[months.map { |month| [month, month.size] }])}"
+print "\nMax month = #{months.max_by(&:size)}"
+print "\nMin month = #{months.min_by(&:size)}"
+
+# print "\nMax month = #{max_hash_key(Hash[months.map { |month| [month, month.size] }])}"
+# print "\nMin month = #{min_hash_key(Hash[months.map { |month| [month, month.size] }])}"
 
 # 7
 puts "\n\nTask 7"
@@ -73,7 +76,7 @@ USERS = { 'Петров Петр Петрович' => 3,
           'Троянов Анатолий Генадьевич' => 3 }.freeze
 puts "\nUsers with ratings:"
 puts "\n"
-USERS.each { |arr| p arr}
+USERS.each { |arr| p arr }
 users = USERS.each_with_object({}) do |(name, score), collection|
   user = User.new(name, score)
   collection[user] = user
@@ -82,6 +85,8 @@ average_rating = users.values.map(&:score).sum / USERS.size
 puts "\nAverage raiting = #{average_rating}\n\nUsers with more than '#{average_rating}' rating:"
 puts "\n"
 users.select { |user, _score| puts "#{user.name} #{user.score}" if user.score > average_rating }
+# users.select { |_user, score| score > average_rating }.each { |user, score| puts "#{user.name} #{score}" }
+# users.select { |user, _score| user.score > average_rating }.each { |user, _score| puts "#{user.name} #{user.score}" }
 
 # 9
 puts "\n\nTask 9"
