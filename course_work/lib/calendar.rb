@@ -16,7 +16,7 @@ class Calendar
     @saturdays = []
     @sundays = []
     @weeks = []
-    full_array
+    full_arrays
     print_calendar
   end
 
@@ -26,7 +26,7 @@ class Calendar
     @arr_dates = (first_day..last_day).to_a
   end
 
-  def full_array
+  def full_arrays
     @arr_dates.each { |date| days(date) }
     @weeks = { 'ПН' => @mondays,
                'ВТ' => @tuesdays,
@@ -38,13 +38,15 @@ class Calendar
   end
 
   def days(date)
-    @mondays.push(date) if date.monday?
-    @tuesdays.push(date) if date.tuesday?
-    @wednesdays.push(date) if date.wednesday?
-    @thursdays.push(date) if date.thursday?
-    @fridays.push(date) if date.friday?
-    @saturdays.push(date) if date.saturday?
-    @sundays.push(date) if date.sunday?
+    case true
+    when date.monday? then @mondays.push(date)
+    when date.tuesday? then @tuesdays.push(date)
+    when date.wednesday? then @wednesdays.push(date)
+    when date.thursday? then @thursdays.push(date)
+    when date.friday? then @fridays.push(date)
+    when date.saturday? then @saturdays.push(date)
+    else @sundays.push(date)
+    end
   end
 
   def get_last_day(year, month)
@@ -53,7 +55,7 @@ class Calendar
     end
   end
 
-  def chk(day, index)
+  def format1(day, index)
     if (1..7).include?(day.strftime('%d').to_i - index) && day.strftime('%d').to_i <= 7
       2
     else
@@ -61,7 +63,7 @@ class Calendar
     end
   end
 
-  def int(day, index)
+  def format2(day, index)
     if day.strftime('%d').to_i < 10 && (day.strftime('%d').to_i - index) <= 0
       1
     elsif day.strftime('%d').to_i < 10 && (day.strftime('%d').to_i - index) >= 0
@@ -74,7 +76,9 @@ class Calendar
   def print_calendar
     @weeks.each_with_index do |(name, dates), index|
       print "\n#{name}: "
-      dates.each_with_index { |day, _ind| print format("%#{chk(day, index) + int(day, index)}d ", day.strftime('%d').to_i) }
+      dates.each_with_index do |day, _ind|
+        print format("%#{format1(day, index) + format2(day, index)}d ", day.strftime('%d').to_i)
+      end
     end
   end
 end
