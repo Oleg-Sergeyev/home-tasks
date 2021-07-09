@@ -23,13 +23,13 @@ class WeekDays
   end
 
   def identify_date(date)
-    case true
-    when date.monday? then @mondays.push(date)
-    when date.tuesday? then @tuesdays.push(date)
-    when date.wednesday? then @wednesdays.push(date)
-    when date.thursday? then @thursdays.push(date)
-    when date.friday? then @fridays.push(date)
-    when date.saturday? then @saturdays.push(date)
+    case date.cwday
+    when 1 then @mondays.push(date)
+    when 2 then @tuesdays.push(date)
+    when 3 then @wednesdays.push(date)
+    when 4 then @thursdays.push(date)
+    when 5 then @fridays.push(date)
+    when 6 then @saturdays.push(date)
     else @sundays.push(date)
     end
   end

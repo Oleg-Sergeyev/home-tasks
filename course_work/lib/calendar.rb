@@ -2,6 +2,8 @@
 
 require_relative 'weekdays'
 require_relative 'constants'
+require_relative 'localisation'
+require 'colorize'
 require 'date'
 
 # Class Calendar
@@ -9,10 +11,11 @@ class Calendar
   attr_reader :weeks
 
   def initialize(year, month)
+    @day_now = Date.today.day
     @arr_dates = dates_in_month(year, month)
     if @arr_dates
       @weeks = WeekDays.new(@arr_dates).weeks
-      print_calendar
+      print_calendar(year, month)
     else
       puts ERR_DATE
     end
@@ -52,12 +55,36 @@ class Calendar
     end
   end
 
-  def print_calendar
+  def print_calendar(year, month)
+    puts ru_lang_month(year, month).center(17, ' ').colorize(color: :white)
     @weeks.each_with_index do |(name, dates), index|
-      print "\n#{name}: "
-      dates.each_with_index do |date, _ind|
-        print format("%#{fst_indent(date, index) + digit_indent(date, index)}d ", date.strftime('%d').to_i)
+      if [5, 6].include?(index)
+        print "\n#{name}: ".colorize(color: :red, background: :white)
+      else
+        print "\n#{name}: ".colorize(color: :black, background: :white)
       end
+      dates.each_with_index do |date, _ind|
+        print_row(date, index)
+      end
+    end
+  end
+
+  def ru_lang_month(year, month)
+    MONTHS.each do |key, value|
+      return "#{value} #{year}" if key == Date.new(year, month, 1).strftime('%B')
+    end
+  end
+
+  def print_row(date, index)
+    day = date.strftime('%d').to_i
+    if Date.today == date
+      print format("%#{fst_indent(date, index) + digit_indent(date, index)}d ", day).colorize(
+        color: :white, background: :black
+      )
+    else
+      print format("%#{fst_indent(date, index) + digit_indent(date, index)}d ", day).colorize(
+        color: :black, background: :white
+      )
     end
   end
 end
