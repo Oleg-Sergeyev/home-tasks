@@ -73,11 +73,8 @@ class Calendar
 
   def print_calendar
     @full_arr.each_with_index do |dates, index|
-      if WEEKEND_DAY_NUMBERS.include?(index + 1)
-        print "\n#{DAYS_WEEK.key(index + 1)}: ".colorize(color: :yellow)
-      else
-        print "\n#{DAYS_WEEK.key(index + 1)}: ".colorize(color: :white)
-      end
+      color = Hash[color: WEEKEND_DAY_NUMBERS.include?(index + 1) ? :yellow : :white]
+      print "\n#{DAYS_WEEK.key(index + 1)}: ".colorize(color)
       dates.each do |day|
         print_row(day, index)
       end
