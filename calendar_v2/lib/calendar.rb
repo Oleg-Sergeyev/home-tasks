@@ -99,11 +99,11 @@ class Calendar
       )
     end
   end
-  
+
   def current_date(day)
     Date.new(year, month, day)
   end
-  
+
   def colors(index)
     if WEEKEND_DAY_NUMBERS.include?(index + 1)
       Hash[color: :yellow]
