@@ -7,7 +7,7 @@ require 'date'
 
 # Class Calendar
 class Calendar
-  attr_reader :year, :month
+  attr_accessor :year, :month
 
   def initialize(year, month)
     @year = year
@@ -105,10 +105,6 @@ class Calendar
   end
 
   def colors(index)
-    if WEEKEND_DAY_NUMBERS.include?(index + 1)
-      Hash[color: :yellow]
-    else
-      Hash[color: :withe]
-    end
+    Hash[color: WEEKEND_DAY_NUMBERS.include?(index + 1) ? :yellow : :withe]
   end
 end
