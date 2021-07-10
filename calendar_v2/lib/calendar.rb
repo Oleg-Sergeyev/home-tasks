@@ -7,13 +7,14 @@ require 'date'
 
 # Class Calendar
 class Calendar
-  attr_accessor :year, :month
+  attr_accessor :year, :month, :full_arr, :arr_days
 
   def initialize(year, month)
     @year = year
     @month = month
+    @arr_days = []
     @full_arr = []
-    7.times { @full_arr.push([]) }
+    7.times { full_arr.push([]) }
     check_and_start(year, month)
   end
 
@@ -32,8 +33,8 @@ class Calendar
   end
 
   def day_week(index)
-    @arr_days.each do |day|
-      @full_arr[index].push(day)
+    arr_days.each do |day|
+      full_arr[index].push(day)
       index += 1
       index = 0 if index > 6
     end
@@ -72,7 +73,7 @@ class Calendar
   end
 
   def print_calendar
-    @full_arr.each_with_index do |dates, index|
+    full_arr.each_with_index do |dates, index|
       color = Hash[color: WEEKEND_DAY_NUMBERS.include?(index + 1) ? :yellow : :white]
       print "\n#{DAYS_WEEK.key(index + 1)}: ".colorize(color)
       dates.each do |day|
