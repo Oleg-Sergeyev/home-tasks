@@ -18,7 +18,7 @@ class Calendar
   def check_and_start(year, month)
     if days_in_month(year, month)
       check_fst_day(Date.new(year, month, 1))
-      puts ru_lang_month(year, month).center(17, ' ').colorize(color: :white)
+      puts ru_lang_month(year, month).center(20, ' ').colorize(color: :white)
       print_calendar
     else
       puts ERR_DATE
