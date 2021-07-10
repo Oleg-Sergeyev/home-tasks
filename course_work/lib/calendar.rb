@@ -15,7 +15,8 @@ class Calendar
     @arr_dates = dates_in_month(year, month)
     if @arr_dates
       @weeks = WeekDays.new(@arr_dates).weeks
-      print_calendar(year, month)
+      puts ru_lang_month(year, month).center(17, ' ').colorize(color: :white)
+      print_calendar
     else
       puts ERR_DATE
     end
@@ -55,13 +56,12 @@ class Calendar
     end
   end
 
-  def print_calendar(year, month)
-    puts ru_lang_month(year, month).center(17, ' ').colorize(color: :white)
+  def print_calendar
     @weeks.each_with_index do |(name, dates), index|
-      if [5, 6].include?(index)
-        print "\n#{name}: ".colorize(color: :red, background: :white)
+      if WEEKEND_DAY_NUMBERS.include?(index + 1)
+        print "\n#{name}: ".colorize(color: :yellow)
       else
-        print "\n#{name}: ".colorize(color: :black, background: :white)
+        print "\n#{name}: ".colorize(color: :white)
       end
       dates.each_with_index do |date, _ind|
         print_row(date, index)
@@ -79,12 +79,20 @@ class Calendar
     day = date.strftime('%d').to_i
     if Date.today == date
       print format("%#{fst_indent(date, index) + digit_indent(date, index)}d ", day).colorize(
-        color: :white, background: :black
+        color: :white, background: :red
       )
     else
       print format("%#{fst_indent(date, index) + digit_indent(date, index)}d ", day).colorize(
-        color: :black, background: :white
+        colors(index)
       )
+    end
+  end
+
+  def colors(index)
+    if WEEKEND_DAY_NUMBERS.include?(index + 1)
+      Hash[color: :yellow]
+    else
+      Hash[color: :withe]
     end
   end
 end

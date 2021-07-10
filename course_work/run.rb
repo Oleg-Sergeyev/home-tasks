@@ -12,23 +12,34 @@ end
 
 def chk_input
   arr = input_data
-  if arr == ''
-    view_cal(Date.today.year, Date.today.month)
-    return true
-  end
-  input_ if arr.size < 2
-  arr.split(' ').each do |str|
-    break unless !Qualifier.number?(str) || Qualifier.float?(str)
+  return if empty_input(arr)
 
-    chk_input
-  end
-  view_cal(arr.split(' ').first.to_i, arr.split(' ').last.to_i)
+  view_cal(arr.split(' ').first.to_i, arr.split(' ').last.to_i) if chk(arr) == :run
 end
 
 def view_cal(year, month)
   puts `clear`
   Calendar.new(year, month)
   puts "\n"
+end
+
+def empty_input(arr)
+  if arr == ''
+    view_cal(Date.today.year, Date.today.month)
+  else
+    false
+  end
+end
+
+def chk(arr)
+  return :err if arr.size < 2
+
+  arr.split(' ').each do |str|
+    break unless !Qualifier.number?(str) || Qualifier.float?(str)
+
+    chk_input
+  end
+  :run
 end
 
 chk_input
