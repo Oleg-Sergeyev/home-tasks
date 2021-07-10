@@ -7,9 +7,11 @@ require 'date'
 
 # Class Calendar
 class Calendar
-  attr_reader :weeks
+  attr_reader :year, :month
 
   def initialize(year, month)
+    @year = year
+    @month = month
     @full_arr = []
     7.times { @full_arr.push([]) }
     check_and_start(year, month)
@@ -87,7 +89,7 @@ class Calendar
   end
 
   def print_row(day, index)
-    if Date.today.strftime('%d').to_i == day
+    if Date.today == current_date(day)
       print format("%#{fst_indent(day, index) + digit_indent(day, index)}d ", day).colorize(
         color: :white, background: :red
       )
@@ -97,7 +99,11 @@ class Calendar
       )
     end
   end
-
+  
+  def current_date(day)
+    Date.new(year, month, day)
+  end
+  
   def colors(index)
     if WEEKEND_DAY_NUMBERS.include?(index + 1)
       Hash[color: :yellow]
