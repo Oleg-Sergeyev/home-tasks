@@ -97,5 +97,19 @@ require 'date'
 #   end
 # end
 
-new_arr = [1, 2, 3, 4, 5, 6, 7, 8, 9].my_select(&:even?)
+# new_arr = [1, 2, 3, 4, 5, 6, 7, 8, 9].my_select(&:even?)
+# p new_arr
+
+# Task 6
+class Array
+  def my_reduce(fst_param, &block)
+    sum = fst_param
+    each do |element|
+      sum += block.call(sum, element)
+    end
+    sum
+  end
+end
+
+new_arr = [1, 3, 5].my_reduce(0) { |sum, n| sum + (3 * n) }
 p new_arr
