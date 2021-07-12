@@ -61,3 +61,41 @@ require 'date'
 # end
 
 # fibonacci(10) { |f| print "#{f} " }
+
+# (*) Создайте полный аналог стандартного итератора map. Назовите его my_map.
+# (*) Создайте полный аналог стандартного итератора метода select. Назовите его my_select.
+# (*) Создайте полный аналог стандартного итератора метода reduce. Назовите его my_reduce.
+
+# Task 5
+# class Array
+#   def my_map(&block)
+#     new_array = []
+#     each do |element|
+#       new_array.push(block.call(element))
+#     end
+#     new_array
+#   end
+# end
+
+# new_arr = [1, 2, 3, 4, 5].my_map do |x|
+#   x * x
+# end
+# p new_arr
+
+# new_arr2 = [1, 2, 3].my_map(&:to_f)
+# p new_arr2
+
+# Task 6
+# class Array
+#   def my_select(&block)
+#     new_array = []
+#     each do |element|
+#       res = block.call(element)
+#       new_array.push(element) if res == true
+#     end
+#     new_array
+#   end
+# end
+
+new_arr = [1, 2, 3, 4, 5, 6, 7, 8, 9].my_select(&:even?)
+p new_arr
