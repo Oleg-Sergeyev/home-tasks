@@ -41,7 +41,6 @@ require 'date'
 # walk(arr) { |i| puts i }
 
 # Task 4
-
 # def add_function(num)
 #   return @y if num == @num_to_f
 
@@ -59,12 +58,7 @@ require 'date'
 #   add_function(1)
 #   return if block_given? && !@arr.each(&block)
 # end
-
 # fibonacci(10) { |f| print "#{f} " }
-
-# (*) Создайте полный аналог стандартного итератора map. Назовите его my_map.
-# (*) Создайте полный аналог стандартного итератора метода select. Назовите его my_select.
-# (*) Создайте полный аналог стандартного итератора метода reduce. Назовите его my_reduce.
 
 # Task 5
 # class Array
@@ -102,10 +96,10 @@ require 'date'
 
 # Task 6
 class Array
-  def my_reduce(fst_param, &block)
+  def my_reduce(fst_param = 0, &block)
     sum = fst_param
     each do |element|
-      sum += block.call(sum, element)
+      sum = block.call(sum, element)
     end
     sum
   end
