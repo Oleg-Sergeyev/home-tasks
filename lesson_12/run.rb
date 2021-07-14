@@ -6,12 +6,11 @@ puts `clear`
 # Task 1
 puts "\nTask 1"
 def week_dates(week_num, &block)
-  return unless if block_given?
+  return unless block_given?
 
-                  (Date.commercial(Time.now.year, week_num,
-                                   1)..Date.commercial(Time.now.year, week_num, 7)).to_a.each(&block)
-                  # arr.each(&block)
-                end
+  start = Date.commercial(Time.now.year, week_num, 1)
+  finish = Date.commercial(Time.now.year, week_num, 7)
+  (start..finish).to_a.each(&block)
 end
 
 week_dates(10) { |date| puts date }
@@ -19,12 +18,11 @@ week_dates(10) { |date| puts date }
 # Task 2
 puts "\nTask 2"
 def weekends(year)
-  return unless if block_given?
+  return unless block_given?
 
-                  (Date.new(year, 1, 1)..Date.new(year, 12, 31)).to_a.each do |date|
-                    yield date if [6, 7].include?(date.cwday)
-                  end
-                end
+  (Date.new(year, 1, 1)..Date.new(year, 12, 31)).to_a.each do |date|
+    yield date if [6, 7].include?(date.cwday)
+  end
 end
 
 weekends(2021) { |date| puts date }
@@ -32,12 +30,12 @@ weekends(2021) { |date| puts date }
 # Task 3
 puts "\nTask 3"
 def walk(array, &block)
-  return unless if block_given?
-                  array.each do |arr|
-                    walk(arr) if arr.instance_of?(Array)
-                    arr.each(&block)
-                  end
-                end
+  return unless block_given?
+
+  array.each do |arr|
+    walk(arr) if arr.instance_of?(Array)
+    arr.each(&block)
+  end
 end
 
 arr = [[[1, 2], 3], [4, 5, 6], [7, [8, 9], [10, [11, 12]]]]
@@ -77,9 +75,7 @@ class Array
   end
 end
 
-new_arr = [1, 2, 3, 4, 5].my_map do |x|
-  x * x
-end
+new_arr = [1, 2, 3, 4, 5].my_map { |x| x * x }
 p new_arr
 
 new_arr2 = [1, 2, 3].my_map(&:to_f)
@@ -93,7 +89,7 @@ class Array
     new_array = []
     each do |element|
       res = block.call(element)
-      new_array.push(element) if res == true
+      new_array.push(element) if res
     end
     new_array
   end
@@ -107,13 +103,9 @@ puts "\nTask 7"
 # class Array
 class Array
   def my_reduce(fst_param = nil, &block)
-    sum = if fst_param.nil?
-            nil
-          else
-            fst_param
-          end
+    sum = fst_param || first
     each do |element|
-      sum = element if sum.nil?
+      sum ||= element
       sum = block.call(sum, element)
     end
     sum
