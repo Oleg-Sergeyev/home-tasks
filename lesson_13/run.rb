@@ -118,23 +118,93 @@ puts `clear`
 # game = Chess.new(:white, :classic)
 # game.move(Chess::Pown, [1, 0], [1, 2])
 # Task 3
-class Week
+# class Week
+#   attr_reader :nmdays
 
-  DAYS = ['Понедельник', 'Вторник']
+#   DAYS = %w[Понедельник Вторник Среда Четверг Пятница Суббота Воскресенье].freeze
+#   def initialize
+#     @nmdays = DAYS
+#   end
 
-  def days
-    DAYS
-  end
+#   def days(&block)
+#     return unless block_given?
 
-  def name(&block)
-    new_array = []
-    each do |element|
-      new_array.push(block.call(element))
-    end
-    new_array
-  end
-end
+#     nmdays.each(&block)
+#   end
 
-#arr = ['Понедельник', 'Вторник'].name { |x| puts x }
+#   def days_map(&block)
+#     new_array = []
+#     nmdays.each do |element|
+#       new_array.push(block.call(element))
+#     end
+#     new_array
+#   end
 
-Week.new.days.name { |x| puts x }
+#   def days_select(&block)
+#     new_array = []
+#     nmdays.each do |element|
+#       res = block.call(element)
+#       new_array.push(element) if res
+#     end
+#     new_array
+#   end
+# end
+
+# week = Week.new
+# week.days(&:puts) #{ |x| p x }
+
+# new_arr = week.days_map { |x| "[#{x}]" }
+# p new_arr
+
+# p week.days_select { |v| v.downcase.include?('ник') }
+
+# Task 4
+# class Factory
+# class Factory
+#   attr_accessor :arr
+
+#   def initialize
+#     @arr = []
+#   end
+
+#   def build(toy)
+#     case toy
+#     when :teddy_bear then arr.push(teddy_bear: TeddyBear.new)
+#     when :ball then arr.push(ball: Ball.new)
+#     when :cube then arr.push(cube: Cube.new)
+#     end
+#   end
+
+#   def total
+#     arr.count
+#   end
+
+#   def offers
+#     toys = Hash.new(0)
+#     arr.each do |hash|
+#       hash.each do |name, _object|
+#         toys[name] += 1
+#       end
+#     end
+#     toys
+#   end
+
+#   class TeddyBear
+#   end
+
+#   class Ball
+#   end
+
+#   class Cube
+#   end
+# end
+
+# factory = Factory.new
+# 4.times { factory.build(:teddy_bear) }
+# 5.times { factory.build(:ball) }
+# 3.times { factory.build(:cube) }
+
+# puts "\nВсего произведено #{factory.total} игрушек"
+# puts "\nИз них #{factory.offers}"
+
+# Task 5
