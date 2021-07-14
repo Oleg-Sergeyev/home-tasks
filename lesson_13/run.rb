@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'date'
+require 'time'
 
 puts `clear`
 # Task 1
@@ -208,4 +208,36 @@ puts `clear`
 # print "\nИз них: "
 # factory.offers.each { |key, value| print "\n#{key} = #{value}" }
 # puts "\n"
+
 # Task 5
+# class Time
+# class Time
+#   MORNING = (Time.parse('06:00:00')..Time.parse('11:59:59')).freeze
+#   DAY = (Time.parse('12:00:00')..Time.parse('17:59:59')).freeze
+#   EVENING = (Time.parse('18:00:00')..Time.parse('23:59:59')).freeze
+#   NIGHT = (Time.parse('00:00:00')..Time.parse('05:59:59')).freeze
+
+#   def hello
+#     return "\nДоброе утро!" if MORNING.cover?(Time.now)
+#     return "\nДобрый день!" if DAY.cover?(Time.now)
+#     return "\nДобрый вечер!" if EVENING.cover?(Time.now)
+#     return "\nДобрый ночи!" if NIGHT.cover?(Time.now)
+#   end
+# end
+
+# time = Time.new
+# puts time.hello
+
+# Добавьте в стандартный класс Integer методы minutes, hours, days, которые возвращают количество секунд, соответствующих заданным значениям. 
+# Например, вызов 5.minutes должен вернуть 300, 2.hours — 7200, а 1.days — 86400.
+
+# Task 6
+
+class Integer
+  def minutes
+  end
+  def hours
+  end
+  def days
+  end
+end
