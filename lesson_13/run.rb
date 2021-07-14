@@ -228,25 +228,65 @@ puts `clear`
 # time = Time.new
 # puts time.hello
 
-# Добавьте в стандартный класс Integer методы minutes, hours, days, которые возвращают количество секунд, соответствующих заданным значениям. 
-# Например, вызов 5.minutes должен вернуть 300, 2.hours — 7200, а 1.days — 86400.
-
 # Task 6
 # class Integer
-class Integer
-  def minutes
-    self * 60
+# class Integer
+#   def minutes
+#     self * 60
+#   end
+
+#   def hours
+#     self * 3_600
+#   end
+
+#   def days
+#     self * 86_400
+#   end
+# end
+
+# puts "#{5.minutes} сек."
+# puts "#{5.hours} сек."
+# puts "#{5.days} сек."
+
+# Task 7
+# class Substace
+class Substance
+  STATES = { solid: %i[deposit freeze], gaz: %i[boil sublime], liquid: %i[condense melt] }.freeze
+  RU = { 'твердое' => :solid, 'газообразное' => :gaz, 'жидкое' => :liquid }.freeze
+  def freeze
+    status(:freeze)
   end
 
-  def hours
-    self * 3_600
+  def boil
+    status(:boil)
   end
 
-  def days
-    self * 86_400
+  def condense
+    status(:condense)
+  end
+
+  def sublime
+    status(:sublime)
+  end
+
+  def deposit
+    status(:deposit)
+  end
+
+  def melt
+    status(:melt)
+  end
+
+  def status(act)
+    STATES.each do |key, arr|
+      arr.each do |value|
+        return RU.key(key) if value == act
+      end
+    end
   end
 end
 
-puts "#{5.minutes} сек."
-puts "#{5.hours} сек."
-puts "#{5.days} сек."
+water = Substance.new
+puts "Текущее состояние вещества '#{water.freeze}'"
+ice = Substance.new
+puts "Текущее состояние вещества '#{ice.melt}'"
