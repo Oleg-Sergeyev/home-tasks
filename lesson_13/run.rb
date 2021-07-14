@@ -232,12 +232,21 @@ puts `clear`
 # Например, вызов 5.minutes должен вернуть 300, 2.hours — 7200, а 1.days — 86400.
 
 # Task 6
-
+# class Integer
 class Integer
   def minutes
+    self * 60
   end
+
   def hours
+    self * 3_600
   end
+
   def days
+    self * 86_400
   end
 end
+
+puts "#{5.minutes} сек."
+puts "#{5.hours} сек."
+puts "#{5.days} сек."
