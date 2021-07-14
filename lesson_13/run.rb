@@ -205,6 +205,7 @@ puts `clear`
 # 3.times { factory.build(:cube) }
 
 # puts "\nВсего произведено #{factory.total} игрушек"
-# puts "\nИз них #{factory.offers}"
-
+# print "\nИз них: "
+# factory.offers.each { |key, value| print "\n#{key} = #{value}" }
+# puts "\n"
 # Task 5
