@@ -18,8 +18,8 @@ class Building
   end
 
   def build_floor(floor)
-    elevator = entrance * ELEVATORS_ENTRANCE
-    flat = floor * entrance * FLATS_FLOOR
+    @elevator = entrance * ELEVATORS_ENTRANCE
+    @flat = floor * entrance * FLATS_FLOOR
   end
 
   def everage_cost
