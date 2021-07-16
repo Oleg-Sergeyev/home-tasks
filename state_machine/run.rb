@@ -39,7 +39,11 @@ end
 ACTS_RAND = { freeze_: 1, boil: 2, condense: 3, sublime: 4, deposit: 5 }.freeze
 puts `clear`
 substance = Substance.new
-puts "Начальное состояние вещества '#{I18n.t(substance.state)}'"
 action = ACTS_RAND.key(rand(1..5))
-substance.method(action).call
-puts "Cостояние вещества после действия '#{I18n.t(action)}' => '#{I18n.t(substance.state)}'"
+puts I18n.t('action', action: I18n.t(action))
+puts I18n.t('begin', state: I18n.t(substance.state))
+if substance.method(action).call == false
+  puts I18n.t('error', state: I18n.t(substance.state))
+else
+  puts I18n.t('end', state: I18n.t(substance.state))
+end
