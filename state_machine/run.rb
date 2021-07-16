@@ -47,3 +47,5 @@ if substance.method(action).call == false
 else
   puts I18n.t('end', state: I18n.t(substance.state))
 end
+
+# p substance.methods
