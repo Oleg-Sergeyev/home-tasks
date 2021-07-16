@@ -1,0 +1,15 @@
+# ru:
+#   date:
+#     formats:
+#       short: "%Y-%m-%d %H:%M:%S"
+ru:
+  begin: "Начальное состояние вещества %{state}"
+  condense: "конденсация"
+  melt: "плавление"
+  freeze_: "кристаллизация"
+  boil: "испарение"
+  sublime: "сублимация"
+  deposit: "десублимация"
+  liquid: "жидкое"
+  solid: "твердое"
+  gas: "газообразное"

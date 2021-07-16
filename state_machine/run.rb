@@ -11,11 +11,10 @@ Russian.init_i18n
 
 # class Substance
 class Substance
-  attr_reader :status
+  attr_accessor :state
 
   STATES_RAND = { solid: 1, gas: 2, liquid: 3 }.freeze
   state_machine :state, initial: -> { STATES_RAND.key(rand(1..3)) } do
-    after_transition on: :liquid, do: :tow
     event :melt do
       transition from: :solid, to: :liquid
     end
@@ -40,8 +39,7 @@ end
 ACTS_RAND = { freeze_: 1, boil: 2, condense: 3, sublime: 4, deposit: 5 }.freeze
 puts `clear`
 substance = Substance.new
-puts "Начальное состояние вещества #{substance.state}"
-action = ACTS_RAND.key(rand(1..5)).to_s
-substance.method(action)
-puts "Cостояние вещества после действия #{Russian.t(action)} => #{substance.state}"
-# puts substance.methods
+puts "Начальное состояние вещества '#{I18n.t(substance.state)}'"
+action = ACTS_RAND.key(rand(1..5))
+substance.method(action).call
+puts "Cостояние вещества после действия '#{I18n.t(action)}' => '#{I18n.t(substance.state)}'"
