@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+# # frozen_string_literal: true
 
 require 'time'
 
@@ -311,29 +311,3 @@ water = Substance.new
 puts water.freeze
 ice = Substance.new
 puts ice.melt
-
-# Task 8
-# class Substance
-#   state_machine :state, :initial => :sub_state do
-#     before_transition :on => :some_event1, :do => :method1
-#     after_transition :on => :some_event2, :do => :method2
-#   end
-#   event :some_event1 do
-#     transition [] => :sub_state1
-#   end
-#   event :some_event2 do
-#     transition [:yyy, :xxx] => :sub_state2
-#   end
-
-#   state :sub_state do
-#     def some
-#       0
-#     end
-#   end
-
-#   state :xxx, :yyy do
-#     def some
-#       0
-#     end
-#   end
-# end
