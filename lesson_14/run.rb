@@ -1,5 +1,12 @@
 # frozen_string_literal: true
 
+require 'faker'
+
+I18n.load_path << Dir["#{File.expand_path('config/locales')}/*.yml"]
+I18n.default_locale = :ru
+Faker::Config.locale = :ru
+#Russian.init_i18n
+
 puts `clear`
 # Task 1
 puts 'Task 1'
@@ -41,7 +48,7 @@ class User
   end
 end
 
-user1 = User.new('Some Any SomeAnySome')
+user1 = User.new(Faker::Name.name_with_middle)
 user1.each { |data| puts data }
 
 # Task 3
@@ -63,8 +70,9 @@ class Group
     group.each(&block)
   end
 end
-first = ['Петров Иван Иванович', 'Сидорова Татьяна Михайловна', 'Федякова Ирина Сергеевна', 'Шпак Иван Васильевич']
-first_group = Group.new(first)
+first_gr = [] # ['Петров Иван Иванович', 'Сидорова Татьяна Михайловна', 'Федякова Ирина Сергеевна', 'Шпак Иван Васильевич']
+6.times { first.push(Faker::Name.name_with_middle) }
+first_group = Group.new(first_gr)
 puts 'Group №1'
 first_group.each { |user| puts "#{user.full_name} [class#{user.class}]" }
 
