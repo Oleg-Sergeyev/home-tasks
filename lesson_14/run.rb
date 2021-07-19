@@ -19,11 +19,11 @@ class Hello
   end
 
   def say
-    "Hello, #{name}!"
+    "Hello, #{name}!" # self.class.say(name)
   end
 
   def self.say(name = 'Ruby')
-    "Hello, #{name}!"
+    new(name).say # "Hello, #{name}!"
   end
 end
 
@@ -71,7 +71,7 @@ class Group
   end
 end
 first_gr = [] # ['Петров Иван Иванович', 'Сидорова Татьяна Михайловна', 'Федякова Ирина Сергеевна', 'Шпак Иван Васильевич']
-6.times { first.push(Faker::Name.name_with_middle) }
+6.times { first_gr.push(Faker::Name.name_with_middle) }
 first_group = Group.new(first_gr)
 puts 'Group №1'
 first_group.each { |user| puts "#{user.full_name} [class#{user.class}]" }
