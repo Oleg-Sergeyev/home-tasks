@@ -27,7 +27,7 @@ puts ARR3
 puts "\nTask4"
 STR4 = "Возьмите текст этого задания и извлеките из него все слова, которые начинаются с символа 'и'.
 Сформируйте из них список уникальных слов и выведите их в порядке увеличения количества символов в слове."
-puts STR4.split(/[\s,.']/).select { |word| word.start_with?('и') }.uniq.sort { |a, b| b.size <=> a.size }
+puts STR4.split(/[\s,.']/).select { |word| word.start_with?('и') }.uniq.sort_by(&:size).reverse
 
 # Task 5
 puts "\nTask 5"
