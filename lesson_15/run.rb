@@ -8,7 +8,12 @@ puts %i[first second third].product.each_with_index { |element, index| element.p
 
 # Task 2
 puts "\nTask2"
-puts %w[first second third].map(&:to_sym).zip(['Fst (1)', 'Snd (2)', 'Trd (3)']).to_h
+KEYS = %w[first second third].freeze
+VALUES = KEYS.each_with_index.map do |word, index|
+  "#{word.to_s.split(//).first(1).join.upcase}#{word.split(//).last(2).join} (#{index + 1})"
+end
+puts KEYS.map(&:to_sym).zip(VALUES).to_h
+# puts %w[first second third].map(&:to_sym).zip(['Fst (1)', 'Snd (2)', 'Trd (3)']).to_h
 
 # Task 3
 puts "\nTask3"
@@ -22,7 +27,7 @@ puts ARR3
 puts "\nTask4"
 STR4 = "Возьмите текст этого задания и извлеките из него все слова, которые начинаются с символа 'и'.
 Сформируйте из них список уникальных слов и выведите их в порядке увеличения количества символов в слове."
-puts STR4.split(/[\s,\s.']/).select { |word| word.start_with?('и') }.uniq.sort {|a, b| b.size<=>a.size }
+puts STR4.split(/[\s,\s.']/).select { |word| word.start_with?('и') }.uniq.sort { |a, b| b.size <=> a.size }
 
 # Task 5
 puts "\nTask 5"
