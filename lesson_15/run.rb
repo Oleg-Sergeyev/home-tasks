@@ -19,7 +19,7 @@ puts KEYS.map(&:to_sym).zip(VALUES).to_h
 puts "\nTask3"
 STR3 = "Возьмите текст этого задания и извлеките из него все слова,
 количество символов в которых больше 5. Подсчитайте количество слов и выведите их алфавитном порядке."
-ARR3 = STR3.split(/[\s,\s.']/).select { |word| word.size > 5 }.map(&:downcase).sort
+ARR3 = STR3.split(/[\s,.']/).select { |word| word.size > 5 }.map(&:downcase).sort
 puts "Количество слов '#{ARR3.size}'"
 puts ARR3
 
@@ -27,7 +27,7 @@ puts ARR3
 puts "\nTask4"
 STR4 = "Возьмите текст этого задания и извлеките из него все слова, которые начинаются с символа 'и'.
 Сформируйте из них список уникальных слов и выведите их в порядке увеличения количества символов в слове."
-puts STR4.split(/[\s,\s.']/).select { |word| word.start_with?('и') }.uniq.sort { |a, b| b.size <=> a.size }
+puts STR4.split(/[\s,.']/).select { |word| word.start_with?('и') }.uniq.sort { |a, b| b.size <=> a.size }
 
 # Task 5
 puts "\nTask 5"
