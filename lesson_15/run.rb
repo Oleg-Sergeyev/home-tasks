@@ -10,7 +10,7 @@ puts %i[first second third].product.each_with_index { |element, index| element.p
 puts "\nTask2"
 KEYS = %w[first second third].freeze
 VALUES = KEYS.each_with_index.map do |word, index|
-  "#{word.to_s.split(//).first(1).join.upcase}#{word.split(//).last(2).join} (#{index + 1})"
+  "#{word.split(/^(.).*(..)$/).join.capitalize} (#{index + 1})"
 end
 puts KEYS.map(&:to_sym).zip(VALUES).to_h
 # puts %w[first second third].map(&:to_sym).zip(['Fst (1)', 'Snd (2)', 'Trd (3)']).to_h
