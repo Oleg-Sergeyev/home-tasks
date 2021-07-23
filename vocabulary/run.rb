@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
-require_relative 'lib/inputword'
+require_relative 'lib/inputchar'
+require_relative 'lib/loadwords'
+require_relative 'lib/viewwords'
 
 str = 'Welcome to new vocabluary!'
 loop do
-  str = InputWord.new(str).getstr
+  str = InputChar.new(str).getstr
 end

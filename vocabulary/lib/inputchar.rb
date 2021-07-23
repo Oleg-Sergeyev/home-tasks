@@ -3,9 +3,9 @@
 require 'io/console'
 require 'io/wait'
 
-# class InputWords
-class InputWord
-  INFO = "\nYou can press backspase to remove words/chars. And input ':' to exit"
+# class InputChar
+class InputChar
+  INFO = "\nYou can press 'backspase' to delete words/chars. And input ':' to exit"
   INTERED_DATA = "\n\nPlease, input word :"
   attr_accessor :getstr
 
@@ -17,6 +17,7 @@ class InputWord
   end
 
   def input_str(str)
+    print "\n\nTranslate: '#{viewwords(str).res_str}'"
     print "#{INTERED_DATA} #{str}"
     key = $stdin.getch.chomp
     return str if key == "\e"
@@ -31,5 +32,9 @@ class InputWord
 
   def clear_stdin
     $stdin.getc while $stdin.ready?
+  end
+
+  def viewwords(str)
+    ViewWords.new(str)
   end
 end
