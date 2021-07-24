@@ -49,6 +49,6 @@ class InputChar
 
     fst_col = arr.map { |_, v| v }.map(&:length).max
     snd_col = arr.map { |k, _| k }.map(&:length).max
-    Table.new([fst_col + 5, snd_col + 5, 'Ru', 'Eng', arr])
+    Table.new([fst_col + 10, snd_col + 10, 'Ru', 'Eng', arr])
   end
 end

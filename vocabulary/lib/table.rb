@@ -14,37 +14,45 @@ class Table
   def print_header
     print "\n"
     total_width.times { print '-' }
-    print "\n|#{fst_col_name}#{center_header}#{snd_col_name}#{right_line_header}"
+    print "\n|#{fst_col_name}"
+    print center_header
+    print snd_col_name
+    print right_line_header
     print "\n"
     total_width.times { print '-' }
-    print "\n"
   end
 
   def fst_col_name
-    format("%#{fst_col / 2}s", fst_name)
+    format("%#{(total_width / 2) / 2}s", fst_name)
   end
 
   def snd_col_name
-    format("%#{snd_col / 2}s", snd_name)
+    format("%#{(total_width / 2) / 2}s", snd_name)
   end
 
   def center_header
-    format("%#{(total_width / 2) - (fst_col / 2)}s", '|')
+    format("%#{(total_width / 2) - ((total_width / 2) / 2) + fst_name.length - 2}s", '|')
   end
 
   def right_line_header
-    format("%#{total_width - (fst_col + (snd_col / 2)) - 1}s", '|')
+    format("%#{total_width - (((total_width / 2) / 2) + (total_width / 2) - snd_name.length) - 4}s", '|')
   end
 
   def print_table
-    data.each { |key, val| puts "| #{left_side(val, key, fst_col)}#{right_side(key, snd_col)}" }
+    data.each do |key, val|
+      print "\n| #{val}"
+      print center_line(val)
+      print " #{key}#{right_side(key)}"
+      print "\n"
+      total_width.times { print '.' }
+    end
   end
 
-  def left_side(val, key, max_size_v)
-    "#{val} #{format("% #{max_size_v}s", "| #{key}")}"
+  def right_side(key)
+    format("%#{total_width - (total_width / 2 + key.length) - 2}s", '|')
   end
 
-  def right_side(key, max_size_k)
-    format("% #{max_size_k - 2 - key.length}s", '|')
+  def center_line(val)
+    format("%#{((total_width / 2) - 1) - val.length}s", '|')
   end
 end
