@@ -16,6 +16,6 @@ class LoadWords
                  'itercept' => 'перехватить',
                  'obsolete' => 'устаревший',
                  'reliable' => 'надежный',
-                 'solve' => 'решать(проблему)',
+                 'solve' => 'решать (проблему)',
                  'enhance' => 'улучшать' }.freeze
 end

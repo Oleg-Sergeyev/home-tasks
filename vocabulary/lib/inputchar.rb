@@ -5,15 +5,11 @@ require 'io/wait'
 
 # class InputChar
 class InputChar
-  INFO = "\nYou can press 'backspase' to delete words/chars. And input ':' to exit"
-  INTERED_DATA = "\n\nPlease, input word :"
-  TRANSLATION = "\n\nTanslation "
-  IGNORE_KEY = ["\e", "\t"].freeze
-  NOT_IGNORE_KEY = ["\c?", ':'].freeze
   attr_accessor :getstr
 
   def initialize(str_res)
     puts `clear`
+    print WELCOME
     print INFO
     clear_stdin
     @getstr = input_str(str_res).downcase
@@ -23,7 +19,7 @@ class InputChar
     viewwords(str)
     print "#{INTERED_DATA} #{str}"
     key = $stdin.getch.chomp
-    abort "\nInputed symbol ':' to exit." if key == ':'
+    abort BYE if key == ':'
     return str if check_input_key(key, str)
 
     if key == "\c?"
@@ -49,6 +45,7 @@ class InputChar
 
     fst_col = arr.map { |_, v| v }.map(&:length).max
     snd_col = arr.map { |k, _| k }.map(&:length).max
-    Table.new([fst_col + 10, snd_col + 10, 'Ru', 'Eng', arr])
+    width = fst_col + snd_col + 20
+    Table.new([width, 'Ru', 'Eng', arr])
   end
 end
