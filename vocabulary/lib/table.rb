@@ -27,7 +27,7 @@ class Table
   end
 
   def snd_col_name
-    format("%#{(total_width / 2) / 2}s", snd_name)
+    format("%#{((total_width / 2) / 2) + 1}s", snd_name)
   end
 
   def center_header
@@ -35,7 +35,7 @@ class Table
   end
 
   def right_line_header
-    format("%#{total_width - (((total_width / 2) / 2) + (total_width / 2) - snd_name.length) - 4}s", '|')
+    format("%#{total_width - (((total_width / 2) / 2) + (total_width / 2) - snd_name.length) - 5}s", '|')
   end
 
   def print_table
