@@ -3,33 +3,32 @@
 require 'io/console'
 require 'io/wait'
 
-# class InputChar
-class InputChar
-  attr_accessor :getstr
-
-  def initialize(str_res)
-    print_header
-    clear_stdin
-    @getstr = get_str(str_res).downcase
+# class Vocabulary
+class Vocabulary
+  def initialize
+    @str = ''
+    start_input(@str)
   end
 
-  def print_header
+  def start_input(str_res)
     puts `clear`
     print WELCOME
     print INFO
+    clear_stdin
+    get_str(str_res).downcase
   end
 
   def get_str(str)
     viewwords(str)
     print "#{INTERED_DATA} #{str}"
     key = input_char
-    return str if check_input_key(key, str)
+    start_input(str) if check_input_key(key, str)
 
     if key == "\c?"
       str = str[0...-1]
-      return str
+      start_input(str)
     end
-    "#{str}#{key}"
+    start_input("#{str}#{key}")
   end
 
   def check_input_key(key, str)
