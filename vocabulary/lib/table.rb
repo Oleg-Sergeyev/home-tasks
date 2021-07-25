@@ -2,7 +2,7 @@
 
 # class Table
 class Table
-  attr_accessor :width, :middle_table, :middle_column, :total_width, :fst_name, :snd_name, :data
+  attr_reader :width, :middle_table, :middle_column, :fst_name, :snd_name, :data
 
   def initialize(arg)
     @width, @fst_name, @snd_name, @data = *arg

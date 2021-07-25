@@ -19,8 +19,8 @@ class ViewWords
 
   def search_accurate(str, trans)
     case trans
-    when :eng then LoadWords::ENGRU.select { |k, v| [k, v] if k == str }
-    when :ru then LoadWords::ENGRU.select { |k, v| [k, v] if v == str }
+    when :eng then LoadWords::ENGRU.select { |k, v| [k, v] if check_word(k, str) == true }
+    when :ru then LoadWords::ENGRU.select { |k, v| [k, v] if check_word(v, str) == true }
     end
   end
 
@@ -35,6 +35,17 @@ class ViewWords
     case trans
     when :eng then LoadWords::ENGRU.select { |k, v| [k, v] if k.downcase.include?(str) }
     when :ru then LoadWords::ENGRU.select { |k, v| [k, v] if v.downcase.include?(str) }
+    end
+  end
+
+  def check_word(value, str)
+    case value
+    when /,*\s/
+      value.split(/,*\s/).each do |word|
+        return true if word == str
+      end
+    when str
+      true
     end
   end
 end
