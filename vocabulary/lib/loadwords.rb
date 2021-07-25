@@ -10,6 +10,6 @@ class LoadWords
   end
 
   def eng_file(name)
-    (CSV.read(name).map { |str| str.join.split(';') }).to_h
+    (CSV.read(name).map { |str| str.join(',').split(';') }).to_h
   end
 end
