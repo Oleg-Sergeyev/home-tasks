@@ -6,7 +6,9 @@ require_relative 'lib/loadwords'
 require_relative 'lib/viewwords'
 require_relative 'lib/table'
 
-str = '' # Welcome to new vocabluary!'
+str = ''
+filename = "#{__dir__}/data/engrus.csv"
+LoadWords.new(filename)
 loop do
   str = InputChar.new(str).getstr
 end

@@ -19,22 +19,22 @@ class ViewWords
 
   def search_accurate(str, trans)
     case trans
-    when :eng then LoadWords::SOME_WORDS.select { |key, value| [key, value] if key == str }
-    when :ru then LoadWords::SOME_WORDS.select { |key, value| [key, value] if value == str }
+    when :eng then LoadWords::ENGRU.select { |k, v| [k, v] if k == str }
+    when :ru then LoadWords::ENGRU.select { |k, v| [k, v] if v == str }
     end
   end
 
   def searh_start_with(str, trans)
     case trans
-    when :eng then LoadWords::SOME_WORDS.select { |key, value| [key, value] if key.downcase.start_with?(str) }
-    when :ru then LoadWords::SOME_WORDS.select { |key, value| [key, value] if value.downcase.start_with?(str) }
+    when :eng then LoadWords::ENGRU.select { |k, v| [k, v] if k.downcase.start_with?(str) }
+    when :ru then LoadWords::ENGRU.select { |k, v| [k, v] if v.downcase.start_with?(str) }
     end
   end
 
   def searh_include(str, trans)
     case trans
-    when :eng then LoadWords::SOME_WORDS.select { |key, value| [key, value] if key.downcase.include?(str) }
-    when :ru then LoadWords::SOME_WORDS.select { |key, value| [key, value] if value.downcase.include?(str) }
+    when :eng then LoadWords::ENGRU.select { |k, v| [k, v] if k.downcase.include?(str) }
+    when :ru then LoadWords::ENGRU.select { |k, v| [k, v] if v.downcase.include?(str) }
     end
   end
 end
