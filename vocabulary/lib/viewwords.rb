@@ -31,23 +31,21 @@ class ViewWords
   end
 
   def search_accurate(str)
-    LoadWords::ENGRU.select { |k, v| [k, v] if check_word(k, str) == true  || check_word(v, str) == true }
+    LoadWords::ENGRU.select { |k, v| check_word?(k, str) || check_word?(v, str) }
   end
 
   def searh_start_with(str)
-    LoadWords::ENGRU.select { |k, v| [k, v] if k.downcase.start_with?(str) || v.downcase.start_with?(str) }
+    LoadWords::ENGRU.select { |k, v| k.downcase.start_with?(str) || v.downcase.start_with?(str) }
   end
 
   def searh_include(str)
-    LoadWords::ENGRU.select { |k, v| [k, v] if k.downcase.include?(str) || v.downcase.include?(str) }
+    LoadWords::ENGRU.select { |k, v| k.downcase.include?(str) || v.downcase.include?(str) }
   end
 
-  def check_word(value, str)
+  def check_word?(value, str)
     case value
     when /,*\s\(/
-      value.split(/,*\s\(|\)/).each do |word|  # (\([^)]*\)|\S) # /,*\s/ # выражение в скобках\((.*?)\)
-        return true if word.downcase == str
-      end
+      value.split(/,*\s\(|\)/).any? { |word| word == str }
     when str
       true
     end

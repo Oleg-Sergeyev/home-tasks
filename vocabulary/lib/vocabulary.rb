@@ -22,7 +22,7 @@ class Vocabulary
     viewwords(str)
     print "#{INTERED_DATA} #{str}"
     key = input_char
-    start_input(str) if check_input_key(key, str)
+    start_input(str) if check_input_key?(key, str)
 
     if key == "\c?"
       str = str[0...-1]
@@ -31,8 +31,8 @@ class Vocabulary
     start_input("#{str}#{key}")
   end
 
-  def check_input_key(key, str)
-    true if IGNORE_KEY.include?(key) || (str.end_with?(' ') && key == ' ') #|| (str.end_with?(' ') && key != "\c?")
+  def check_input_key?(key, str)
+    IGNORE_KEY.include?(key) || (str.end_with?(' ') && key == ' ')
   end
 
   def input_char
