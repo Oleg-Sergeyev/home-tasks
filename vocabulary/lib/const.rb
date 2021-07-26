@@ -10,4 +10,4 @@ IGNORE_KEY = ["\e", "\t"].freeze
 IGNORE_NUMBERS = (0..9).freeze
 NOT_IGNORE_KEY = ["\c?", ':'].freeze
 BYE = "\n\nBye, bye!"
-CUSTOM_WIDTH = 20
+CUSTOM_WIDTH = 40

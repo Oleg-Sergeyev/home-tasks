@@ -32,7 +32,7 @@ class Vocabulary
   end
 
   def check_input_key(key, str)
-    true if IGNORE_KEY.include?(key) || (str.end_with?(' ') && key == ' ') || (str.end_with?(' ') && key != "\c?")
+    true if IGNORE_KEY.include?(key) || (str.end_with?(' ') && key == ' ') #|| (str.end_with?(' ') && key != "\c?")
   end
 
   def input_char
