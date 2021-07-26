@@ -6,37 +6,29 @@ class ViewWords
 
   def initialize(str)
     @res_str = []
-    str.match?(/^[a-zA-Z\s]+$/) ? translation(str, :eng) : translation(str, :ru)
+    #str.match?(/^[a-zA-Z\s]+$/) ? translation(str, :eng) : translation(str, :ru)
+    translation(str)
   end
 
-  def translation(str, trans)
+  def translation(str)
     @res_str = if str.end_with?(' ')
-                 search_accurate(str.rstrip, trans).to_h
+                 search_accurate(str.rstrip).to_h
                else
-                 searh_start_with(str, trans).merge(searh_include(str, trans)).uniq.sort.to_h
+                 searh_start_with(str).merge(searh_include(str)).uniq.sort.to_h
                end
     @res_str[RUNMF] = ENGNMF if @res_str.empty?
   end
 
-  def search_accurate(str, trans)
-    case trans
-    when :eng then LoadWords::ENGRU.select { |k, v| [k, v] if check_word(k, str) == true }
-    when :ru then LoadWords::ENGRU.select { |k, v| [k, v] if check_word(v, str) == true }
-    end
+  def search_accurate(str)
+    LoadWords::ENGRU.select { |k, v| [k, v] if check_word(k, str) == true || check_word(v, str) == true }
   end
 
-  def searh_start_with(str, trans)
-    case trans
-    when :eng then LoadWords::ENGRU.select { |k, v| [k, v] if k.downcase.start_with?(str) }
-    when :ru then LoadWords::ENGRU.select { |k, v| [k, v] if v.downcase.start_with?(str) }
-    end
+  def searh_start_with(str)
+    LoadWords::ENGRU.select { |k, v| [k, v] if k.downcase.start_with?(str) || v.downcase.start_with?(str) }
   end
 
-  def searh_include(str, trans)
-    case trans
-    when :eng then LoadWords::ENGRU.select { |k, v| [k, v] if k.downcase.include?(str) }
-    when :ru then LoadWords::ENGRU.select { |k, v| [k, v] if v.downcase.include?(str) }
-    end
+  def searh_include(str)
+    LoadWords::ENGRU.select { |k, v| [k, v] if k.downcase.include?(str) || v.downcase.include?(str) }
   end
 
   def check_word(value, str)
