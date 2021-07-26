@@ -6,7 +6,6 @@ class ViewWords
 
   def initialize(str)
     @res_str = []
-    #str.match?(/^[a-zA-Z\s]+$/) ? translation(str, :eng) : translation(str, :ru)
     translation(str)
   end
 
@@ -20,7 +19,7 @@ class ViewWords
   end
 
   def search_accurate(str)
-    LoadWords::ENGRU.select { |k, v| [k, v] if check_word(k, str) == true || check_word(v, str) == true }
+    LoadWords::ENGRU.select { |k, v| [k, v] if check_word(k, str) == true  || check_word(v, str) == true  }
   end
 
   def searh_start_with(str)
