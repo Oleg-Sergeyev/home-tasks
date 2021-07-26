@@ -23,7 +23,7 @@ class ViewWords
     str = str.rstrip                                                              # удаляем пробел
     @res_str = search_accurate(str).sort.to_h                                     # поиск точного соотвествия
     @res_str_ext = searh_start_with(str).merge(searh_include(str)).uniq.sort.to_h # поиск по началу и включения подстроки
-    if @res_str.empty? && !@res_str_ext.empty?                                    # если результат в точном нет, но в других поисках есть
+    if @res_str.empty? && !@res_str_ext.empty?                                    # если результа в точном нет, но в других поисках есть
       @res_str = @res_str_ext                                                     # переприсавиваем результат запроса, возвращаем что нашлось
     elsif @res_str.empty? && @res_str_ext.empty?                                  # иначе если оба запроса пусты
       @res_str[RUNMF] = ENGNMF                                                    # вносим в результат(массив) дежурные фразы "ничего не найдено"
