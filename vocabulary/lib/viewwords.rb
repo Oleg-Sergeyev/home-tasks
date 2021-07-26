@@ -15,6 +15,7 @@ class ViewWords
                else
                  searh_start_with(str, trans).merge(searh_include(str, trans)).uniq.sort.to_h
                end
+    @res_str[RUNMF] = ENGNMF if @res_str.empty?
   end
 
   def search_accurate(str, trans)
