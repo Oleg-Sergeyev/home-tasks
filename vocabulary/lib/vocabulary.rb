@@ -50,8 +50,6 @@ class Vocabulary
     return if str.size <= 1
 
     arr = ViewWords.new(str.downcase).res_str
-    return if arr.empty?
-
     fst_col = arr.map { |_, v| v }.map(&:length).max
     snd_col = arr.map { |k, _| k }.map(&:length).max
     width = fst_col + snd_col + CUSTOM_WIDTH
