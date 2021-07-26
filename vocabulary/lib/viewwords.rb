@@ -13,7 +13,7 @@ class ViewWords
     @res_str = if str.end_with?(' ')
                  search_accurate(str.rstrip, trans).to_h
                else
-                 searh_start_with(str, trans).merge(searh_include(str, trans)).uniq.to_h
+                 searh_start_with(str, trans).merge(searh_include(str, trans)).uniq.sort.to_h
                end
   end
 
