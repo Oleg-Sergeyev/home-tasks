@@ -26,7 +26,6 @@ class ViewWords
     if @res_str.empty? && !@res_str_ext.empty?
       @res_str = @res_str_ext
     elsif @res_str.empty? && @res_str_ext.empty?
-      puts 'HERE!!!'
       @res_str[RUNMF] = ENGNMF
     end
   end
