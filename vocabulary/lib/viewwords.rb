@@ -21,7 +21,7 @@ class ViewWords
 
   def space_after_word(str)
     str = str.rstrip                                                              # удаляем пробел
-    @res_str = search_accurate(str).to_h                                          # поиск точного соотвествия
+    @res_str = search_accurate(str).sort.to_h                                     # поиск точного соотвествия
     @res_str_ext = searh_start_with(str).merge(searh_include(str)).uniq.sort.to_h # поиск по началу и включения подстроки
     if @res_str.empty? && !@res_str_ext.empty?                                    # если результат в точном нет, но в других поисках есть
       @res_str = @res_str_ext                                                     # переприсавиваем результат запроса, возвращаем что нашлось
