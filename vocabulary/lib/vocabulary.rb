@@ -6,14 +6,12 @@ require 'io/wait'
 # class Vocabulary
 class Vocabulary
   def initialize
-    @str = ''
-    start_input(@str)
+    start_input('')
   end
 
   def start_input(str_res)
     puts `clear`
-    print WELCOME
-    print INFO
+    print "#{WELCOME} #{INFO}"
     clear_stdin
     get_str(str_res).downcase
   end
