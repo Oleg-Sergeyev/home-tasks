@@ -112,31 +112,31 @@ class Person
   end
 end
 
-class User < Person
+class UserN < Person
 end
 
-class Admin < Person
+class AdminN < Person
 end
 
-class Moderator < Person
+class ModeratorN < Person
 end
 
 # person = Person.new # Error
 # p person
 
-user1 = User.new
+user1 = UserN.new
 user1.name = 'Alex'
 user1.surname = 'Alexyeyev'
 user1.patronimyc = 'Alexyeyevich'
 user1.each { |user| puts user }
 
-admin1 = Admin.new
+admin1 = AdminN.new
 admin1.name = 'Sergey'
 admin1.surname = 'Sergeyev'
 admin1.patronimyc = 'Vasilievich'
 admin1.each { |user| puts user }
 
-moderator1 = Moderator.new
+moderator1 = ModeratorN.new
 moderator1.name = 'Ivan'
 moderator1.surname = 'Petrov'
 moderator1.patronimyc = 'Petrovich'
