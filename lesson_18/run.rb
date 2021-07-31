@@ -69,4 +69,4 @@ class MyClass
   implements MyInterface
 end
 
-p m = MyClass.new
+
