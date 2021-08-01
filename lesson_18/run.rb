@@ -1,72 +1,35 @@
 # frozen_string_literal: true
 
-require 'interface'
+require 'singleton'
 
-Strategy = interface do
-  required_methods :use
-end
-
-class StrategyOne
-  def use
-    puts 'Strategy one'
-  end
-  implements Strategy
-end
-
-class StrategyTwo
-  def use
-    puts 'Strategy two'
-  end
-  implements Strategy
-end
-
-class StrategyThree
-  def use
-    puts 'Strategy three'
-  end
-  implements Strategy
-end
-
-class Context
-  attr_accessor :strategy
-
-  def initialize(strategy)
-    @strategy = strategy
-  end
-
-  def use_strategy
-    strategy.use
-  end
-end
-
-context = Context.new(StrategyOne.new)
-
-#context.strategy = StrategyOne.new
-context.use_strategy
-
-context.strategy = StrategyTwo.new
-context.use_strategy
-
-context.strategy = StrategyThree.new
-context.use_strategy
-
-MyInterface = interface { required_methods :foo, :bar, :baz }
-
-# Raises an error until 'baz' is defined
+# class Singleton
 class MyClass
-  def foo
-    puts "foo"
+  include Singleton
+
+  @instance = new
+
+  class << self
+    attr_reader :instance
   end
 
-  def bar
-    puts "bar"
+  def dup
+    self
   end
 
-  def baz
-    puts "baz"
+  def some_data
+    "Object made by: #{self.class.name}"
   end
 
-  implements MyInterface
+  alias clone dup
 end
 
-
+first = MyClass.instance
+p "Object '#{first}'"
+p first.some_data
+p "Object_id '#{first.object_id}'"
+second = MyClass.instance
+p "Object '#{second}'"
+p second.some_data
+p "Object_id '#{second.object_id}'"
+p second.dup
+p second.clone
