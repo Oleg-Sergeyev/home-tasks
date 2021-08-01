@@ -2,6 +2,13 @@
 
 # class Subject
 class TrafficLight
+  attr_accessor :state
+
+  def initialize(arr)
+    @street1, @street2 = *arr
+    @observers = []
+  end
+
   def drive_up(_observer)
     raise NotImplementedError, "#{self.class} has not implemented method '#{__method__}'"
   end
@@ -17,14 +24,6 @@ end
 
 # class TraffLight
 class TwoWayTrafficLight < TrafficLight
-  attr_accessor :state
-
-  def initialize(arr)
-    @street1, @street2 = *arr
-    @observers = []
-    # super
-  end
-
   def drive_up(observer)
     puts "TrafficLight: '#{observer.class.name}' I drove up to a crossroads down the street '#{observer.street}'"
     @observers << observer
@@ -57,6 +56,12 @@ end
 
 # class Auto
 class Auto
+  attr_reader :street
+
+  def initialize(street)
+    @street = street
+  end
+
   def update(_state)
     raise NotImplementedError, "#{self.class} has not implemented method '#{__method__}'"
   end
@@ -64,13 +69,6 @@ end
 
 # class Bus
 class Bus < Auto
-  attr_reader :street
-
-  def initialize(street)
-    @street = street
-    # super
-  end
-
   def update(state)
     puts "#{Bus.name} on '#{street}': I stoped" if state[@street] == :red
     puts "#{Bus.name} on '#{street}': I drove away" if state[@street] == :green
@@ -79,13 +77,6 @@ end
 
 # class Truck
 class Truck < Auto
-  attr_reader :street
-
-  def initialize(street)
-    @street = street
-    # super
-  end
-
   def update(state)
     puts "#{Truck.name} on '#{street}': I stoped" if state[@street] == :red
     puts "#{Truck.name} on '#{street}': I drove away" if state[@street] == :green

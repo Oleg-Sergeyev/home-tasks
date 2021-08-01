@@ -2,7 +2,7 @@
 
 require_relative 'lib/traficlight'
 
-STREETS = %i[Studenay Moskovskaya].freeze
+STREETS = %i[Studenaya Moskovskaya].freeze
 traffic_light1 = TwoWayTrafficLight.new(STREETS)
 
 bus = Bus.new(STREETS.first)
