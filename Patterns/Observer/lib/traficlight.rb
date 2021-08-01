@@ -31,14 +31,14 @@ class TwoWayTrafficLight < TrafficLight
   end
 
   def drive_off(observer)
-    puts "\n#{observer.class.name}: I drove away from the crossroads"
+    puts "#{observer.class.name}: I drove away from the crossroads"
     @observers.delete(observer)
   end
 
   def light(state)
     puts "TrafficLight: '#{state}'"
     puts "\n"
-    @observers.each { |observer| observer.update(self, state) }
+    @observers.each { |observer| observer.update(state) }
   end
 
   def start_light
@@ -49,7 +49,6 @@ class TwoWayTrafficLight < TrafficLight
             else
               { @street1 => :green, @street2 => :red }
             end
-      puts "TrafficLight: I turned on the: #{arr} light"
       light(arr)
       sleep 5
     end
@@ -58,7 +57,7 @@ end
 
 # class Auto
 class Auto
-  def update(_subject, _state)
+  def update(_state)
     raise NotImplementedError, "#{self.class} has not implemented method '#{__method__}'"
   end
 end
@@ -72,9 +71,9 @@ class Bus < Auto
     # super
   end
 
-  def update(_subject, state)
-    puts "#{Bus.name}: I stoped" if state[@street] == :red
-    puts "#{Bus.name}: I drove away" if state[@street] == :green
+  def update(state)
+    puts "#{Bus.name} on '#{street}': I stoped" if state[@street] == :red
+    puts "#{Bus.name} on '#{street}': I drove away" if state[@street] == :green
   end
 end
 
@@ -87,9 +86,8 @@ class Truck < Auto
     # super
   end
 
-  # @param [Subject] subject
-  def update(_subject, state)
-    puts "#{Truck.name}: I stoped" if state[@street] == :red
-    puts "#{Truck.name}: I drove away" if state[@street] == :green
+  def update(state)
+    puts "#{Truck.name} on '#{street}': I stoped" if state[@street] == :red
+    puts "#{Truck.name} on '#{street}': I drove away" if state[@street] == :green
   end
 end
