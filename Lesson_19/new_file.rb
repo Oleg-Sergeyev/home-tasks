@@ -4,8 +4,9 @@ require 'fileutils'
 require_relative 'lib/randomtext'
 
 puts `clear`
+# Task 2
 puts "\nTask 2"
-text_size = 1000 # bytes
+text_size = 2048 # bytes
 name = 'some.txt'
 File.delete(name) if File.exist?(name)
 file = File.new(name, 'a')
@@ -17,6 +18,8 @@ puts "File size set: #{text_size} bytes"
 # puts some_text
 file << some_text
 puts "File '#{name}' created. Size = #{file.size}"
+
+# Task 3
 puts "\nTask 3"
 arr = File.readlines(file).map(&:chomp)
 # puts arr
