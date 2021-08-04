@@ -1,10 +1,14 @@
 # frozen_string_literal: true
 
-require_relative 'lib/randomstring'
+require_relative 'lib/randomtext'
 
-file_size = 15_000
+text_size = 1_000 # bytes
 name = 'some.txt'
 file = File.new(name, 'a')
-some_text = RandomString.text
-p some_text.bytesize
-file << some_text if some_text.bytesize <= file_size
+some_text = RandomText.new(text_size).text
+puts "Text size: #{some_text.bytesize} bytes"
+puts "Your condition max: #{text_size} bytes"
+puts 'Some text:'
+puts "\n"
+puts some_text
+file << some_text
