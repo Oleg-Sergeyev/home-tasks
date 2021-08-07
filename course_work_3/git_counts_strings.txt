@@ -1,0 +1,30 @@
+Report generated: 07-08-2021 13:01
++------------------------------------------------+-------+
+|projects                                        |strings|
++------------------------------------------------+-------+
+|/home/oleg/ruby/repo/gb/home-tasks/state_machine|57     |
+|/home/oleg/ruby/repo/gb/home-tasks/lesson_7     |90     |
+|/home/oleg/ruby/repo/gb/home-tasks/lesson_16    |70     |
+|/home/oleg/ruby/repo/gb/home-tasks/lesson_3     |118    |
+|/home/oleg/ruby/repo/gb/home-tasks/lesson_6     |524    |
+|/home/oleg/ruby/repo/gb/home-tasks/usr          |140    |
+|/home/oleg/ruby/repo/gb/home-tasks/lesson_9     |383    |
+|/home/oleg/ruby/repo/gb/home-tasks/lesson_8     |280    |
+|/home/oleg/ruby/repo/gb/home-tasks/course_work_3|106    |
+|/home/oleg/ruby/repo/gb/home-tasks/lesson_14    |125    |
+|/home/oleg/ruby/repo/gb/home-tasks/lesson_11    |232    |
+|/home/oleg/ruby/repo/gb/home-tasks/lesson_17    |219    |
+|/home/oleg/ruby/repo/gb/home-tasks/lesson_10    |360    |
+|/home/oleg/ruby/repo/gb/home-tasks/lesson_5     |135    |
+|/home/oleg/ruby/repo/gb/home-tasks/lesson_18    |41     |
+|/home/oleg/ruby/repo/gb/home-tasks/lesson_4     |261    |
+|/home/oleg/ruby/repo/gb/home-tasks/calendar_v2  |246    |
+|/home/oleg/ruby/repo/gb/home-tasks/lesson_12    |135    |
+|/home/oleg/ruby/repo/gb/home-tasks/lesson_15    |48     |
+|/home/oleg/ruby/repo/gb/home-tasks/lesson_13    |319    |
+|/home/oleg/ruby/repo/gb/home-tasks/course_work  |275    |
+|/home/oleg/ruby/repo/gb/home-tasks/vocabulary   |208    |
+|/home/oleg/ruby/repo/gb/home-tasks/Patterns     |224    |
+|/home/oleg/ruby/repo/gb/home-tasks/lesson_2     |257    |
+|/home/oleg/ruby/repo/gb/home-tasks/lesson_19    |112    |
++------------------------------------------------+-------+

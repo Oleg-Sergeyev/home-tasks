@@ -1,79 +1,77 @@
 # frozen_string_literal: true
 
+require 'date'
 require 'singleton'
-require_relative 'table'
+require 'tty-table'
 
 # class StringsCount
 class StringsGitRepo
   include Singleton
 
-  attr_accessor :hash
-
   @total = 0
 
-  def self.strings_count
+  def self.strings_count(method = :hash)
     hash = git_folders(git_path)
-    print_format_strings(hash)
-  end
-
-  def self.scan(path)
-    entries = Dir.new(path)
-                 .entries
-                 .reject { |x| %w[. ..].include? x }
-                 .map { |x| File.join(path, x) }
-    entries.each do |item|
-      scan(item) if File.directory?(item)
-
-      @total += File.new(item, chomp: true).readlines.size if File.extname(item) == '.rb'
+    case method
+    when :print
+      print_format_strings(hash)
+    when :hash
+      hash
     end
-    @total
   end
 
-  def self.root_directory?(file_path)
-    File.directory?(file_path) &&
-      File.expand_path(file_path) == File.expand_path(File.join(file_path, '..'))
-  end
+  # protected
+  class << self
+    protected
 
-  def self.git_path(start_path = '.')
-    raise NoSuchPathError unless File.exist?(start_path)
+    # Подсчет строк в файлах
+    def scan(path)
+      entries = Dir.new(path)
+                   .entries
+                   .reject { |x| %w[. ..].include? x }
+                   .map { |x| File.join(path, x) }
+      entries.each do |item|
+        scan(item) if File.directory?(item)
 
-    current_path = File.expand_path(start_path)
-    return_path = nil
-    until root_directory?(current_path)
-      if File.exist?(File.join(current_path, '.git'))
-        return_path = current_path
-        break
-      else
+        @total += File.new(item, chomp: true).readlines.size if File.extname(item) == '.rb'
+      end
+      @total
+    end
+
+    def root_directory?(file_path)
+      File.directory?(file_path) &&
+        File.expand_path(file_path) == File.expand_path(File.join(file_path, '..'))
+    end
+
+    def git_path(start_path = '.')
+      raise NoSuchPathError unless File.exist?(start_path)
+
+      current_path = File.expand_path(start_path)
+      check_path(current_path)
+    end
+
+    def check_path(current_path)
+      until root_directory?(current_path)
+        return current_path if File.exist?(File.join(current_path, '.git'))
+
         current_path = File.dirname(current_path)
       end
+      current_path
     end
-    return_path
-  end
 
-  def self.git_folders(path)
-    hash = {}
-    folders = Dir.new(path).entries.reject { |x| %w[. ..].include? x }.map { |x| File.join(path, x) }
-    folders.select { |file| file if File.directory?(file) }.each do |folder|
-      @total = 0
-      hash[folder] = scan(folder).to_s unless folder.include?('/.git')
+    def git_folders(path)
+      hash = {}
+      folders = Dir.new(path).entries.reject { |x| %w[. ..].include? x }.map { |x| File.join(path, x) }
+      folders.select { |file| file if File.directory?(file) }.each do |folder|
+        @total = 0
+        hash[folder] = scan(folder).to_s unless folder.include?('/.git')
+      end
+      hash
     end
-    hash
-  end
 
-  # def self.print_format_strings(hash)
-  #   max_lenght = hash.max_by { |k, _v| k.length }.first.length
-  #   hash.sort.each do |k, v|
-  #     puts
-  #     print "'#{k}'"
-  #     print format("%#{4 + (max_lenght - k.length)}s", v)
-  #     print ' strings'
-  #   end
-  #   puts
-  # end
-  def self.print_format_strings(hash)
-    max_path_lenght = hash.max_by { |k, _v| k.length }.first.length
-    max_size_lenght = hash.max_by { |_k, v| v.to_s.length }.first.length
-    width = max_path_lenght + max_size_lenght + 6
-    Table.new([width, 'projects', 'strings', hash])
+    def print_format_strings(hash)
+      table = TTY::Table.new(%w[projects strings], hash.to_a)
+      "Report generated: #{DateTime.now.strftime('%d-%m-%Y %H:%M')}\n#{table.render(:ascii)}"
+    end
   end
 end
