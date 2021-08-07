@@ -24,7 +24,6 @@ class StringsGitRepo
   class << self
     protected
 
-    # Подсчет строк в файлах
     def scan(path)
       entries = Dir.new(path)
                    .entries
