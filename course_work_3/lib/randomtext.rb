@@ -43,7 +43,7 @@ class RandomText
       word = ('a'..'z').to_a.sample(rand(MIN..MAX_CHARS)).join
       check_string_size(arr_string, word)
     end
-    arr_string[-1] = arr_string.last.rstrip
+    arr_string[-1] = arr_string.last.rstrip if arr_string[-1]
     # arr_string.push(LS).join
     arr_string.join
   end
