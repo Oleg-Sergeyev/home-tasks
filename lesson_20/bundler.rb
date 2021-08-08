@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'exifr'
-require 'bundler/setup'
-require 'tty-table'
 require 'rubygems'
+require 'bundler/setup'
 
 Bundler.require(:default)
