@@ -2,5 +2,6 @@
 
 require 'rubygems'
 require 'bundler/setup'
+require 'tty-table'
 
 Bundler.require(:default)

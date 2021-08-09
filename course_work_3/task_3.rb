@@ -4,7 +4,7 @@ require 'fileutils'
 require_relative 'lib/strings_git_repo'
 
 # p StringsGitRepo.git_path # protected method
-_hash = StringsGitRepo.strings_count
+# _hash = StringsGitRepo.strings_count
 file_name = 'git_strings_count.txt'
 File.delete(file_name) if File.exist?(file_name)
 file = File.new(file_name, 'a')

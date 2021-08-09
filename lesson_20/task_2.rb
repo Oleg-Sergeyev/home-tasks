@@ -2,6 +2,8 @@
 
 # class Unit
 class Unit
+  attr_accessor :param
+
   def initialize(users)
     @param = MyArray.new
     users.each do |hash|
@@ -18,35 +20,35 @@ class Unit
   end
 
   def add(name, role)
-    @param << Employee.new(name, role)
+    param << Employee.new(name, role)
   end
 
   def remove(name)
-    @param.each_with_index do |employee, index|
-      @param.delete_at(index) if employee.data.first == name
+    param.each_with_index do |employee, index|
+      param.delete_at(index) if employee.data.first == name
     end
   end
 
   def rename(old_name, new_name)
-    @param.each do |employee|
+    param.each do |employee|
       employee.data[0] = new_name if employee.data.first == old_name
     end
   end
 
   def redefine_role(name, new_role)
-    @param.each do |employee|
+    param.each do |employee|
       employee.data[1] = new_role if employee.data.first == name
     end
   end
 
   def report_by_role(role)
-    @param.each do |employee|
+    param.each do |employee|
       p employee.data.join(',') if employee.data[1] == role
     end
   end
 
   def report_by_name
-    @param.each do |employee|
+    param.each do |employee|
       p employee.data[0]
     end
   end
@@ -62,29 +64,31 @@ class Unit
 
   # class Array
   class MyArray < Array
+    attr_accessor :arr
+
     def initialize
       @arr = []
       super
     end
 
     def set(employee)
-      @arr.push(employee)
+      arr.push(employee)
     end
 
     def each(&block)
-      @arr.each(&block)
+      arr.each(&block)
     end
 
     def each_with_index(&block)
-      @arr.each_with_index(&block)
+      arr.each_with_index(&block)
     end
 
     def delete_at(index)
-      @arr.delete_at(index)
+      arr.delete_at(index)
     end
 
     def <<(value)
-      @arr.push(value)
+      arr.push(value)
     end
   end
 end

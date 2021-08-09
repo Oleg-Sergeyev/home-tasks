@@ -23,8 +23,8 @@ end
 
 a = Vector::Point.new(-1, 4)
 b = Vector::Point.new(5, 9)
-p Vector.distance(a, b)
+p "Длина вектора: #{Vector.distance(a, b)}"
 
 a = Vector::Point.new(10, -4)
 b = Vector::Point.new(0, -19)
-p Vector.distance(a, b)
+p "Длина вектора: #{Vector.distance(a, b)}"
