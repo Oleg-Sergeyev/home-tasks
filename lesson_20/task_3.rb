@@ -4,38 +4,20 @@ require 'tty-table'
 
 # class File
 class Human < File
+  DIMENSIONS = %w[Kb Mb Gb Tb].freeze
   def self.size(file)
-    Methods.calc(File.size(file))
+    Methods.get_human_size(File.size(file)) { |symbol| return symbol }
   end
 
   # module Methods
   module Methods
-    def self.calc(size)
-      return "#{size} bytes" if size <= 999
+    def self.get_human_size(size)
+      return unless block_given?
 
-      str = ''
-      divisions(size).each_with_index do |val, index|
-        str = define_hsize(val, index)
+      yield "#{size} bytes" if size < 999
+      DIMENSIONS.each do |arr|
+        yield "#{size.round(1)}#{arr}" if (1...999).include?((size = size.to_f / 1024))
       end
-      str
-    end
-
-    def self.define_hsize(val, index)
-      case index
-      when 0 then "#{val.round(1)}k"
-      when 1 then "#{val.round(1)}M"
-      when 2 then "#{val.round(1)}G"
-      end
-    end
-
-    def self.divisions(size)
-      arr = []
-      rank = size
-      while rank > 999
-        rank = rank.to_f / 1024
-        arr.push(rank)
-      end
-      arr
     end
   end
 end
@@ -47,7 +29,9 @@ end
 # puts File.singleton_methods
 
 arr = []
-Dir.children(File.dirname('task_3.rb')).sort.each do |f|
-  arr.push([f, Human.size(f)])
-end
+# Dir.children(__dir__).sort.each do |f|
+#   arr.push([f, Human.size(f)]) #if File.extname(f) == '.rb'
+# end
+
+Dir.each_child(__dir__) { |file| arr.push([file, Human.size(file)]) }
 puts (TTY::Table.new(%w[files size], arr)).render(:ascii)
