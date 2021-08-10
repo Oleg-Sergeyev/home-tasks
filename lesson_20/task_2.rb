@@ -7,7 +7,7 @@ class Unit
   def initialize(users)
     @param = []
     users.each do |hash|
-      hash.each { |k, v| @param.set(Employee.new(k, v)) }
+      hash.each { |k, v| @param << Employee.new(k, v) }
     end
   end
 
@@ -17,10 +17,6 @@ class Unit
     else
       puts @param.each.map { |employee| "#{employee.data[1]}, #{employee.data[0]}" }.sort { |a, b| a <=> b }
     end
-  end
-
-  def set
-    param << Employee.new(name, role)
   end
 
   def add(name, role)
