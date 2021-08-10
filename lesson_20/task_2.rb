@@ -7,7 +7,7 @@ class Unit
   def initialize(users)
     @param = []
     users.each do |hash|
-      hash.each { |k, v| @param.set(Employee.new(k, v)) }
+      hash.each { |k, v| @param << Employee.new(k, v) }
     end
   end
 
