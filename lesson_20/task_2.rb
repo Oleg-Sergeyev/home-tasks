@@ -19,10 +19,6 @@ class Unit
     end
   end
 
-  def set
-    param << Employee.new(name, role)
-  end
-
   def add(name, role)
     param << Employee.new(name, role)
   end
