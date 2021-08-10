@@ -5,7 +5,7 @@ class Unit
   attr_accessor :param
 
   def initialize(users)
-    @param = MyArray.new
+    @param = []
     users.each do |hash|
       hash.each { |k, v| @param.set(Employee.new(k, v)) }
     end
@@ -17,6 +17,10 @@ class Unit
     else
       puts @param.each.map { |employee| "#{employee.data[1]}, #{employee.data[0]}" }.sort { |a, b| a <=> b }
     end
+  end
+
+  def set
+    param << Employee.new(name, role)
   end
 
   def add(name, role)
@@ -63,7 +67,7 @@ class Unit
   end
 
   # class Array
-  class MyArray < Array
+  class Array
     attr_accessor :arr
 
     def initialize
