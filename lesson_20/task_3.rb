@@ -4,25 +4,28 @@ require 'tty-table'
 
 class Byte
   def self.calc(value)
-    value
+    "#{value} bytes" if (1...999).include?(value)
   end
 end
 
 class Kb
   def self.calc(value)
-    (value.to_f / 1024).round(1)
+    res = (value.to_f / 1024).round(1)
+    "#{res}Kb" if (1...999).include?(res)
   end
 end
 
 class Mb
   def self.calc(value)
-    ((value.to_f / 1024) / 1024).round(1)
+    res = ((value.to_f / 1024) / 1024).round(1)
+    "#{res}Mb" if (1...999).include?(res)
   end
 end
 
 class Gb
   def self.calc(value)
-    (((value.to_f / 1024) / 1024) / 1024).round(1)
+    res = (((value.to_f / 1024) / 1024) / 1024).round(1)
+    "#{res}Gb" if (1...999).include?(res)
   end
 end
 
@@ -41,7 +44,7 @@ class Human < File
       hs = ''
       DIMENSIONS.each do |object|
         res = object.calc(size)
-        if (1...999).include?(res)
+        if res
           hs = res.to_s
           break
         end
