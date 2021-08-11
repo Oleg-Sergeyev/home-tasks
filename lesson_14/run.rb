@@ -5,7 +5,7 @@ require 'faker'
 I18n.load_path << Dir["#{File.expand_path('config/locales')}/*.yml"]
 I18n.default_locale = :ru
 Faker::Config.locale = :ru
-#Russian.init_i18n
+# Russian.init_i18n
 
 puts `clear`
 # Task 1

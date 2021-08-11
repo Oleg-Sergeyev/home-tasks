@@ -2,11 +2,35 @@
 
 require 'tty-table'
 
+class Byte
+  def self.calc(value)
+    value
+  end
+end
+
+class Kb
+  def self.calc(value)
+    (value.to_f / 1024).round(1)
+  end
+end
+
+class Mb
+  def self.calc(value)
+    ((value.to_f / 1024) / 1024).round(1)
+  end
+end
+
+class Gb
+  def self.calc(value)
+    (((value.to_f / 1024) / 1024) / 1024).round(1)
+  end
+end
+
 # class File
 class Human < File
-  DIMENSIONS = %w[Kb Mb Gb Tb].freeze
+  DIMENSIONS = [Byte, Kb, Mb, Gb].freeze
   def self.size(file)
-    Methods.get_human_size(File.size(file)) { |symbol| return symbol }
+    Methods.get_human_size(File.size(file), &:calc)
   end
 
   # module Methods
@@ -14,10 +38,15 @@ class Human < File
     def self.get_human_size(size)
       return unless block_given?
 
-      yield "#{size} bytes" if size < 999
-      DIMENSIONS.each do |arr|
-        yield "#{size.round(1)}#{arr}" if (1...999).include?((size = size.to_f / 1024))
+      hs = ''
+      DIMENSIONS.each do |object|
+        res = object.calc(size)
+        if (1...999).include?(res)
+          hs = res.to_s
+          break
+        end
       end
+      hs
     end
   end
 end
