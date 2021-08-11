@@ -2,36 +2,50 @@
 
 require 'tty-table'
 
-class Byte
-  def self.calc(value)
-    "#{value} bytes" if (1...999).include?(value)
+module Dimensions
+  # class Byte
+  class Byte
+    def self.calc(value)
+      "#{value} bytes" if (1...999).include?(value)
+    end
   end
-end
 
-class Kb
-  def self.calc(value)
-    res = (value.to_f / 1024).round(1)
-    "#{res}Kb" if (1...999).include?(res)
+  # class Kb
+  class Kb
+    def self.calc(value)
+      res = (value.to_f / 1024).round(1)
+      "#{res} Kb" if (1...999).include?(res)
+    end
   end
-end
 
-class Mb
-  def self.calc(value)
-    res = ((value.to_f / 1024) / 1024).round(1)
-    "#{res}Mb" if (1...999).include?(res)
+  # class Mb
+  class Mb
+    def self.calc(value)
+      res = ((value.to_f / 1024) / 1024).round(1)
+      "#{res} Mb" if (1...999).include?(res)
+    end
   end
-end
 
-class Gb
-  def self.calc(value)
-    res = (((value.to_f / 1024) / 1024) / 1024).round(1)
-    "#{res}Gb" if (1...999).include?(res)
+  # class Gb
+  class Gb
+    def self.calc(value)
+      res = (((value.to_f / 1024) / 1024) / 1024).round(1)
+      "#{res} Gb" if (1...999).include?(res)
+    end
+  end
+
+  # class Tb
+  class Tb
+    def self.calc(value)
+      res = ((((value.to_f / 1024) / 1024) / 1024) / 1024).round(1)
+      "#{res} Gb" if (1...999).include?(res)
+    end
   end
 end
 
 # class File
 class Human < File
-  DIMENSIONS = [Byte, Kb, Mb, Gb].freeze
+  DIMENSIONS = [Dimensions::Byte, Dimensions::Kb, Dimensions::Mb, Dimensions::Gb, Dimensions::Tb].freeze
   def self.size(file)
     Methods.get_human_size(File.size(file), &:calc)
   end
