@@ -22,16 +22,6 @@ class Human < File
   end
 end
 
-# File.hsize(ARGV.first)
-# file = 'task_2.rb'
-# file = '3_2.MP4'
-# puts File.hsize(file)
-# puts File.singleton_methods
-
 arr = []
-# Dir.children(__dir__).sort.each do |f|
-#   arr.push([f, Human.size(f)]) #if File.extname(f) == '.rb'
-# end
-
-Dir.each_child(__dir__) { |file| arr.push([file, Human.size(file)]) }
+Dir.each_child(__dir__) { |file| arr.push([file, Human.size("#{File.dirname(__FILE__)}/#{file}")]) }
 puts (TTY::Table.new(%w[files size], arr)).render(:ascii)
