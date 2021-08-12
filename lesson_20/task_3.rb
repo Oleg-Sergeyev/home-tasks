@@ -1,8 +1,23 @@
 # frozen_string_literal: true
 
+require 'singleton'
 require 'tty-table'
 
-module Dimensions
+# class Dimensions
+class Dimensions
+  include Singleton
+
+  def self.human_size(&block)
+    return unless block_given?
+
+    res = ''
+    [Dimensions::Byte, Dimensions::Kb, Dimensions::Mb, Dimensions::Gb, Dimensions::Tb].each do |object|
+      res = block.call(object)
+      break if res
+    end
+    res
+  end
+
   # class Byte
   class Byte
     def self.calc(value)
@@ -43,31 +58,11 @@ module Dimensions
   end
 end
 
-# class File
-class Human < File
-  DIMENSIONS = [Dimensions::Byte, Dimensions::Kb, Dimensions::Mb, Dimensions::Gb, Dimensions::Tb].freeze
-  def self.size(file)
-    Methods.get_human_size(File.size(file), &:calc)
-  end
-
-  # module Methods
-  module Methods
-    def self.get_human_size(size)
-      return unless block_given?
-
-      hs = ''
-      DIMENSIONS.each do |object|
-        res = object.calc(size)
-        if res
-          hs = res.to_s
-          break
-        end
-      end
-      hs
-    end
-  end
-end
-
+p Dimensions.singleton_methods
 arr = []
-Dir.each_child(__dir__) { |file| arr.push([file, Human.size("#{File.dirname(__FILE__)}/#{file}")]) }
+Dir.each_child(__dir__) do |file|
+  full_path = "#{File.dirname(__FILE__)}/#{file}"
+  size = File.size(full_path)
+  arr << ([file, Dimensions.human_size { |val| val.calc(size) }])
+end
 puts (TTY::Table.new(%w[files size], arr)).render(:ascii)
