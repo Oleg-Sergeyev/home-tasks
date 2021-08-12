@@ -4,7 +4,7 @@
 module Fivable
   @@object = 1
   def initialize
-    p self
+    p self # output objects SomeClass
     raise "You can create only 5 objects '#{self.class}'" unless @@object <= 5
 
     @@object += 1
