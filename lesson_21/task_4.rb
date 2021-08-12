@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-# Создайте модуль RomanNumbers с методом roman, который переводит арабские цифры в римские.
-# Расширьте класс Integer созданным модулем.
-
 # module RomanNumbers
 module RomanNumbers
   NUMBERS = { 1 => 'I',
@@ -21,6 +18,7 @@ module RomanNumbers
   end
 end
 
+# class Integer
 class Integer
   include RomanNumbers
 end
