@@ -3,6 +3,7 @@
 # module RomanNumbers
 module RomanNumbers
   UNITS = {
+    0 => '0',
     1 => 'I',
     2 => 'II',
     3 => 'III',
@@ -51,6 +52,14 @@ module RomanNumbers
 
   private
 
+  # def hundreds(val)
+  #   str = ''
+  #   val.3 { str += 'C' } if (1..3).include?(val)
+  #   str += 'CD' if val == 4
+  #   str += 'D' if val == 5
+  #   val.3 { str += 'D' } if (6..8).include?(val)
+  # end
+
   def create_dozens(arr)
     "#{DOZENS["#{arr.first}0".to_i]}#{UNITS[arr.last]}"
   end
@@ -69,9 +78,10 @@ class Integer
   include RomanNumbers
 end
 
+p 0.roman
 p 8.roman
-p 18.roman
-p 99.roman
-p 415.roman
+p 37.roman
+p 929.roman
+p 1015.roman
 p 3352.roman
 p 352.roman
