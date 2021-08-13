@@ -56,4 +56,3 @@ class Dimensions
     end
   end
 end
-
