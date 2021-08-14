@@ -5,7 +5,7 @@ require 'json'
 # class Group
 class Group
   include Enumerable
-  attr_accessor :group, :users
+  attr_accessor :group_name, :users
 
   def initialize(args)
     @users = []
@@ -18,7 +18,7 @@ class Group
       group << k
       v.each do |key, value|
         group << value
-        @group = value if key == 'group'
+        @group_name = value if key == 'group'
       end
       users << User.new(group)
     end
@@ -61,7 +61,7 @@ class User
   end
 end
 
-file = File.read('./users.json')
+file = File.read('./web_users.json')
 data_hash = JSON.parse(file)
 
 fst_group = Group.new(data_hash)
@@ -69,4 +69,5 @@ fst_group = Group.new(data_hash)
 # fst_group.each { |group| p group }
 # fst_group.each_user { |user| p user }
 # fst_group.each_with_index { |group, index| p "'#{index}' #{group}" }
+p fst_group.group_name
 fst_group.each_user_with_index { |user, index| p "#{index} #{user}" }
