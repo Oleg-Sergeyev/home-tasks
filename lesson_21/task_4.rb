@@ -44,32 +44,26 @@ module RomanNumbers
 
   def roman
     numbers = to_s.split('').map(&:to_i)
-    return UNITS[numbers.first] if numbers.size == 1
-    return create_dozens(numbers) if numbers.size == 2
-    return create_hundreds(numbers) if numbers.size == 3
-    return create_thousands(numbers) if numbers.size == 4
+    case numbers.size
+    when 1 then UNITS[numbers.first]
+    when 2 then dozens(numbers)
+    when 3 then hundreds(numbers)
+    when 4 then thousands(numbers)
+    end
   end
 
   private
 
-  # def hundreds(val)
-  #   str = ''
-  #   val.3 { str += 'C' } if (1..3).include?(val)
-  #   str += 'CD' if val == 4
-  #   str += 'D' if val == 5
-  #   val.3 { str += 'D' } if (6..8).include?(val)
-  # end
-
-  def create_dozens(arr)
+  def dozens(arr)
     "#{DOZENS["#{arr.first}0".to_i]}#{UNITS[arr.last]}"
   end
 
-  def create_hundreds(arr)
-    "#{HUNDREDS["#{arr.first}00".to_i]}#{create_dozens(arr.drop(1))}"
+  def hundreds(arr)
+    "#{HUNDREDS["#{arr.first}00".to_i]}#{dozens(arr.drop(1))}"
   end
 
-  def create_thousands(arr)
-    "#{THOUSANDS["#{arr.first}000".to_i]}#{create_hundreds(arr.drop(1))}"
+  def thousands(arr)
+    "#{THOUSANDS["#{arr.first}000".to_i]}#{hundreds(arr.drop(1))}"
   end
 end
 
