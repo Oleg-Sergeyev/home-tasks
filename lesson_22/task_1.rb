@@ -25,39 +25,26 @@ class Group
   end
 
   def each(&block)
-    users.each do |group|
-      block.call(group)
-    end
+    users.each(&block)
   end
 
-  def each_user(&block)
-    users.each do |group|
-      group.each do |user|
-        block.call(user)
-      end
-    end
-  end
-
-  def each_user_with_index(&block)
+  def each_user_with_index(&_block)
     users.each_with_index do |val, index|
-      val.each do |user|
-        block.call(user, index)
-      end
+      yield "#{index + 1} #{val}"
     end
   end
 end
 
 # class User
 class User
-  include Enumerable
   attr_accessor :id, :surname, :name, :patronimyc, :group, :role
 
   def initialize(args)
     @id, @surname, @name, @patronimyc, @group, @role = *args
   end
 
-  def each
-    yield "User: #{id} #{surname} #{name} #{patronimyc} #{group} #{role}"
+  def to_s
+    "User: #{id} #{surname} #{name} #{patronimyc} #{group} #{role}"
   end
 end
 
@@ -67,7 +54,5 @@ data_hash = JSON.parse(file)
 fst_group = Group.new(data_hash)
 # p fst_group
 # fst_group.each { |group| p group }
-# fst_group.each_user { |user| p user }
-# fst_group.each_with_index { |group, index| p "'#{index}' #{group}" }
 p fst_group.group_name
-fst_group.each_user_with_index { |user, index| p "#{index} #{user}" }
+fst_group.each_user_with_index { |user, index| puts "#{index} #{user}" }
