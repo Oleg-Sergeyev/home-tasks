@@ -39,4 +39,4 @@ end
 path = '/home'
 puts MyFileUtils.dirs(path)
 # dir = './tmp'
-# rm_dir(dir)
+# MyFileUtils.rm_dir(dir)
