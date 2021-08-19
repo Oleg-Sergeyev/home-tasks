@@ -3,6 +3,7 @@
 # require_relative 'lib/samecubes'
 require_relative 'lib/figures'
 
+# rubocop:disable Style/ClassVars
 # class Object
 class Object
   @@figures = Figures.new

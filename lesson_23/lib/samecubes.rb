@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Style/ClassVars
 # module SameCube
 module SameCube
   @@cubes = []
