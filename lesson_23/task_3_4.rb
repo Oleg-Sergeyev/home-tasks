@@ -13,12 +13,13 @@
 # class MyFileUtils
 class MyFileUtils
   @dirs = []
+  PSEUDONIM = %w[. ..].freeze
   class << self
     def dirs(path)
       return unless File.directory?(path)
 
       Dir.foreach(path) do |file|
-        dirs("#{path}/#{file}") unless ['.', '..'].include?(file.to_s)
+        dirs("#{path}/#{file}") unless PSEUDONIM.include?(file.to_s)
       end
       @dirs << path
     end
@@ -26,7 +27,7 @@ class MyFileUtils
     def rm_dir(path)
       if File.directory?(path)
         Dir.foreach(path) do |file|
-          remove_dir("#{path}/#{file}") unless ['.', '..'].include?(file.to_s)
+          rm_dir("#{path}/#{file}") unless PSEUDONIM.include?(file.to_s)
         end
         Dir.delete(path)
       else
@@ -36,7 +37,7 @@ class MyFileUtils
   end
 end
 
-path = '/home'
+path = '/home/oleg/ruby'
 puts MyFileUtils.dirs(path)
-# dir = './tmp'
+# dir = '/home/oleg/tmp'
 # MyFileUtils.rm_dir(dir)
