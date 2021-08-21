@@ -7,7 +7,7 @@ class Array
   include For
 
   def for(args = nil, &block)
-    return to_enum(:for, *args) unless block_given?
+    return to_enum(:for, *args) unless block_given? # look like cycle :)
 
     # return to_enum(:for, 10) unless block_given?
     For.my_cycle(args, self, &block)
