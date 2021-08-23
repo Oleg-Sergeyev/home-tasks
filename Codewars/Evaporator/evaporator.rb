@@ -2,7 +2,7 @@
 
 def evaporator(content, evap_per_day, threshold)
   threshold_ml = (content.to_f * threshold) / 100
-  (1..100).reduce(content) do |sum, day|
+  (1..nil).reduce(content) do |sum, day|
     return day unless (sum -= (evap_per_day * sum.to_f / 100)) > threshold_ml
 
     sum
