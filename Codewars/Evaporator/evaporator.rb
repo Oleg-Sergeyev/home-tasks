@@ -20,3 +20,9 @@ p evaporator(10, 10, 5)
 # def evaporator(c, e, t, o = c, s = 0)
 #   c < t*0.01*o ? s : evaporator(c*(1-0.01*e), e, t, o, -~s)
 # end
+
+# def evaporator(content, evap_per_day, threshold)
+#   day, percent = 1, 100
+#   day += 1 while (percent -= percent*evap_per_day/100.0) > threshold
+#   return day
+# end
