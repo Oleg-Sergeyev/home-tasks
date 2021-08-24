@@ -5,10 +5,11 @@ NUMS = (0..9).to_a.concat(('A'..'Z').to_a).freeze
 def dec_2_fact_string(nb)
   arr = []
   NUMS.each_with_index.reduce(nb) do |memo, (_num, index)|
-    return (arr << NUMS.at(memo.remainder(index + 1))).reverse.join if (memo / (index + 1)).zero?
+    index += 1
+    return (arr << NUMS.at(memo.remainder(index))).reverse.join if (memo / index).zero?
 
-    arr << (memo.remainder(index + 1).zero? ? 0 : NUMS.at(memo.remainder(index + 1)))
-    memo /= index + 1
+    arr << (memo.remainder(index).zero? ? 0 : NUMS.at(memo.remainder(index)))
+    memo /= index
     memo
   end
 end
