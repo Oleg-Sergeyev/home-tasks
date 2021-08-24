@@ -1,22 +1,22 @@
 # frozen_string_literal: true
 
+NUMS = (0..9).to_a.concat(('A'..'Z').to_a).freeze
+
 def dec_2_fact_string(nb)
   arr = []
-  nums = (0..9).to_a.concat(('A'..'Z').to_a)
-  nums.each_with_index.reduce(nb) do |memo, (_num, index)|
-    return (arr << nums.at(memo.remainder(index + 1))).reverse.join if (memo / (index + 1)).zero?
+  NUMS.each_with_index.reduce(nb) do |memo, (_num, index)|
+    return (arr << NUMS.at(memo.remainder(index + 1))).reverse.join if (memo / (index + 1)).zero?
 
-    arr << (memo.remainder(index + 1).zero? ? 0 : nums.at(memo.remainder(index + 1)))
+    arr << (memo.remainder(index + 1).zero? ? 0 : NUMS.at(memo.remainder(index + 1)))
     memo /= index + 1
     memo
   end
 end
 
 def fact_string_2_dec(str)
-  nums = (0..9).to_a.concat(('A'..'Z').to_a)
   str.chars.reverse!.each_with_index.reduce(0) do |sum, (val, index)|
     val = val.to_i if (48..57).include? val.ord
-    sum += ((1..index).reduce(1, :*) * nums.index(val))
+    sum += ((1..index).reduce(1, :*) * NUMS.index(val))
     sum
   end
 end
