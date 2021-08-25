@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# class NewClass
+# class SuperClass
 class NewClass
   @dirs = []
   PSEUDONIM = %w[. ..].freeze
@@ -26,4 +26,5 @@ class NewClass
     # end
   end
 end
-NewClass213
+SuperClass345
+SuperClass

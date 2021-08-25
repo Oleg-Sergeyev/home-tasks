@@ -40,14 +40,10 @@ authors.sort_by { |k, _v| k }.to_h.each { |a, b| puts "#{a} #{b}" }
 # task 4
 puts 'Task 4'
 path = '/home/oleg/ruby/repo/gb/home-tasks/lesson_25'
-array = MyFileUtils.dirs(path).reduce([]) { |arr, dir| arr << [dir, Dir.children(dir)] }
+array = MyFileUtils.dirs_and_files(path)
 array.to_h.sort.each { |dir, file| puts "#{dir}: #{file.join(',')}" }
 
 # task 5
 puts 'Task 5'
-MyFileUtils.clear_dirs # kludge... clear instance array
-
 path = '/home/oleg/ruby/repo/gb/home-tasks/lesson_25/tmp1'
-dirs = MyFileUtils.dirs(path).reduce([]) { |arr, dir| arr << [dir, Dir.children(dir)] }
-
-MyFileUtils.replace(dirs, 'SuperClass', 'NewClass')
+MyFileUtils.replace(path, 'SuperClass', 'NewClass')
