@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# class MyFileUtils
-class MyFileUtils
+# class SuperClass
+class SuperClass
   @dirs = []
   PSEUDONIM = %w[. ..].freeze
   class << self
@@ -14,9 +14,6 @@ class MyFileUtils
       @dirs << path
     end
 
-    def clear_dirs
-      @dirs = []
-    end
     # def rm_dir(path)
     #   if File.directory?(path)
     #     Dir.foreach(path) do |file|
@@ -29,3 +26,4 @@ class MyFileUtils
     # end
   end
 end
+SuperClass213

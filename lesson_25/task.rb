@@ -4,10 +4,13 @@ require 'csv'
 require 'find'
 require_relative 'lib/myfileutils'
 
+puts `clear`
 # task 1
-# p CSV.read('countries.csv').to_h.map { |k, v| [k.strip, v.to_i] }.to_h
+puts 'Task 1'
+p CSV.read('countries.csv').to_h.map { |k, v| [k.strip, v.to_i] }.to_h
 
 # task 2
+puts 'Task 2'
 colors = { red: 'красный',
            orange: 'оранжевый',
            yellow: 'жёлтый',
@@ -15,11 +18,12 @@ colors = { red: 'красный',
            blue: 'голубой',
            indigo: 'синий',
            violet: 'фиолетовый' }
-# p colors.keys.map(&:to_s)
-# p colors.values
-# p colors.invert
+p colors.keys.map(&:to_s)
+p colors.values
+p colors.invert
 
 # task 3
+puts 'Task 3'
 books = { 'Design Patterns in Ruby' => ['Russ Olsen'],
           'Eloquent Ruby' => ['Russ Olsen'],
           'The Well-Grounded Rubyist' => ['David A. Black'],
@@ -29,34 +33,39 @@ books = { 'Design Patterns in Ruby' => ['Russ Olsen'],
           'Ruby Under a Microscope' => ['Pat Shaughnessy'],
           'Ruby Performance Optimization' => ['Alexander Dymo'],
           'The Ruby Way' => ['Hal Fulton', 'Andre Arko'] }
-array = books.values.flatten.uniq.each_with_object({}) do |author, hash|
+authors = books.values.flatten.uniq.each_with_object({}) do |author, hash|
   hash[author] = books.select { |k, v| k if v.include?(author) }.keys # .size
 end
-# array.sort_by { |k, _v| k }.to_h.each { |a, b| puts "#{a} #{b}" }
+authors.sort_by { |k, _v| k }.to_h.each { |a, b| puts "#{a} #{b}" }
 
 # task 4
-
-# (*) Создайте метод, который выводит список подкаталогов в текущем каталоге. 
-# Рядом с каждым из подкаталогов следует вывести список файлов в нем (с учетом вложенных подкаталогов).
-
-PSEUDONIM = %w[. ..].freeze
+puts 'Task 4'
 path = '/home/oleg/ruby/repo/gb/home-tasks/lesson_25'
-# array = Find.find(path).reduce([]) do |arr, file|
-#     next file if PSEUDONIM.include?(file.to_s)
+array = MyFileUtils.dirs(path).reduce([]) { |arr, dir| arr << [dir, Dir.children(dir)] }
+array.to_h.sort.each { |dir, file| puts "#{dir}: #{file.join(',')}" }
 
-#     p hash
-#     p file
-#     p Dir.children(file)
-#     arr << [file.to_s, Dir.children(file)] if File.directory?(file)
-# end
-array = MyFileUtils.dirs(path).reduce([]) do |arr, dir|
-  arr << [dir.split('/').last, Dir.children(dir)] unless dir.start_with?('.')
-end
+# task 5
+puts 'Task 5'
+MyFileUtils.clear_dirs # kludge... clear instance array
 
-array.each do |dir, content| 
-  if content.respond_to?('each')
-    puts "#{dir} | #{content.sort_by {} }"
-  else
-    puts "#{dir} | #{content}"
+path = '/home/oleg/ruby/repo/gb/home-tasks/lesson_25/tmp1'
+array = MyFileUtils.dirs(path).reduce([]) { |arr, dir| arr << [dir, Dir.children(dir)] }
+
+array.each do |dir, children|
+  children.each do |file|
+    path = "#{dir}/#{file}"
+    next if File.directory?(path)
+
+    file = File.read(path)
+    next unless file.include?('SuperClass')
+
+    changed_string = file.gsub('SuperClass', 'NewClass')
+    File.open(path, 'w') do |line|
+      line.write(changed_string)
+      puts "File was changed: #{path.split('/').last}"
+    end
   end
 end
+
+# Super short line for one file...
+# File.write(path,File.open(path,&:read).gsub('SuperClass', 'NewClass')
