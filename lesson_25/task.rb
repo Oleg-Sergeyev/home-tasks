@@ -48,23 +48,6 @@ puts 'Task 5'
 MyFileUtils.clear_dirs # kludge... clear instance array
 
 path = '/home/oleg/ruby/repo/gb/home-tasks/lesson_25/tmp1'
-array = MyFileUtils.dirs(path).reduce([]) { |arr, dir| arr << [dir, Dir.children(dir)] }
+dirs = MyFileUtils.dirs(path).reduce([]) { |arr, dir| arr << [dir, Dir.children(dir)] }
 
-array.each do |dir, children|
-  children.each do |file|
-    path = "#{dir}/#{file}"
-    next if File.directory?(path)
-
-    file = File.read(path)
-    next unless file.include?('SuperClass')
-
-    changed_string = file.gsub('SuperClass', 'NewClass')
-    File.open(path, 'w') do |line|
-      line.write(changed_string)
-      puts "File was changed: #{path.split('/').last}"
-    end
-  end
-end
-
-# Super short line for one file...
-# File.write(path,File.open(path,&:read).gsub('SuperClass', 'NewClass')
+MyFileUtils.replace(dirs, 'SuperClass', 'NewClass')

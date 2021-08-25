@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# class SuperClass
-class SuperClass
+# class NewClass
+class NewClass
   @dirs = []
   PSEUDONIM = %w[. ..].freeze
   class << self
@@ -26,4 +26,4 @@ class SuperClass
     # end
   end
 end
-SuperClass213
+NewClass213
