@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'csv'
-require 'find'
 require_relative 'lib/myfileutils'
 
 puts `clear`
