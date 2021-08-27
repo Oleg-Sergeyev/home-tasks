@@ -4,9 +4,13 @@ require_relative 'lib/battlefield'
 require_relative 'lib/navy'
 
 map = BattleField.new
-# field.field.each { |arr| arr.each { |obj| print "#{obj.x}:#{obj.y} " } }
-ships = Navy.new([4, 4, 2, 1, 3])
+# puts 'New filed'
+# map.view
+# puts
 
-Navy.set_on_field(ships.fleet[0], [1, :a], :hor_plus)
-
-p ships.fleet[0]
+ships = Navy.new([4, 4, 2, 1, 3]) # fleet
+Navy.set_on_field(ships.fleet[0], [1, :a], :h_plus, map)
+Navy.set_on_field(ships.fleet[1], [1, :f], :v_plus, map)
+Navy.set_on_field(ships.fleet[2], [1, :j], :v_plus, map)
+Navy.set_on_field(ships.fleet[4], [8, :f], :h_minus, map)
+map.view

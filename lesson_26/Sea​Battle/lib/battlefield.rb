@@ -16,11 +16,23 @@ class BattleField
     end
   end
 
+  def view
+    print '   '
+    (:a..:j).each { |s| print "#{s} " }
+    @field.each_with_index do |arr, index|
+      print "\n#{(index + 1).to_s.ljust(3)}"
+      arr.each do |obj|
+        print "#{obj.z} "
+      end
+    end
+    puts
+  end
+
   # class Cell
   class Cell
-    attr_accessor :y, :x
+    attr_accessor :y, :x, :z
 
-    def initialize(y, x, z = nil)
+    def initialize(y, x, z = '*')
       @x = x
       @y = y
       @z = z

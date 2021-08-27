@@ -8,53 +8,73 @@ class Navy
     @fleet = params.map { |deck| Navy::Boat.new(deck) }
   end
 
-  def self.set_on_field(boat, arr, direction)
+  def self.set_on_field(boat, arr, direction, map)
     y, x = *arr
     case direction
-    when :hor_plus then horizontal_plus(boat, y, x)
-    when :hor_minus then horizontal_minus(boat, y, x)
-    when :ver_plus then vertical_plus(boat, y, x)
-    when :ver_minus then vertical_minus(boat, y, x)
+    when :h_plus then horizontal_plus(boat, y, x, map)
+    when :h_minus then horizontal_minus(boat, y, x, map)
+    when :v_plus then vertical_plus(boat, y, x, map)
+    when :v_minus then vertical_minus(boat, y, x, map)
     end
   end
 
-  def self.horizontal_plus(boat, y, x)
-    #(x..:j).to_a.each { |a| print "#{a}," }
+  def self.place_on(map, boat)
+    map.field.each do |arr|
+      arr.each do |cell|
+        boat.size.each do |b|
+          cell.z = boat.deck if b.first == cell.y && b.last == cell.x
+        end
+      end
+    end
+  end
+
+  def self.set_area_around(map, y, x)
+    # field.each do |arr|
+    #   arr.each do |cell|
+    #     if cell.z != '*' && cell != '-'
+    #   end
+    # end
+  end
+
+  def self.horizontal_plus(boat, y, x, map)
     (x..:j).each_with_index do |sym, index|
       break unless index + 1 <= boat.deck
 
       boat.size << [y, sym]
     end
+    place_on(map, boat)
   end
 
-  def self.horizontal_minus(boat, y, x)
-    #(:a..x).to_a.each { |a| print "#{a}," }
-    p index + 1
-    (:a..x).each_with_index do |sym, index|
+  def self.horizontal_minus(boat, y, x, map)
+    (:a..x).reverse_each.each_with_index do |sym, index|
       break unless index + 1 <= boat.deck
 
       boat.size << [y, sym]
     end
+    place_on(map, boat)
   end
 
-  def self.vertical_plus(boat, y, x)
+  def self.vertical_plus(boat, y, x, map)
     y -= 1
-    boat.deck.times { boat.size << [y+=1, sym] }
+    boat.deck.times { boat.size << [y += 1, x] }
+    set_area_around(map, y, x)
+    place_on(map, boat)
   end
 
-  def self.vertical_minus(boat, y, x)
+  def self.vertical_minus(boat, y, x, map)
     y += 1
-    boat.deck.times { boat.size << [y-=1, sym] }
+    boat.deck.times { boat.size << [y -= 1, x] }
+    place_on(map, boat)
   end
 
   # class Boat
   class Boat
-    attr_accessor :deck, :size
+    attr_accessor :deck, :size, :area
 
     def initialize(deck)
       @deck = deck
       @size = []
-      #create
+      @area = []
     end
 
     # def create
