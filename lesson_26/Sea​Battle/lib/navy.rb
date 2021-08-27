@@ -28,36 +28,52 @@ class Navy
     end
   end
 
-  def self.set_area_around(map, y, x)
-    # field.each do |arr|
-    #   arr.each do |cell|
-    #     if cell.z != '*' && cell != '-'
-    #   end
-    # end
-  end
-
-  def self.horizontal_plus(boat, y, x, map)
-    (x..:j).each_with_index do |sym, index|
-      break unless index + 1 <= boat.deck
-
-      boat.size << [y, sym]
+  def self.set_area_around(map, y, x, board)
+    #if y > 1
+    map.field.each do |arr|
+      arr.each_cons(3) do |prev, cell, nxt|
+        if y == cell.y && x == cell.x
+          prev.x = x - 1
+          prev.z = '-'
+          nxt.x = x + 1
+          nxt.z = '-'
+          cell.z = '-' if board == 10
+        end
+      end
     end
-    place_on(map, boat)
+    set_area_around(map, y += 1, x, 10) if board.zero?
   end
 
-  def self.horizontal_minus(boat, y, x, map)
-    (:a..x).reverse_each.each_with_index do |sym, index|
-      break unless index + 1 <= boat.deck
+  def set_board(map, y, x)
 
-      boat.size << [y, sym]
-    end
-    place_on(map, boat)
   end
+
+  # def self.horizontal_plus(boat, y, x, map)
+  #   (x..:j).each_with_index do |sym, index|
+  #     break unless index + 1 <= boat.deck
+
+  #     boat.size << [y, sym]
+  #   end
+  #   place_on(map, boat)
+  # end
+
+  # def self.horizontal_minus(boat, y, x, map)
+  #   (:a..x).reverse_each.each_with_index do |sym, index|
+  #     break unless index + 1 <= boat.deck
+
+  #     boat.size << [y, sym]
+  #   end
+  #   place_on(map, boat)
+  # end
 
   def self.vertical_plus(boat, y, x, map)
     y -= 1
-    boat.deck.times { boat.size << [y += 1, x] }
-    set_area_around(map, y, x)
+    board = boat.deck
+    boat.deck.times do
+      boat.size << [y += 1, x]
+      board -= 1
+      set_area_around(map, y, x, board)
+    end
     place_on(map, boat)
   end
 

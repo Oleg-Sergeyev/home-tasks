@@ -10,15 +10,17 @@ class BattleField
 
   def set_cell
     (1..10).to_a.reduce([]) do |row, num|
-      row << (:a..:j).to_a.reduce([]) do |arr, sym|
-        arr << BattleField::Cell.new(num, sym)
+      # row << (:a..:j).to_a.reduce([]) do |arr, sym|
+      row << (1..10).to_a.reduce([]) do |arr, n|
+        arr << BattleField::Cell.new(num, n)
       end
     end
   end
 
   def view
     print '   '
-    (:a..:j).each { |s| print "#{s} " }
+    #(:a..:j).each { |s| print "#{s} " }
+    (1..10).each { |s| print "#{s} " }
     @field.each_with_index do |arr, index|
       print "\n#{(index + 1).to_s.ljust(3)}"
       arr.each do |obj|
