@@ -18,9 +18,10 @@ class BattleField
   end
 
   def view
+    clear_minus
     print '   '
-    # (:a..:j).each { |s| print "#{s} " }
-    (1..10).each { |s| print "#{s} " }
+    (:a..:j).each { |s| print "#{s} " }
+    # (1..10).each { |s| print "#{s} " }
     @field.each_with_index do |arr, index|
       print "\n#{(index + 1).to_s.ljust(3)}"
       arr.each do |obj|
@@ -28,6 +29,14 @@ class BattleField
       end
     end
     puts
+  end
+
+  def clear_minus
+    @field.each do |arr|
+      arr.each do |cell|
+        cell.z = '*' if cell.z == '-'
+      end
+    end
   end
 
   # class Cell

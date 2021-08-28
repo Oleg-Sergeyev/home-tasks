@@ -8,7 +8,32 @@ class Navy
     @fleet = params.map { |deck| Navy::Boat.new(deck) }
   end
 
+  def self.set_boats_on_map(boat, map)
+    rand(0..1).zero? ? auto_vertical_set(boat, map) : auto_horizontal_set(boat, map)
+  end
+
   def self.auto_vertical_set(boat, map)
+    full = []
+    (0..9).to_a.each_with_index do |_col, index|
+      row = 0
+      col = []
+      while row <= 9
+        col << [map.field[row][index].y, map.field[row][index].x] if map.field[row][index].z == '*'
+        row += 1
+      end
+      full << col
+    end
+    var = check_vertical_array(full.compact).select do |arr|
+      arr.each do |a|
+        a if a.size >= boat.deck
+      end
+    end
+    new_arr = var.reject(&:empty?)
+    array = random_cell(new_arr, boat)
+    set_on_field(boat, array, :vertical, map)
+  end
+
+  def self.auto_horizontal_set(boat, map)
     full = []
     map.field.each do |array|
       row = []
@@ -51,6 +76,17 @@ class Navy
     array.each do |arr|
       arr1 = arr.chunk_while do |i, j|
         j if (j.last - i.last) == 1
+      end.to_a
+      full_arr << arr1.uniq
+    end
+    full_arr
+  end
+
+  def self.check_vertical_array(array)
+    full_arr = []
+    array.each do |arr|
+      arr1 = arr.chunk_while do |i, j|
+        j if (j.first - i.first) == 1
       end.to_a
       full_arr << arr1.uniq
     end
