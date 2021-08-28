@@ -19,7 +19,7 @@ class BattleField
 
   def view
     print '   '
-    #(:a..:j).each { |s| print "#{s} " }
+    # (:a..:j).each { |s| print "#{s} " }
     (1..10).each { |s| print "#{s} " }
     @field.each_with_index do |arr, index|
       print "\n#{(index + 1).to_s.ljust(3)}"

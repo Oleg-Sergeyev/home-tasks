@@ -14,7 +14,6 @@ Navy.set_on_field(ships.fleet[1], [2, 3], :vertical, map)
 Navy.set_on_field(ships.fleet[2], [7, 10], :vertical, map)
 Navy.set_on_field(ships.fleet[1], [1, 10], :vertical, map)
 Navy.set_on_field(ships.fleet[4], [10, 5], :horizontal, map)
-# Navy.set_on_field(ships.fleet[1], [1, :f], :v_plus, map)
-# Navy.set_on_field(ships.fleet[2], [1, :j], :v_plus, map)
-# Navy.set_on_field(ships.fleet[4], [8, :f], :h_minus, map)
+
+Navy.auto_vertical_set(ships.fleet[4], map)
 map.view
