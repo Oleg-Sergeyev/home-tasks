@@ -18,7 +18,7 @@ class BattleField
   end
 
   def view
-    clear_minus
+    clear_sea
     print '   '
     (:a..:j).each { |s| print "#{s} " }
     # (1..10).each { |s| print "#{s} " }
@@ -31,7 +31,7 @@ class BattleField
     puts
   end
 
-  def clear_minus
+  def clear_sea
     @field.each do |arr|
       arr.each do |cell|
         cell.z = '*' if cell.z == '-'

@@ -4,8 +4,14 @@
 class Navy
   attr_accessor :fleet
 
+  include Enumerable
+
   def initialize(params)
     @fleet = params.map { |deck| Navy::Boat.new(deck) }
+  end
+
+  def each(&block)
+    @fleet.each(&block)
   end
 
   def self.set_boats_on_map(boat, map)
