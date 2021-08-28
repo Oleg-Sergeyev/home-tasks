@@ -20,41 +20,35 @@ class Navy
 
   def self.auto_vertical_set(boat, map)
     full = (0..9).to_a.map do |index|
-      (0..9).to_a.reduce([]) do |col, row|
+      (0..9).to_a.each_with_object([]) do |row, col|
         col << [map.field[row][index].y, map.field[row][index].x] if map.field[row][index].z == '*'
-        col
       end
     end
-    var = set_array(full, boat, :v)
-    new_arr = var.reject(&:empty?)
-    array = random_cell(new_arr, boat)
-    set_on_field(boat, array, :vertical, map)
+    set_array(full, boat, :v, map)
   end
 
   def self.auto_horizontal_set(boat, map)
     full = map.map do |array|
-      array.reduce([]) do |row, cell|
+      array.each_with_object([]) do |cell, row|
         row << [cell.y, cell.x] if cell.z == '*'
-        row
       end
     end
-    var = set_array(full, boat, :h)
-    new = var.reject(&:empty?)
-    array = random_cell(new, boat)
-    set_on_field(boat, array, :horizontal, map)
+    set_array(full, boat, :h, map)
   end
 
-  def self.set_array(full, boat, param)
-    rebuild_array(full.compact, param).select do |arr|
+  def self.set_array(full, boat, param, map)
+    var = rebuild_array(full.compact, param).select do |arr|
       arr.each do |a|
         a if a.size >= boat.deck
       end
     end
+    array = random_cell(var.reject(&:empty?), boat)
+    set_on_field(boat, array, param, map)
   end
 
   def self.random_cell(array, boat)
     full_arr = []
-    array.select do |arr|
+    array.each do |arr|
       if arr.size > 1
         arr.each do |arr1|
           full_arr << arr1 if arr1.size >= boat.deck
@@ -87,8 +81,8 @@ class Navy
   def self.set_on_field(boat, arr, direction, map)
     y, x = *arr
     case direction
-    when :horizontal then horizontal_set(boat, y, x, map)
-    when :vertical then vertical_set(boat, y, x, map)
+    when :h then horizontal_set(boat, y, x, map)
+    when :v then vertical_set(boat, y, x, map)
     end
   end
 
@@ -103,21 +97,31 @@ class Navy
   end
 
   def self.set_area_around(map, y, x)
-    map.field.each do |arr|
-      if x == 1
-        right_side(arr, y, x)
-        right_side_front_back(arr, y - 1, x) if y > 1
-        right_side_front_back(arr, y + 1, x) if y < 10
-      elsif x <= 9
-        both_sides(arr, y, x)
-        both_sides_front_back(arr, y - 1, x) if y > 1
-        both_sides_front_back(arr, y + 1, x) if y < 10
-      elsif x == 10
-        left_side(arr, y, x)
-        left_side_front_back(arr, y - 1, x) if y > 1
-        left_side_front_back(arr, y + 1, x) if y < 10
+    map.each do |arr|
+      case x
+      when x == 1 then right_side_all(arr, y, x)
+      when x <= 9 then both_sides_all(arr, y, x)
+      when x == 10 then left_side_all(arr, y, x)
       end
     end
+  end
+
+  def self.right_side_all(arr, y, x)
+    right_side(arr, y, x)
+    right_side_front_back(arr, y - 1, x) if y > 1
+    right_side_front_back(arr, y + 1, x) if y < 10
+  end
+
+  def self.left_side_all(arr, y, x)
+    left_side(arr, y, x)
+    left_side_front_back(arr, y - 1, x) if y > 1
+    left_side_front_back(arr, y + 1, x) if y < 10
+  end
+
+  def self.both_sides_all(arr, y, x)
+    both_sides(arr, y, x)
+    both_sides_front_back(arr, y - 1, x) if y > 1
+    both_sides_front_back(arr, y + 1, x) if y < 10
   end
 
   def self.both_sides_front_back(arr, y, x)
@@ -218,7 +222,6 @@ class Navy
     def initialize(deck)
       @deck = deck
       @size = []
-      @area = []
     end
   end
 end
