@@ -19,43 +19,37 @@ class Navy
   end
 
   def self.auto_vertical_set(boat, map)
-    full = []
-    (0..9).to_a.each_with_index do |_col, index|
-      row = 0
-      col = []
-      while row <= 9
+    full = (0..9).to_a.map do |index|
+      (0..9).to_a.reduce([]) do |col, row|
         col << [map.field[row][index].y, map.field[row][index].x] if map.field[row][index].z == '*'
-        row += 1
-      end
-      full << col
-    end
-    var = check_vertical_array(full.compact).select do |arr|
-      arr.each do |a|
-        a if a.size >= boat.deck
+        col
       end
     end
+    var = set_array(full, boat, :v)
     new_arr = var.reject(&:empty?)
     array = random_cell(new_arr, boat)
     set_on_field(boat, array, :vertical, map)
   end
 
   def self.auto_horizontal_set(boat, map)
-    full = []
-    map.field.each do |array|
-      row = []
-      array.each do |cell|
+    full = map.map do |array|
+      array.reduce([]) do |row, cell|
         row << [cell.y, cell.x] if cell.z == '*'
+        row
       end
-      full << row
     end
-    var = check_array(full).select do |arr|
+    var = set_array(full, boat, :h)
+    new = var.reject(&:empty?)
+    array = random_cell(new, boat)
+    set_on_field(boat, array, :horizontal, map)
+  end
+
+  def self.set_array(full, boat, param)
+    rebuild_array(full.compact, param).select do |arr|
       arr.each do |a|
         a if a.size >= boat.deck
       end
     end
-    new = var.reject(&:empty?)
-    array = random_cell(new, boat)
-    set_on_field(boat, array, :horizontal, map)
   end
 
   def self.random_cell(array, boat)
@@ -77,22 +71,13 @@ class Navy
     end
   end
 
-  def self.check_array(array)
+  def self.rebuild_array(array, param)
     full_arr = []
     array.each do |arr|
       arr1 = arr.chunk_while do |i, j|
-        j if (j.last - i.last) == 1
-      end.to_a
-      full_arr << arr1.uniq
-    end
-    full_arr
-  end
-
-  def self.check_vertical_array(array)
-    full_arr = []
-    array.each do |arr|
-      arr1 = arr.chunk_while do |i, j|
-        j if (j.first - i.first) == 1
+        uniq_num = j.first - i.first if param == :v
+        uniq_num = j.last - i.last if param == :h
+        j if uniq_num == 1
       end.to_a
       full_arr << arr1.uniq
     end

@@ -4,8 +4,14 @@
 class BattleField
   attr_accessor :field
 
+  include Enumerable
+
   def initialize
     @field = set_cell
+  end
+
+  def each(&block)
+    @field.each(&block)
   end
 
   def set_cell
