@@ -2,16 +2,16 @@
 
 # class BattleField
 class BattleField
-  attr_accessor :field
+  attr_accessor :chart
 
   include Enumerable
 
   def initialize
-    @field = set_cell
+    @chart = set_cell
   end
 
   def each(&block)
-    @field.each(&block)
+    @chart.each(&block)
   end
 
   def set_cell
@@ -28,7 +28,7 @@ class BattleField
     print '   '
     (:a..:j).each { |s| print "#{s} " }
     # (1..10).each { |s| print "#{s} " }
-    @field.each_with_index do |arr, index|
+    @chart.each_with_index do |arr, index|
       print "\n#{(index + 1).to_s.ljust(3)}"
       arr.each do |obj|
         print "#{obj.z} "
@@ -38,7 +38,7 @@ class BattleField
   end
 
   def clear_sea
-    @field.each do |arr|
+    @chart.each do |arr|
       arr.each do |cell|
         cell.z = '*' if cell.z == '-'
       end

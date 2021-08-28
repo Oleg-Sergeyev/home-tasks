@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative 'boat'
+
 # class Fleet
 class Navy
   attr_accessor :fleet
@@ -7,43 +9,43 @@ class Navy
   include Enumerable
 
   def initialize(params)
-    @fleet = params.map { |deck| Navy::Boat.new(deck) }
+    @fleet = params.map { |deck| Boat.new(deck) }
   end
 
   def each(&block)
     @fleet.each(&block)
   end
 
-  def self.set_boats_on_map(boat, map)
-    rand(0..1).zero? ? auto_vertical_set(boat, map) : auto_horizontal_set(boat, map)
+  def self.set_boats_on_map(boat, field)
+    rand(0..1).zero? ? auto_vertical_set(boat, field) : auto_horizontal_set(boat, field)
   end
 
-  def self.auto_vertical_set(boat, map)
+  def self.auto_vertical_set(boat, field)
     full = (0..9).to_a.map do |index|
       (0..9).to_a.each_with_object([]) do |row, col|
-        col << [map.field[row][index].y, map.field[row][index].x] if map.field[row][index].z == '*'
+        col << [field.chart[row][index].y, field.chart[row][index].x] if field.chart[row][index].z == '*'
       end
     end
-    set_array(full, boat, :v, map)
+    set_array(full, boat, :v, field)
   end
 
-  def self.auto_horizontal_set(boat, map)
-    full = map.map do |array|
+  def self.auto_horizontal_set(boat, field)
+    full = field.map do |array|
       array.each_with_object([]) do |cell, row|
         row << [cell.y, cell.x] if cell.z == '*'
       end
     end
-    set_array(full, boat, :h, map)
+    set_array(full, boat, :h, field)
   end
 
-  def self.set_array(full, boat, param, map)
+  def self.set_array(full, boat, param, field)
     var = rebuild_array(full.compact, param).select do |arr|
       arr.each do |a|
         a if a.size >= boat.deck
       end
     end
     array = random_cell(var.reject(&:empty?), boat)
-    set_on_field(boat, array, param, map)
+    set_on_field(boat, array, param, field)
   end
 
   def self.random_cell(array, boat)
@@ -78,16 +80,16 @@ class Navy
     full_arr
   end
 
-  def self.set_on_field(boat, arr, direction, map)
+  def self.set_on_field(boat, arr, direction, field)
     y, x = *arr
     case direction
-    when :h then horizontal_set(boat, y, x, map)
-    when :v then vertical_set(boat, y, x, map)
+    when :h then horizontal_set(boat, y, x, field)
+    when :v then vertical_set(boat, y, x, field)
     end
   end
 
-  def self.place_on(map, boat)
-    map.field.each do |arr|
+  def self.place_on(field, boat)
+    field.each do |arr|
       arr.each do |cell|
         boat.size.each do |b|
           cell.z = boat.deck if b.first == cell.y && b.last == cell.x
@@ -96,12 +98,14 @@ class Navy
     end
   end
 
-  def self.set_area_around(map, y, x)
-    map.each do |arr|
-      case x
-      when x == 1 then right_side_all(arr, y, x)
-      when x <= 9 then both_sides_all(arr, y, x)
-      when x == 10 then left_side_all(arr, y, x)
+  def self.set_area_around(field, y, x)
+    field.each do |arr|
+      if x == 1
+        right_side_all(arr, y, x)
+      elsif x <= 9
+        both_sides_all(arr, y, x)
+      elsif x == 10
+        left_side_all(arr, y, x)
       end
     end
   end
@@ -193,35 +197,25 @@ class Navy
     end
   end
 
-  def self.vertical_set(boat, y, x, map)
+  def self.vertical_set(boat, y, x, field)
     y -= 1
     board = boat.deck
     boat.deck.times do
       boat.size << [y += 1, x]
       board -= 1
-      set_area_around(map, y, x)
+      set_area_around(field, y, x)
     end
-    place_on(map, boat)
+    place_on(field, boat)
   end
 
-  def self.horizontal_set(boat, y, x, map)
+  def self.horizontal_set(boat, y, x, field)
     x -= 1
     board = boat.deck
     boat.deck.times do
       boat.size << [y, x += 1]
       board -= 1
-      set_area_around(map, y, x)
+      set_area_around(field, y, x)
     end
-    place_on(map, boat)
-  end
-
-  # class Boat
-  class Boat
-    attr_accessor :deck, :size, :area
-
-    def initialize(deck)
-      @deck = deck
-      @size = []
-    end
+    place_on(field, boat)
   end
 end
