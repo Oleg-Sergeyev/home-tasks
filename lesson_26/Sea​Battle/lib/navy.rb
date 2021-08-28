@@ -17,31 +17,41 @@ class Navy
       end
       full << row
     end
-    var = check_array(full).select { |arr| arr.size >= boat.deck }
-    array = random_cell(var, boat)
+    var = check_array(full).select do |arr|
+      arr.each do |a|
+        a if a.size >= boat.deck
+      end
+    end
+    new = var.reject(&:empty?)
+    array = random_cell(new, boat)
     set_on_field(boat, array, :horizontal, map)
   end
 
   def self.random_cell(array, boat)
-    arr = array[rand(0..array.size - 1)]
-    random_cell(array, boat) if arr.nil?
-    if arr.size == boat.deck
-      arr.first 
-    elsif (arr.size - boat.deck).positive?
+    full_arr = []
+    array.select do |arr|
+      if arr.size > 1
+        arr.each do |arr1|
+          full_arr << arr1 if arr1.size >= boat.deck
+        end
+      elsif arr.first.size >= boat.deck
+        full_arr << arr.first
+      end
+    end
+    arr = full_arr[rand(0..full_arr.size - 1)]
+    if (arr.size - boat.deck).positive?
       arr[rand(0..(arr.size - boat.deck))]
+    else
+      arr.first
     end
   end
 
   def self.check_array(array)
     full_arr = []
     array.each do |arr|
-      arr1 = []
-      arr.each_cons(2) do |curr, nxt|
-        next if nxt.last - curr.last != 1
-
-        arr1 << [curr.first, curr.last]
-        arr1 << [nxt.first, nxt.last] if nxt
-      end
+      arr1 = arr.chunk_while do |i, j|
+        j if (j.last - i.last) == 1
+      end.to_a
       full_arr << arr1.uniq
     end
     full_arr
