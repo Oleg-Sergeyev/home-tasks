@@ -17,9 +17,9 @@ require_relative 'lib/navy'
   puts "Boats #{ships.count}       map №#{num}"
   puts '======================'
   ships.each do |boat|
-    puts "<(#{boat.deck})> #{boat.map { |el| el }.join(',')}"
+    puts "<#{boat.deck}> #{boat.map { |el| el }.join(',')}"
   end
   puts '======================'
   puts 'Next map in 15 seconds'
-  sleep 15
+  sleep 3
 end

@@ -83,8 +83,8 @@ class Navy
   def self.set_on_field(boat, arr, direction, field)
     y, x = *arr
     case direction
-    when :h then horizontal_set(boat, y, x, field)
-    when :v then vertical_set(boat, y, x, field)
+    when :h then set_boat(boat, y, x, field, :h)
+    when :v then set_boat(boat, y, x, field, :v)
     end
   end
 
@@ -197,22 +197,11 @@ class Navy
     end
   end
 
-  def self.vertical_set(boat, y, x, field)
-    y -= 1
+  def self.set_boat(boat, y, x, field, param)
+    param == :v ? y -= 1 : x -= 1
     board = boat.deck
     boat.deck.times do
-      boat.size << [y += 1, x]
-      board -= 1
-      set_area_around(field, y, x)
-    end
-    place_on(field, boat)
-  end
-
-  def self.horizontal_set(boat, y, x, field)
-    x -= 1
-    board = boat.deck
-    boat.deck.times do
-      boat.size << [y, x += 1]
+      boat.size << (param == :v ? [y += 1, x] : [y, x += 1])
       board -= 1
       set_area_around(field, y, x)
     end
