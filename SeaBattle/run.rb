@@ -8,7 +8,7 @@ require_relative 'lib/navy'
   puts `clear`
   puts '***** Sea Battle *****'
   puts '======================'
-  ships = Navy.new([4, 3, 3, 2, 2, 2, 1, 1, 1, 1]) # fleet
+  ships = Navy.new(:standart)
   ships.each do |boat|
     Navy.set_boats_on_map(boat, field)
   end

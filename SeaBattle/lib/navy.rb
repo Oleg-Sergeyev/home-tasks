@@ -7,11 +7,15 @@ require_relative 'boat'
 class Navy
   attr_accessor :fleet
 
+  REG_SET = [4, 3, 3, 2, 2, 2, 1, 1, 1, 1].freeze
+
   include AreaAroundBoat
   include Enumerable
 
-  def initialize(params)
-    @fleet = params.map { |deck| Boat.new(deck) }
+  def initialize(mode)
+    raise 'No set mode!' unless mode == :standart
+
+    @fleet = REG_SET.map { |deck| Boat.new(deck) }
   end
 
   def each(&block)
@@ -65,6 +69,9 @@ class Navy
           full_arr << arr.first
         end
       end
+      # if too many boats
+      raise 'Failed to place all ships. Try again' if full_arr.size.zero?
+
       arr = full_arr[rand(0..full_arr.size - 1)]
       if (arr.size - boat.deck).positive?
         arr[rand(0..(arr.size - boat.deck))]
