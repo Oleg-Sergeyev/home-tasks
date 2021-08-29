@@ -26,7 +26,7 @@ class BattleField
   def view
     clear_sea
     print '   '
-    (:a..:j).each { |s| print "#{s} " }
+    (:A..:J).each { |s| print "#{s} " }
     # (1..10).each { |s| print "#{s} " }
     @chart.each_with_index do |arr, index|
       print "\n#{(index + 1).to_s.ljust(3)}"

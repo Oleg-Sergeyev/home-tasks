@@ -23,7 +23,10 @@ class Navy
   def self.auto_vertical_set(boat, field)
     full = (0..9).to_a.map do |index|
       (0..9).to_a.each_with_object([]) do |row, col|
-        col << [field.chart[row][index].y, field.chart[row][index].x] if field.chart[row][index].z == '*'
+        y = field.chart[row][index].y
+        x = field.chart[row][index].x
+        z = field.chart[row][index].z
+        col << [y, x] if z == '*'
       end
     end
     set_array(full, boat, :v, field)
@@ -68,16 +71,13 @@ class Navy
   end
 
   def self.rebuild_array(array, param)
-    full_arr = []
-    array.each do |arr|
-      arr1 = arr.chunk_while do |i, j|
+    array.reduce([]) do |full, arr|
+      full << arr.chunk_while do |i, j|
         uniq_num = j.first - i.first if param == :v
         uniq_num = j.last - i.last if param == :h
         j if uniq_num == 1
       end.to_a
-      full_arr << arr1.uniq
     end
-    full_arr
   end
 
   def self.set_on_field(boat, arr, direction, field)
