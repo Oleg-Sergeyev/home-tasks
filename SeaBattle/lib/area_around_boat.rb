@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 # module Filling
-module Filling
+module AreaAroundBoat
   module_function
 
-  def set_area_around(field, y, x)
+  def set_area(field, y, x)
     field.each do |arr|
       if x == 1
         right_side_all(arr, y, x)

@@ -20,6 +20,6 @@ require_relative 'lib/navy'
     puts "<#{boat.deck}> #{boat.map { |el| el }.join(',')}"
   end
   puts '======================'
-  puts 'Next map in 15 seconds'
-  sleep 3
+  puts 'Next map in 5 seconds'
+  sleep 5
 end

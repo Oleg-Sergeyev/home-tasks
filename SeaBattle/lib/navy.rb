@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-require_relative 'filling'
+require_relative 'area_around_boat'
 require_relative 'boat'
 
 # class Fleet
 class Navy
   attr_accessor :fleet
 
-  include Filling
+  include AreaAroundBoat
   include Enumerable
 
   def initialize(params)
@@ -20,10 +20,10 @@ class Navy
 
   class << self
     def set_boats_on_map(boat, field)
-      rand(0..1).zero? ? vertical_set(boat, field) : horizontal_set(boat, field)
+      rand(0..1).zero? ? v_search_free_cells(boat, field) : h_search_free_cells(boat, field)
     end
 
-    def vertical_set(boat, field)
+    def v_search_free_cells(boat, field)
       free_cells = (0..9).to_a.map do |index|
         (0..9).to_a.each_with_object([]) do |row, col|
           y = field.chart[row][index].y
@@ -35,7 +35,7 @@ class Navy
       get_boat_coordinates(free_cells, boat, :v, field)
     end
 
-    def horizontal_set(boat, field)
+    def h_search_free_cells(boat, field)
       free_cells = field.map do |array|
         array.each_with_object([]) do |cell, row|
           row << [cell.y, cell.x] if cell.z == '*'
@@ -107,7 +107,7 @@ class Navy
       boat.deck.times do
         boat.size << (param == :v ? [y += 1, x] : [y, x += 1])
         board -= 1
-        Filling.set_area_around(field, y, x)
+        AreaAroundBoat.set_area(field, y, x)
       end
       place_on(field, boat)
     end
