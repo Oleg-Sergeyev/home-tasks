@@ -12,6 +12,7 @@ class ChessField
 
   def initialize
     @chart = set_cell
+    @main_diagonals = []
   end
 
   def each(&block)
@@ -57,6 +58,8 @@ class ChessField
   end
 
   def diagonal_search_free?(field, y, x)
-    Search.diagonal_search_free?(field, y, x)
+    #Search.diagonal_search_free?(field, y, x)
+    Search.top(field, y, x)
+    #p @main_diagonals
   end
 end

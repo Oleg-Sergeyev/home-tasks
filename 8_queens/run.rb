@@ -9,8 +9,8 @@ queens = 8.times.map { |num| Queen.new(num + 1) }
 queens.each { |queen| field.set_auto(queen) }
 field.view
 
-field.diagonal_search_free?(field.chart, 3, 2)
-field.diagonal_search_free?(field.chart, 6, 5)
+field.diagonal_search_free?(field.chart, 5, 6)
+# field.diagonal_search_free?(field.chart, 6, 5)
 # field.diagonal_search_free?(field.chart, 1, 3)
 # field.diagonal_search_free?(field.chart, 1, 4)
 # field.diagonal_search_free?(field.chart, 1, 5)
