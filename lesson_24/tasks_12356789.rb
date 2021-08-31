@@ -31,7 +31,7 @@ p arr
 puts 'Task 5'
 # frozen_string_literal: false
 
-p [1, 2, 3, 4, 5].reduce([]) { |sum, val| sum << val unless val.even?; sum }
+p [1, 2, 3, 4, 5].each_with_object([]) { |val, sum| sum << val unless val.even?; }
 
 # task 6, 7
 puts 'Task 6,7'
