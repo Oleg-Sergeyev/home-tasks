@@ -14,7 +14,7 @@ class ChessField
     psn = [1, 2, 3, 4, 5, 6, 7, 8]
     psn = psn.sort_by { rand } until valid_position(psn)
 
-    arrprint(psn)
+    filling_solutions(psn)
   end
 
   def valid_position(psn)
@@ -26,7 +26,7 @@ class ChessField
     true
   end
 
-  def arrprint(arr)
+  def filling_solutions(arr)
     @solutions << arr unless @solutions.include?(arr)
     start if @solutions.size < 92
   end
