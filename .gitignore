@@ -6,3 +6,5 @@
 /doc/*.doc
 .env
 .env.template
+Some_code
+Some_code/**

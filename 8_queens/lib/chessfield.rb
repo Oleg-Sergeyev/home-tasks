@@ -1,21 +1,34 @@
 # frozen_string_literal: true
 
 require_relative 'cell'
-require_relative 'search'
 
 # class ChessField
 class ChessField
-  attr_accessor :chart
-
-  include Search
-  include Enumerable
+  attr_accessor :solutions
 
   def initialize
-    @chart = set_cell
+    @solutions = []
   end
 
-  def each(&block)
-    @chart.each(&block)
+  def start
+    psn = [1, 2, 3, 4, 5, 6, 7, 8]
+    psn = psn.sort_by { rand } until valid_position(psn)
+
+    arrprint(psn)
+  end
+
+  def valid_position(psn)
+    (0..6).each do |row|
+      ((row + 1)..7).each do |col|
+        return false if (row - col).abs == (psn[row] - psn[col]).abs
+      end
+    end
+    true
+  end
+
+  def arrprint(arr)
+    @solutions << arr unless @solutions.include?(arr)
+    start if @solutions.size < 92
   end
 
   def set_cell
@@ -26,85 +39,39 @@ class ChessField
     end
   end
 
-  def view
-    print '   '
-    # (:A..:H).each { |s| print "#{s} " }
-    (1..8).each { |s| print "#{s} " }
-    @chart.each_with_index do |arr, index|
-      print "\n#{(index + 1).to_s.ljust(3)}"
-      arr.each do |obj|
-        print "#{obj.z} "
+  def set_queen(y, x)
+    @chart.each do |row|
+      row.each do |cell|
+        cell.z = 'W' if cell.y == y && cell.x == x
       end
     end
+  end
+
+  def view(arr)
+    @chart = set_cell
+    (1..8).each_with_index { |row, index| set_queen(arr[index], row) }
+    view_sol(arr)
+    puts
+    print '         '
+    print_chessbattle
     puts
   end
 
-  # def set_auto(queen)
-  #   y, x = *rand_yx
-  #   y, x = *rand_yx while Search.recursive_search(chart, y, x) == true
-  #   chart.each do |row|
-  #     row.each do |cell|
-  #       #set_auto(queen) if cell.y == y && cell.x == x && (1..8).include?(cell.z)
-  #       cell.z = queen.num if cell.y == y && cell.x == x #&& !(1..8).include?(cell.z)
-  #     end
-  #   end
-  # end
-  def set_q(_queen)
-    n = 8
-    @queens_in_board = []
-    row = 0
-    column = 0
-    until @queens_in_board.size == n
-      if Search.recursive_search(chart, row, column) == true
-        row += 1
-        while row >= n
-          row    = @queens_in_board[-1][0] + 1
-          column = @queens_in_board[-1][1]
-          puts "Backtracking, deleted: #{@queens_in_board.pop}"
-        end
-      else
-        place_queen(row, column)
-        p "placing at #{row} #{column}"
-        row = 0
-        column += 1
-
-        # chart.each do |row|
-        #   row.each do |cell|
-        #     # set_auto(queen) if cell.y == y && cell.x == x && (1..8).include?(cell.z)
-        #     cell.z = queen.num if cell.y == y && cell.x == x # && !(1..8).include?(cell.z)
-        #   end
-        # end
-        # row = 0
-        # column += 1
+  def print_chessbattle
+    (:A..:H).each { |s| print "#{s} " }
+    @chart.each_with_index do |array, index|
+      print "\n#{(index + 1).to_s.ljust(3).rjust(9)}"
+      array.each do |obj|
+        print "#{obj.z} "
       end
     end
-    @queens_in_board
   end
 
-  def set_auto(queen)
-    y, x = *rand_yx
-    if Search.recursive_search(chart, y, x) == true
-      chart.each do |row|
-        row.each do |cell|
-          # set_auto(queen) if cell.y == y && cell.x == x && (1..8).include?(cell.z)
-          cell.z = queen.num if cell.y == y && cell.x == x # && !(1..8).include?(cell.z)
-        end
-      end
-    else
-      set_auto(queen)
+  def view_sol(arr)
+    arr.each_with_index do |num, index|
+      print "#{num}:#{Cell::SYM[index + 1]}"
+      print ' '
     end
-  end
-
-  def rand_yx
-    y = rand(1..8)
-    x = rand(1..8)
-    # rand_yx if @array_xy.include?([y, x])
-    # @array_xy << [y, x]
-    # p @array_xy
-    [y, x]
-  end
-
-  def search(field, y, x)
-    # Search.recursive_search(field, y, x)
+    puts
   end
 end
