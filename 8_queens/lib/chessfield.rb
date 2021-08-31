@@ -27,8 +27,8 @@ class ChessField
   end
 
   def filling_solutions(arr)
-    @solutions << arr unless @solutions.include?(arr)
-    start if @solutions.size < 92
+    solutions << arr unless @solutions.include?(arr)
+    start if solutions.size < 92
   end
 
   def set_cell
