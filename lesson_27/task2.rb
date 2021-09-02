@@ -1,17 +1,7 @@
 # frozen_string_literal: true
 
-# Создайте класс Солнечной системы, который предоставляет методы,
-# совпадающие с названиями планет. При вызове эти методы должны сообщать
-# порядковый номер планеты, считая от Солнца. При попытке обратиться к
-# несуществующей планете, класс должен выбрасывать
-# исключение NotExistingPlanetException.
-
 # class UserException
 class NotExistingPlanetException < RuntimeError
-  def err
-    # process the exception thrown from inner
-    'no such planet'
-  end
 end
 
 # class SolarSystem
@@ -31,14 +21,20 @@ class SolarSystem
     end
   end
 
-  def method_missing(method, *args, &block)
-    self.class.send(method, *args, &block)
-  rescue NoMethodError
-    puts "Here #{method}"
+  def method_missing(method, *_args)
+    raise NotExistingPlanetException, "No such planet - '#{method}'"
+  rescue NotExistingPlanetException => e
+    puts e.message.to_s
+  end
+
+  # rubocop requires respond_to_missing? for method_missing
+  def respond_to_missing?(_method_name, _include_private = false)
+    true
   end
 end
 
 solarsystem = SolarSystem.new
 p solarsystem.uranus
 p solarsystem.earth
-p solarsystem.sun
+solarsystem.sun
+solarsystem.earth_13
