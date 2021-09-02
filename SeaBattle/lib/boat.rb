@@ -23,11 +23,10 @@ class Boat
   end
 
   def each
-    return unless if block_given?
+    return unless block_given?
 
-                    size.each do |arr|
-                      yield "#{arr.first}:#{SYM[arr.last]}"
-                    end
-                  end
+    size.each do |arr|
+      yield "#{arr.first}:#{SYM[arr.last]}"
+    end
   end
 end
