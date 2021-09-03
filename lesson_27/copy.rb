@@ -1,9 +1,5 @@
 # frozen_string_literal: true
 
-# require 'fileutils'
-
-# FileUtils.cp_r '../', '/home/oleg/backup'
-
 # class MyFileUtils
 class MyFileUtils
   @dirs = []
@@ -11,20 +7,44 @@ class MyFileUtils
   class << self
     def copy(from, to)
       dirs(from)
-      from_dir = from.split('/').last
       @dirs.each do |path|
-        path_copy = path.split('/').drop(1).drop_while { |element| element != from_dir }.join('/')
-        to_dir = "#{to}/#{path_copy}"
-        array_to_dir = to_dir.split('/').drop(1)
-        str = ''
-        array_to_dir.each do |folder|
-          str += "/#{folder}"
-          Dir.mkdir(str) unless Dir.exist?(str)
-        end
+        files = getfiles(path)
+        path_copy = path_to(files, from)
+        to_dir = "#{to}/#{path_copy}".split('/').drop(1)
+        mk_dir(to_dir)
+        write_files_in_folder(files, path, to_dir)
       end
     end
 
     private
+
+    def write_files_in_folder(files, path, to_dir)
+      files.last.each do |file|
+        unless File.exist?("/#{to_dir.join('/')}/#{file}")
+          File.write("/#{path}/#{file}",
+                     "/#{to_dir.join('/')}/#{file}")
+        end
+      end
+    end
+
+    def path_to(files, from)
+      files.first.split('/').drop(1).drop_while { |element| element != from.split('/').last }.join('/')
+    end
+
+    def mk_dir(array_to_dir)
+      str = ''
+      array_to_dir.each do |folder|
+        str += "/#{folder}"
+        Dir.mkdir(str) unless Dir.exist?(str)
+      end
+    end
+
+    def getfiles(path)
+      files = Dir.entries(path).each_with_object([]) do |file, arr|
+        arr << file unless File.directory?(file)
+      end
+      [path, files]
+    end
 
     def dirs(path)
       return unless File.directory?(path)
@@ -37,7 +57,7 @@ class MyFileUtils
   end
 end
 
-from = '/home/oleg/ruby'
+from = '/home/oleg/test'
 to = '/home/oleg/backup'
 # puts MyFileUtils.dirs(path)
 MyFileUtils.copy(from, to)
