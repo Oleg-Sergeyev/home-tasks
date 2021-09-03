@@ -12,17 +12,21 @@ class MyFileUtils
         path_copy = path_to(files, from)
         to_dir = "#{to}/#{path_copy}".split('/').drop(1)
         mk_dir(to_dir)
-        write_files_in_folder(files, path, to_dir)
+        files_in_folder(files, path, to_dir)
       end
     end
 
     private
 
-    def write_files_in_folder(files, path, to_dir)
+    def copy_file(src, dest)
+      File.write(dest, File.read(src))
+    end
+
+    def files_in_folder(files, path, to_dir)
       files.last.each do |file|
         unless File.exist?("/#{to_dir.join('/')}/#{file}")
-          File.write("/#{path}/#{file}",
-                     "/#{to_dir.join('/')}/#{file}")
+          copy_file("/#{path}/#{file}",
+                    "/#{to_dir.join('/')}/#{file}")  # File.write("/#{path}/#{file}", File.read("/#{to_dir.join('/')}/#{file}"))
         end
       end
     end
