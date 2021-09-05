@@ -1,12 +1,15 @@
 # frozen_string_literal: true
 
-def solution(string, params)
-  # p string.scan(/\w+/)
-  # p string.sub(/.(?<=#).*?(?=\\n)/, '')
-  # p string.sub(/(#{params.first}.*?)\n/m, "\n")
-  # p string[/(#{params.first}.*?)\n/m, 1]
-  p string.scan(/(#{params.first}.*?)\n/m)
+def solution(input, markers)
+  markers.collect! do |element|
+    element == '$' ? '\$' : element
+  end
+  # input.gsub(
+  #   /(\W#{markers.first}.*?(?=\n))|(\W#{markers.last}.*?(?=\n))|(\W#{markers.last}.*(?=#{markers.first})|(\W#{markers.last}.*(?=$)))/m, ''
+  # )
+  input.gsub(/\s+[#{markers.join}].*/, '')
 end
-solution("apples, pears # and bananas\ngrapes\nbananas !apples apples, pears # and bananas\ngrapes\nbananas !apples",
-         ['#', '!'])
+p solution("apples, pears # and bananas\ngrapes\nbananas !apples",
+           ['#', '!'])
+p solution("a #b\nc\nd $e f g", ['#', '$'])
 # result should == "apples, pears\ngrapes\nbananas"
