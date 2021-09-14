@@ -14,7 +14,8 @@ SELECT * FROM streams;
 --1   165     2020-08-18  34               3                     
 --2   178     2020-10-02  37               2                     
 --3   203     2020-12-11  35               1                     
---4   210     2020-03-12  41               1           
+--4   210     2020-03-12  41               1  
+
 SELECT * FROM courses;
 --id  name                  
 ----  ----------------------
@@ -28,13 +29,15 @@ SELECT * FROM teachers;
 --1   Николай  Савельев  saveliev.n@mai.ru             
 --2   Наталья  Петрова   petrova.n@yandex.ru           
 --3   Елена    Малышева  malisheva.e@google.com  
+
 SELECT * FROM academic_perfomance;
 --teacher_id  stream_id  perfomance
 ------------  ---------  ----------
 --3           1.0        4.7       
 --2           2.0        4.9       
 --1           3.0        4.8       
---1           4.0        4.9  
+--1           4.0        4.9
+  
 -- task 1
 SELECT
   number,
