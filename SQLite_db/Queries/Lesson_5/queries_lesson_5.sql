@@ -66,8 +66,8 @@ SELECT
   surname || ' ' || name AS full_name,
     (SELECT
     (AVG(perfomance)) || ' : ' ||
-    (AVG(perfomance) - (SELECT max_ FROM temp.MAX_MIN)) || ' : ' ||
-    (AVG(perfomance) - (SELECT min_ FROM temp.MAX_MIN))
+    round((AVG(perfomance) - (SELECT max_ FROM temp.MAX_MIN)), 2) || ' : ' ||
+    round((AVG(perfomance) - (SELECT min_ FROM temp.MAX_MIN)), 2)
     FROM academic_perfomance
     WHERE teacher_id = id) AS 'avg : avg - max : avg - min'
 FROM teachers;
