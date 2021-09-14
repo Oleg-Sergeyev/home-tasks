@@ -71,3 +71,4 @@ SELECT
     FROM academic_perfomance
     WHERE teacher_id = id) AS 'avg : avg - max : avg - min'
 FROM teachers;
+DROP TABLE IF EXISTS temp.MAX_MIN;
