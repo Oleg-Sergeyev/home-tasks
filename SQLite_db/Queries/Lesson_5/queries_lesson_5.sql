@@ -46,10 +46,11 @@ SELECT * FROM academic_perfomance;
 
 -- task 1
 SELECT
-  (SELECT number FROM streams WHERE students_amount >= 40) AS num,
-  name,
-  (SELECT students_amount FROM streams WHERE students_amount > 40) AS amount
-FROM courses;
+  number AS num,
+  (SELECT name FROM courses WHERE course_id = id) AS name,
+  students_amount AS amount
+FROM streams
+WHERE students_amount >= 40;
 
 -- task 2
 SELECT
@@ -58,7 +59,7 @@ SELECT
   (SELECT surname || ' ' || name FROM teachers WHERE id = academic_perfomance.teacher_id ) AS full_name,
   perfomance
 FROM academic_perfomance
-GROUP BY perfomance HAVING MIN(perfomance) LIMIT 2;
+ORDER BY perfomance ASC LIMIT 2;
 
 -- task 3
 SELECT
@@ -80,20 +81,13 @@ SELECT
       (SELECT surname || ' ' || name FROM teachers WHERE id = academic_perfomance.teacher_id ) AS full_name,
       perfomance
 FROM academic_perfomance
-GROUP BY perfomance HAVING AVG(perfomance) < 4.8;
+WHERE perfomance < 4.8;
 
 -- task 5
-CREATE TEMP TABLE MAX_MIN( max_, min_ );
-INSERT INTO temp.MAX_MIN VALUES (
-  (SELECT MAX(perfomance) FROM academic_perfomance), 
-  (SELECT MIN(perfomance) FROM academic_perfomance));
+
 SELECT
   surname || ' ' || name AS full_name,
-    (SELECT
-    (AVG(perfomance)) || ' : ' ||
-    round((AVG(perfomance) - (SELECT max_ FROM temp.MAX_MIN)), 2) || ' : ' ||
-    round((AVG(perfomance) - (SELECT min_ FROM temp.MAX_MIN)), 2)
+  (SELECT round((MAX(perfomance) - MIN(perfomance)) / COUNT(*), 2)
     FROM academic_perfomance
-    WHERE teacher_id = id) AS 'avg : avg - max : avg - min'
+    WHERE teacher_id = id) AS '(max-min)/count'
 FROM teachers;
-DROP TABLE IF EXISTS temp.MAX_MIN;

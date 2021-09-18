@@ -43,6 +43,8 @@ SELECT * FROM academic_perfomance;
 --1           4.0        4.9  
 
 -- task 1
+-- Нам нужно получить данные по каждому курсу, добавьте группировку по курсу.
+-- Для streams.number также нужно найти максимальное значение, для каждой группы это будет номер последнего потока курса.
 CREATE VIEW last_course AS
   SELECT
     courses.name,
@@ -53,7 +55,8 @@ CREATE VIEW last_course AS
     JOIN academic_perfomance
     ON academic_perfomance.stream_id = streams.id
     JOIN courses
-    ON streams.course_id = courses.id;
+    ON streams.course_id = courses.id
+    GROUP BY streams.course_id HAVING MAX(streams.number);
 SELECT * FROM last_course;
 DROP VIEW last_course;
 
