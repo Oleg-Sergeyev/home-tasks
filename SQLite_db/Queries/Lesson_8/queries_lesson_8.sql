@@ -4,6 +4,10 @@
 -- имя учителя, среднюю оценку по всем проведённым потокам. Учителя, у которых не было потоков, также должны попасть в 
 -- выборку. Решите задание с применением оконных функций.
 -- 3. Какие индексы надо создать для максимально быстрого выполнения представленного запроса?
+-- 5. Дополнительное задание. Для каждого преподавателя выведите имя, фамилию, минимальное значение успеваемости по 
+-- всем потокам преподавателя, название курса, который соответствует потоку с минимальным значением успеваемости, максимальное 
+-- значение успеваемости по всем потокам преподавателя, название курса, соответствующий потоку с максимальным значением 
+-- успеваемости, дату начала следующего потока. Выполните задачу с использованием оконных функций.
 
 .tables
 .header on
@@ -50,3 +54,109 @@ SELECT DISTINCT
 (SELECT name FROM courses WHERE streams.course_id = courses.id) AS name,
 SUM(students_amount) OVER(PARTITION BY course_id) AS 'sum'
 FROM streams;
+
+--task2
+-- INSERT INTO teachers (id, name, surname, email) VALUES( 4,	'Сергей' , 'Филимонов' , 'philimonov.s@gmail.com');
+
+--SELECT
+--id,
+--name,
+--surname,
+--AVG(academic_perfomance.perfomance) AS 'avg'
+--FROM teachers
+--LEFT JOIN academic_perfomance
+--ON academic_perfomance.teacher_id = teachers.id
+--GROUP BY id;
+
+SELECT DISTINCT
+  id,
+  name,
+  surname,
+  AVG(academic_perfomance.perfomance) OVER(PARTITION BY teacher_id) AS 'avg'
+FROM teachers
+  LEFT JOIN academic_perfomance
+  ON academic_perfomance.teacher_id = teachers.id;
+
+--task 3
+-- 3. Какие индексы надо создать для максимально быстрого выполнения представленного запроса?
+--SELECT
+-- surname,
+--  name,
+--  number,
+--  perfomance
+--FROM academic_perfomance
+--  JOIN teachers 
+--    ON academic_perfomance.teacher_id = teachers.id
+-- JOIN streams
+--    ON academic_perfomance.stream_id = streams.id
+--WHERE number >= 200;  
+
+CREATE INDEX streams_number_idx ON streams(number);
+-- Для ключей xxxxx_id, xxxxx.id индескы создаются автоматически, т.к СУБД построит индексы на такие 
+-- столбцы без участия пользователя, согласно методичке. А если не создаст можно создать вручную.
+
+-- task 5
+-- Скорее всего не верно понял задание, реализавол не правильно.
+-- А точнее не понял про -> 'дату начала следующего потока'.
+CREATE VIEW min_perfomance AS
+  SELECT
+    teachers.id AS id,
+    teachers.name AS name,
+    teachers.surname AS surname,
+    courses.name AS course,
+    MIN(academic_perfomance.perfomance) AS min_
+  FROM teachers
+    JOIN courses
+    ON courses.id = (SELECT course_id FROM streams WHERE streams.id = academic_perfomance.stream_id)
+    JOIN academic_perfomance
+    ON academic_perfomance.teacher_id = teachers.id
+    JOIN streams
+    ON academic_perfomance.stream_id = streams.id
+    GROUP BY teachers.id;
+
+CREATE VIEW max_perfomance AS
+  SELECT
+    teachers.id AS id,
+    courses.name AS course,
+    MAX(academic_perfomance.perfomance) AS max_,
+    streams.started_at AS started_at
+  FROM teachers
+    JOIN courses
+    ON courses.id = (SELECT course_id FROM streams WHERE streams.id = academic_perfomance.stream_id)
+    JOIN academic_perfomance
+    ON academic_perfomance.teacher_id = teachers.id
+    JOIN streams
+    ON academic_perfomance.stream_id = streams.id
+    GROUP BY teachers.id;
+
+SELECT DISTINCT
+  min_perfomance.id AS id,
+  min_perfomance.name AS name,
+  min_perfomance.surname AS surname,
+  min_perfomance.course AS course,
+  min_perfomance.min_ AS min_,
+  max_perfomance.course AS course,
+  max_perfomance.max_ AS max_,
+  max_perfomance.started_at AS started_at
+FROM min_perfomance
+JOIN max_perfomance
+ON min_perfomance.id = max_perfomance.id;
+
+DROP VIEW max_perfomance;
+DROP VIEW min_perfomance;
+
+-- Сообствено говоря вот тут не понятно, что делать с датой из потока... там только started_at, не следующая.
+SELECT DISTINCT
+  teachers.id AS id,
+  teachers.name AS name,
+  teachers.surname AS surname,
+  courses.name AS course,
+  MIN(academic_perfomance.perfomance) OVER(PARTITION BY academic_perfomance.teacher_id) AS min_,
+  MAX(academic_perfomance.perfomance) OVER(PARTITION BY academic_perfomance.teacher_id) AS max_
+FROM teachers
+  JOIN courses
+  ON courses.id = (SELECT course_id FROM streams WHERE streams.id = academic_perfomance.stream_id)
+  JOIN academic_perfomance
+  ON academic_perfomance.teacher_id = teachers.id
+  JOIN streams
+  ON academic_perfomance.stream_id = streams.id;
