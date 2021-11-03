@@ -64,7 +64,7 @@ for user in ${users_array[*]}
 
 # Creating user with administrator rights
 printf "\n"
-sudo userdel -r adm_db
+#sudo userdel -r adm_db
 sudo useradd -m -s /bin/bash -p $(perl -e 'print crypt($ARGV[0], "password")' 'qwerty') adm_db
 sudo usermod -aG sudo adm_db
 printf "User: 'adm_db' created with roots rights\n"
@@ -90,3 +90,18 @@ for group in ${groups_array[*]}
         printf "Group: '$group' ... does not exist\n"
       fi
   done
+
+# Creating user with administrator rights
+printf "\n"
+sudo useradd -m adm_pswd
+sudo passwd adm_pswd
+printf "User: 'adm_pswd' created for manage passwods\n"
+printf "'adm_pswd' groups: "
+id -Gn adm_pswd
+# sudo visudo -f /etc/sudoers
+# adm_pswd ALL=NOPASSWD: /usr/bin/passwd
+# su adm_pswd
+# sudo passwd some_user
+# change password w/o roots password
+
+sudo userdel -r adm_pswd
