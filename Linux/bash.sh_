@@ -1,0 +1,8 @@
+# Copy disk to image
+sudo dd if=/dev/cdrom of=/tmp/copy_image.iso
+# Write disk from image
+# sudo apt install wodim
+cdrecord -dev=/dev/cdrom -speed=16 -eject -v cdrom.iso
+# Mount cifs 
+# sudo apt install cifs-utils
+sudo mount.cifs //10.1.30.20/volume_3 /media/srv_disk_3 -o username=****,password=***
