@@ -1,0 +1,55 @@
+# Task 1
+cat -An /etc/*.* 2>err.txt etc.txt
+# Task 2
+ls -al /etc | cut -c -10 | sort -d | uniq
+# find /home/oleg/*.* -printf "%M:%f\n"
+# find /home/oleg/*.* -printf "%M:%f\n" | cut -d ":" -f 1,2 | sort -d
+# find /etc/*.* -printf "%M\n" | sort -d | uniq
+# find /etc/*.* -printf "%f:%m\n" | sort -d | uniq
+
+# Task 3
+oleg@miniserv:~$ ps -aux | grep sshd
+root      4280  0.0  0.4  72308  5584 ?        Ss   20:45   0:00 /usr/sbin/sshd -D
+root      4596  0.2  0.5 107992  7188 ?        Ss   20:52   0:00 sshd: oleg [priv]
+oleg      4674  0.0  0.2 107992  3552 ?        S    20:52   0:00 sshd: oleg@pts/0
+oleg      4688  0.0  0.0  14864  1048 pts/0    S+   20:52   0:00 grep --color=auto sshd
+oleg@miniserv:~$ systemctl reload sshd
+==== AUTHENTICATING FOR org.freedesktop.systemd1.manage-units ===
+Authentication is required to reload 'ssh.service'.
+Authenticating as: oleg
+Password: 
+==== AUTHENTICATION COMPLETE ===
+oleg@miniserv:~$ ps -aux | grep sshd
+root      4280  0.0  0.4  72308  5572 ?        Ss   20:45   0:00 /usr/sbin/sshd -D
+root      4596  0.0  0.5 107992  7188 ?        Ss   20:52   0:00 sshd: oleg [priv]
+oleg      4674  0.0  0.2 107992  3552 ?        S    20:52   0:00 sshd: oleg@pts/0
+oleg      4701  0.0  0.0  14864  1060 pts/0    S+   20:53   0:00 grep --color=auto sshd
+oleg@miniserv:~$ systemctl restart sshd
+==== AUTHENTICATING FOR org.freedesktop.systemd1.manage-units ===
+Authentication is required to restart 'ssh.service'.
+Authenticating as: oleg
+Password: 
+==== AUTHENTICATION COMPLETE ===
+oleg@miniserv:~$ ps -aux | grep sshd
+root      4596  0.0  0.5 107992  7188 ?        Ss   20:52   0:00 sshd: oleg [priv]
+oleg      4674  0.0  0.2 107992  3552 ?        S    20:52   0:00 sshd: oleg@pts/0
+root      4720  1.0  0.4  72308  5572 ?        Ss   20:53   0:00 /usr/sbin/sshd -D
+oleg      4725  0.0  0.0  14864  1092 pts/0    S+   20:53   0:00 grep --color=auto sshd
+
+cat > cat_file.txt
+Text in cat_file...oleg@miniserv:~$ cat cat_file.txt
+# CTRL+D -> EOF, closing STDIN
+
+# Task 4
+oleg@miniserv:~$ mc
+
+oleg@miniserv:~$ ps -aux | grep mc
+root       418  0.0  0.0      0     0 ?        I<   Nov01   0:00 [ib_mcast]
+oleg      4809  1.6  0.6  55536  8596 pts/0    S+   21:21   0:00 mc
+oleg      4820  0.0  0.0  14864  1012 pts/1    S+   21:21   0:00 grep --color=auto mc
+oleg@miniserv:~$ kill -9 4809
+Killed
+oleg@miniserv:~$ ps -aux | grep mc
+root       418  0.0  0.0      0     0 ?        I<   Nov01   0:00 [ib_mcast]
+oleg      4823  0.0  0.0  14864  1068 pts/0    S+   21:22   0:00 grep --color=auto mc
+oleg@miniserv:~$ 
