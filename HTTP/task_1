@@ -1,0 +1,47 @@
+POST /login HTTP/1.1
+Host: gb.ru
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:94.0) Gecko/20100101 Firefox/94.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+Accept-Language: ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3
+Accept-Encoding: gzip, deflate, br
+Referer: https://gb.ru/login
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 216
+Origin: https://gb.ru
+Connection: keep-alive
+Cookie: qrator_msid=1637784333.775.j9saj3au6VDrEmGc-sq2hq15b54ek4c1pdqcc8a1b68mu5617; auth.strategy=local; gb_lang_cookie=ru; utm_source=gb.ru; utm_medium=referral; OAID=97b6aec553a4f417747990066733328a; _gcl_au=1.1.499841503.1637784336; _gasessionid=20211124|03331316; _gasessiondate=Wed, 24 Nov 2021 20:59:54 GMT; _ga_D11RM3RGCC=GS1.1.1637784336.1.1.1637787534.0; _ga=GA1.2.438974016.1637784336; __eventn_id=qgohktrd5o; advcake_trackid=4fe9ebc7-3f17-dae7-de42-59d84b4c76ed; advcake_session_id=2435ede6-fda9-a234-257d-cd7bccad078f; _gid=GA1.2.1799805603.1637784338; mr1lad=619ea78e64bf107d-21-21-; tmr_reqNum=172; tmr_lvid=e0a5955536538b5903853aab08607f9d; tmr_lvidTS=1637784338387; _ym_uid=1637784339686699100; _ym_d=1637784339; _ym_visorc=w; _ym_isad=2; _fbp=fb.1.1637784339655.274599827; flocktory-uuid=fee4fa1c-aef9-4709-98ab-d396c90e8cee-1; mars=ce8aef9bb6434881af8aa80311d25169; tmr_detect=0%7C1637787537674; cto_bundle=-r7A9F9BcXh6YkdKMGhnS01mTDdvUjRialo2SEpxTThNenFCUlZFVWRPa0pWQ1RGd2dTR3RrVlVVSzE2aSUyQkEzU0NHSWxxWEF5blc0dnVXaWtYVHl0WCUyQnhwWSUyQnZuNzJKdVd3Q1NGQWE2UDhYcHBSZVUyTzhRU2Fpd2Nidlh0OVRNM3dHRg; _app_session=e7b7f9e36196e7a52a9ee85c355a4268; registered=1; show_notifications=on; OABLOCK=122.1637784380; OACAP=122.12; OASCAP=122.12; usedesk-widget__login-user-data={%22name%22:%22%D0%9E%D0%BB%D0%B5%D0%B3%20%D0%A1%D0%B5%D1%80%D0%B3%D0%B5%D0%B5%D0%B2%22%2C%22email%22:%22sergeyev_ov@mail.ru%22%2C%22phone%22:%2279990712161%22%2C%22token%22:null}; __eventn_id_usr=%7B%22internal_id%22%3A%226282685%22%7D; logout_page=%2F; entrance_path=%2Fposts; _OACAP[122]=1; _OASCAP[122]=1; _dc_gtm_UA-28341436-7=1
+Upgrade-Insecure-Requests: 1
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: same-origin
+Sec-Fetch-User: ?1
+
+utf8=✓
+authenticity_token=YWf5hUtNX5ho7RqRHn6d0KDl44bs6ZRywntM6EwWvMYQc4rrsBtGQs3UDLUjsYPzBfCf4mJfTAUAmE6hC0BQJA==
+user[email]=****
+user[password]=*****
+user[remember_me]=0
+
+HTTP/2 302 Found
+server: QRATOR
+date: Wed, 24 Nov 2021 21:00:05 GMT
+content-type: text/html; charset=utf-8
+x-frame-options: SAMEORIGIN
+x-xss-protection: 1; mode=block
+x-content-type-options: nosniff
+x-download-options: noopen
+x-permitted-cross-domain-policies: none
+referrer-policy: strict-origin-when-cross-origin
+location: https://gb.ru/
+x-robots-tag: none
+cache-control: no-cache
+set-cookie: user_id=UW5ObDVrUmExUG9TekhqL2dwd2ZsZz09LS03M21KVm5Vck40YXBDOVdIclRTcmNnPT0%3D--6800ddb2b1bd746f7ca7ed84fabdbfb4fa1d6ca1; domain=.gb.ru; path=/
+jwt_token=eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJnZWVrYnJhaW5zIiwiaWF0IjoxNjM3Nzg3NjA1LCJhdWQiOlsiYWNjZXNzIl0sInVzZXJfaWQiOjYyODI2ODUsInVwZiI6ImxpbnV4IiwiZXhwIjoxNjM3ODc0MDA1LCJhdXRoZW50aWNhdGFibGVfc2FsdCI6IiQyYSQxMSRUTjF4elJDVlh1VmEuMFJXVnFiMUkuIiwicm9sZXMiOlsidXNlciJdfQ.SWTL8uF3N1r5XSzEKr_fMVvGM4nu4GqBG6JTaaAcf2LY-b9fdWfyI2Ja3rtaxokav5guIJInJMiC5U_SFT4HoIUHQDse0Zb0cZuYomweiYpEdiYyX6MXBEGLhEAdLNEaMgPQbMXkKs1Rr0graegbw_wzhex0LZpNJZpF5X7MS-GX38bmuhL1yVhoB9BhS7Lpu-YN-ADLUuy3R-ZmJYzjdWohuKCB6WhNGC_OnpT0at6nj1WwgInGKd5z2eJKQobTbzEEbLYRED1J2U3X1dXRwz8fg6y5T1jJjZfa4z0-uem3KxXvDk2wRf5oMkm9zQLsNLNPSWA2FYfViq6vfZUsQg; domain=.gb.ru; path=/; expires=Thu, 25 Nov 2021 18:00:05 -0000
+registered=1; path=/; expires=Thu, 24 Nov 2022 21:00:05 -0000
+_app_session=d2c9e8033309827d1369f72f2913c6f9; path=/; HttpOnly
+x-request-id: f8c96de7b1501adca0fe252de787ea89
+x-runtime: 0.477164
+content-security-policy: frame-ancestors 'self'
+strict-transport-security: max-age=15724800
+X-Firefox-Spdy: h2
+
