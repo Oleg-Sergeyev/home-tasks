@@ -9,8 +9,16 @@ puts "Gem Faraday, total strings: #{Faraday.post('https://gb.ru/courses').body.s
 puts "Gem HTTParty, total strings: #{HTTParty.post('https://gb.ru/courses').body.split("\n").size}"
 
 # Task 4
-phones = []
-Nokogiri::HTML(Faraday.get('https://gb.ru').body).xpath('//a').each do |tag|
-  phones.push(tag.text) if tag.text.match(/^\+|[0-9]|\d/)
+
+# phones = []
+# Nokogiri::HTML(Faraday.get('https://gb.ru').body).xpath('//a').each do |tag|
+#   phones.push(tag.text) if tag.text.match(/^\+|[0-9]|\d/)
+# end
+# puts phones.uniq
+
+phones = Nokogiri::HTML(Faraday.get('https://gb.ru').body).xpath('//a').map do |tag|
+  tag.text if tag.text.match(/^\+|[0-9]|\d/)
 end
 puts phones.uniq
+
+# puts Nokogiri::HTML(Faraday.get('https://gb.ru').body).xpath('//a').select { |v| v =~ /^\+|[0-9]|\d/ }
