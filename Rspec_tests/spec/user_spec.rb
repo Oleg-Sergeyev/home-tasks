@@ -2,40 +2,29 @@ require './lib/user'
 require 'faker'
 
 RSpec.describe 'Пользователь' do
-  context 'корректность работы метода SET' do
+  context 'должен содержать' do
     let(:data) do
-      surnames = []
-      names = []
-      patronymics = []
-      emails = []
-      10.times do
-        surnames.push(Faker::Name.last_name)
-        names.push(Faker::Name.first_name)
-        patronymics.push(Faker::Name.middle_name)
-        emails.push(Faker::Internet.email)
-      end
-      [surnames, names, patronymics, emails]
+      {
+        surnames: 10.times.collect { Faker::Name.last_name },
+        names: 10.times.collect { Faker::Name.first_name },
+        patronymics: 10.times.collect { Faker::Name.middle_name },
+        emails: 10.times.collect { Faker::Internet.email }
+      }
     end
-
-    let(:object) do
-      User.new(data[0].sample,data[1].sample, data[2].sample, data[3].sample)
+    let(:user) do
+      User.new(data[:surnames].sample, data[:names].sample, data[:patronymics].sample, data[:emails].sample)
     end
-
-    it 'должен содержать Фамилию ' do
-      p object
-      expect(data[0].include?(object.surname)).to be true
+    it 'Фамилию ' do
+      expect(data[:surnames].include?(user.surname)).to be true
     end
-
-    it 'должен содержать Имя ' do
-      expect(data[1].include?(object.name)).to be true
+    it 'Имя ' do
+      expect(data[:names].include?(user.name)).to be true
     end
-
-    it 'должен содержать Отчество ' do
-      expect(data[2].include?(object.patronymic)).to be true
+    it 'Отчество ' do
+      expect(data[:patronymics].include?(user.patronymic)).to be true
     end
-
-    it 'должен содержать Эл.почту ' do
-      expect(data[3].include?(object.email)).to be true
+    it 'Эл.почту ' do
+      expect(data[:emails].include?(user.email)).to be true
     end
   end
 end
